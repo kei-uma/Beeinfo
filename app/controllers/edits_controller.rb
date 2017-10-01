@@ -17,6 +17,8 @@ class EditsController < ApplicationController
   # GET /edits/new
   def new
     @edit = Edit.new
+    @articles = TwitterDatum.all
+ 	 #@articles = TwitterDatum.all.order(created_at: 'desc')g
   end
 
   # GET /edits/1/edit
