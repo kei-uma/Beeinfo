@@ -1,0 +1,2 @@
+namespace :twitter do
+end
