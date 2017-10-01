@@ -204,4 +204,46 @@ gem 'whenever', require: false
 ```
 $ bundle install
 ```
+
+# twitterのツイートトレンドを取得
+
+
+## modelの作成
+```
+$ rails generate model TwitterDatum trend:string tweet:text
+```
+
+下記は必要かなわからない
+```
+#rails db:migrate RAILS_ENV=production
+```
+
+### modelが作成できない場合
+```
+# spring stop
+Spring stopped.
+
+# bin/spring
+```
+
+### rake db:migrateでエラーが出る場合
+```
+$ rake db:migrate
+== 20171001140007 CreateTwitterData: migrating ================================
+-- create_table(:twitter_data)
+rake aborted!
+StandardError: An error has occurred, all later migrations canceled:
+~~~
+
+```
+以下を実行
+```
+$ bin/rails db:environment:set RAILS_ENV=development
+$rake db:migrate:reset
+```
+その後もう一度以下を実行
+```
+$ rake db:migrate
+```
+
 ## タスクの作成
