@@ -117,6 +117,7 @@ rootユーザ以外を作成し使用した場合
 
 mysqlにユーザでログイン
 
+```
 mysql> show grants for 'kei'@'localhost';
 +-----------------------------------------+
 | Grants for kei@localhost                |
@@ -124,10 +125,12 @@ mysql> show grants for 'kei'@'localhost';
 | GRANT USAGE ON *.* TO 'kei'@'localhost' |
 +-----------------------------------------+
 1 row in set (0.00 sec)
+```
 
 USAGE だと権限がない。
 
 すべての権限を与える。
+```
 mysql>  GRANT ALL PRIVILEGES ON *.* TO 'kei'@'localhost';
 
 mysql> show grants for 'kei'@'localhost';
@@ -137,12 +140,39 @@ mysql> show grants for 'kei'@'localhost';
 | GRANT ALL PRIVILEGES ON *.* TO 'kei'@'localhost' |
 +--------------------------------------------------+
 1 row in set (0.00 sec)
+```
 
 上記のようになればok
 
 # scaffoldの使用
 
 ### 記事編集画面を作成
+
+使用できる型
+
+binary
+
+boolean
+
+date
+
+datetime
+
+decimal
+
+float
+
+integer
+
+primary_key
+
+string
+
+text
+
+time
+
+timestamp
 
 ```
 rails generate scaffold edit user:string title:string date:date category:string text:text url:string
