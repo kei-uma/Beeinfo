@@ -190,7 +190,7 @@ http://localhost:3000/edits
 ## Gemfileの編集
 
 ```
-vim Gemfile
+$ vim Gemfile
 gem 'therubyracer', platforms: :ruby	←コメントを外す
 
 追加
@@ -198,5 +198,10 @@ gem "twitter"
 gem 'oauth'
 gem 'json'
 gem 'whenever', require: false
+```
+
+変更後
+```
+$ bundle install
 ```
 ## タスクの作成
