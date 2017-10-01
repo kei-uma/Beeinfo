@@ -175,7 +175,7 @@ time
 timestamp
 
 ```
-rails generate scaffold edit user:string title:string date:date category:string text:text url:string
+$ rails generate scaffold edit user:string title:string date:date category:string text:text url:string
 ```
 
 ### テーブルの作成
