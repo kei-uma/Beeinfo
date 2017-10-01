@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool: 5
   username: kei
-  password: kei
+  password: 
   host: localhost
 
 development:
