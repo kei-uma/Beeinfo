@@ -6,7 +6,7 @@ class EditsController < ApplicationController
   def index
     @edits = Edit.all
     @articles = TwitterDatum.all
- 	 #@articles = TwitterDatum.all.order(created_at: 'desc')
+ 	 #@articles = TwitterDatum.all.order(created_at: 'desc')g
   end
 
   # GET /edits/1

@@ -320,3 +320,39 @@ end
 ```
 $ rails twitter:tweet
 ```
+
+
+## コントローラー編集
+
+```
+$ vim app/controllers/edits.controller.rb
+
+追加
+	def index
+	 @articles = TwitterDatum.all
+	 #@articles = TwitterDatum.all.order(created_at: 'desc')
+	end
+end
+```
+## webページの作成
+
+
+indexを作成
+```
+vim app/views/edits/index.html.erb
+
+<h2>tweet </h2>
+<ul>
+<% str = "a" %>
+<% @articles.each do |art|%>
+<% if art.trend.to_s.include?(str.to_s)  %>
+
+
+<% else %>
+ <h2><%= art.trend %></h2>
+<%  str = art.trend %>
+<% end %>
+<li><%= art.tweet %></li>
+<% end %>
+</ul>
+```
