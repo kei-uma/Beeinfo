@@ -92,7 +92,7 @@ $ cd beeinfo
 
 ここでエラーが出る場合
 
- ```config/database.yml
+ ```ruby:config/database.yml
 $ vim config/database.yml
 （usernameとpasswordを入力する）。
 
