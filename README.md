@@ -139,3 +139,17 @@ mysql> show grants for 'kei'@'localhost';
 1 row in set (0.00 sec)
 
 上記のようになればok
+
+# scaffoldの使用
+
+### 記事編集画面を作成
+
+```
+rails generate scaffold edit user:string title:string date:date category:string text:text url:string
+```
+
+### テーブルの作成
+
+```
+$ rake db:migrate
+```
