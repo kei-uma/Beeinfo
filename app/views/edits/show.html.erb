@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @edit.user %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @edit.title %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @edit.date %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @edit.category %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @edit.text %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @edit.url %>
+</p>
+
+<%= link_to 'Edit', edit_edit_path(@edit) %> |
+<%= link_to 'Back', edits_path %>
