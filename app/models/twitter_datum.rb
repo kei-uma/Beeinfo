@@ -1,0 +1,2 @@
+class TwitterDatum < ApplicationRecord
+end
