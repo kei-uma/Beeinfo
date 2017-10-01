@@ -1,6 +1,8 @@
 # 使用環境
 ruby : 2.4.1
+
 rails : 5.0.2
+
 mysql 5.7.19
 
 ## railsのバージョン変更
@@ -82,18 +84,18 @@ $ cd beeinfo
  ```
  $ bundle install
  ```
- 
+
 ## データベースの作成
  ```
  $ rake db:create
  ```
 
 ここでエラーが出る場合
- 
+
  ```
 $ vim config/database.yml
 （usernameとpasswordを入力する）。
- 
+
 default: &default
 adapter: mysql2
 encoding: utf8mb4  #最初はutf8ですがdbにツイートを追加する際にエラーがでるので後で変更します。
@@ -103,6 +105,10 @@ password: ここに追加
 socket: /var/run/mysqld/mysqld.sock
 ```
 
+## mysqlの起動
+```
+$ mysql.server start
+```
 上記でもエラーが出る場合
 
 rootユーザ以外を作成し使用した場合
