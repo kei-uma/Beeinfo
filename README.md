@@ -66,7 +66,7 @@ $ cd beeinfo
  bin/rails: spring inserted
 
  ## Gemfileの編集
- ```ruby:Gemfile.rb
+ ```rb:Gemfile.rb
  $ vim Gemfile
  gem 'therubyracer', platforms: :ruby	←コメントを外す
  ```
