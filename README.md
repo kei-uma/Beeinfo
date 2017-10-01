@@ -63,6 +63,7 @@ $ cd beeinfo
 ```
 
  bin/rake: spring inserted
+ 
  bin/rails: spring inserted
 
  ## Gemfileの編集
