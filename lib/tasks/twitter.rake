@@ -17,10 +17,10 @@ end
 def get_twitter_client
   client = Twitter::REST::Client.new do |config|
 
-    config.consumer_key="AIlKbEH3GvK3HxbPoN7gfm9Ku"
-    config.consumer_secret="ua58S6nFNPReeCKJCuZh9xCbVDwaRWsF77xXPepOyONzTlI2kb"
-    config.access_token="3004005439-UfmYvvhWYCsdXlhKOa778QPSWu5lFlx3TL05sVW"
-    config.access_token_secret="Sr21T3IxJ4BLs9gDwAJvfuxbNCOHWdnF8UAB0ar5b6vqI"
+    config.consumer_key=""
+    config.consumer_secret=""
+    config.access_token=""
+    config.access_token_secret=""
   end
   client
 end
