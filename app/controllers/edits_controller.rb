@@ -5,6 +5,8 @@ class EditsController < ApplicationController
   # GET /edits.json
   def index
     @edits = Edit.all
+    @articles = TwitterDatum.all
+ 	 #@articles = TwitterDatum.all.order(created_at: 'desc')
   end
 
   # GET /edits/1
