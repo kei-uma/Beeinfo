@@ -186,3 +186,5 @@ $ rake db:migrate
 
 ## localサーバで確認
 http://localhost:3000/edits
+
+## タスクの作成
