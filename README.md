@@ -92,7 +92,7 @@ $ cd beeinfo
 
 ここでエラーが出る場合
 
- ```
+ ```config/database.yml
 $ vim config/database.yml
 （usernameとpasswordを入力する）。
 
@@ -321,6 +321,31 @@ end
 $ rails twitter:tweet
 ```
 
+ここでテーブルの文字コードが「utf8mb4」でない場合エラーがでる。
+
+mysqlにログインする。
+
+使っているデータベースの変更
+```
+# use beeinfo_development
+```
+
+テーブルの状態を確認
+```
+# show create table twitter_data;
+```
+
+CHARSET=utf8mb4になってない場合
+```
+# alter table twitter_data convert to character set utf8mb4;
+```
+上記を実行
+
+```
+vim config/database.yml
+encoding: utf8mb4
+```
+上記に変更
 
 ## コントローラー編集
 
