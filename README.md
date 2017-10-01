@@ -183,3 +183,6 @@ rails generate scaffold edit user:string title:string date:date category:string 
 ```
 $ rake db:migrate
 ```
+
+## localサーバで確認
+http://localhost:3000/edits
