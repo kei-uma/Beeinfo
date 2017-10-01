@@ -3,10 +3,10 @@ ruby : 2.4.1
 rails : 5.0.2
 mysql 5.7.19
 
-'''## railsのバージョン変更
+```## railsのバージョン変更
  $ rails -v
  $ gem uninstall rails
-'''
+```
 
  $ gem uninsrall railties
  $ gem insall rails -v '○.○.○'
