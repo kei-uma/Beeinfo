@@ -1,8 +1,4 @@
 <h1>New Edit</h1>
-
-<%= render 'form', edit: @edit %>
-
-<%= link_to 'Back', edits_path %>
 <h2>tweet </h2>
 <ul>
 <% str = "a" %>
@@ -17,3 +13,6 @@
 <li><%= art.tweet %></li>
 <% end %>
 </ul>
+<%= render 'form', edit: @edit %>
+
+<%= link_to 'Back', edits_path %>
