@@ -187,4 +187,16 @@ $ rake db:migrate
 ## localサーバで確認
 http://localhost:3000/edits
 
+## Gemfileの編集
+
+'''
+vim Gemfile
+gem 'therubyracer', platforms: :ruby	←コメントを外す
+
+追加
+gem "twitter"
+gem 'oauth'
+gem 'json'
+gem 'whenever', require: false
+'''
 ## タスクの作成
