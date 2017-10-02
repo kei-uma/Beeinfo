@@ -1,7 +1,7 @@
 # 使用環境
 ruby : 2.4.1
 
-rails : 5.0.2
+rails : 5.0.6
 
 mysql 5.7.19
 
@@ -63,7 +63,7 @@ $ cd beeinfo
 ```
 
  bin/rake: spring inserted
- 
+
  bin/rails: spring inserted
 
  ## Gemfileの編集
