@@ -44,7 +44,7 @@ railtiesのアンインストールが必要
  ```
  $ SET GLOBAL validate_password_length=4;
  $ show variables like 'validate_password%';
- $ create user 'kei'@localhost identified by 'root';
+ $ create user 'root'@localhost identified by 'root';
  ```
  ユーザを消去
  ```
