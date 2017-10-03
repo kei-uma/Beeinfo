@@ -119,11 +119,11 @@ rootユーザ以外を作成し使用した場合
 mysqlにユーザでログイン
 
 ```
-mysql> show grants for 'kei'@'localhost';
+mysql> show grants for 'root'@'localhost';
 +-----------------------------------------+
-| Grants for kei@localhost                |
+| Grants for root@localhost                |
 +-----------------------------------------+
-| GRANT USAGE ON *.* TO 'kei'@'localhost' |
+| GRANT USAGE ON *.* TO 'root'@'localhost' |
 +-----------------------------------------+
 1 row in set (0.00 sec)
 ```
@@ -132,13 +132,13 @@ USAGE だと権限がない。
 
 すべての権限を与える。
 ```
-mysql>  GRANT ALL PRIVILEGES ON *.* TO 'kei'@'localhost';
+mysql>  GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';
 
-mysql> show grants for 'kei'@'localhost';
+mysql> show grants for 'root'@'localhost';
 +--------------------------------------------------+
-| Grants for kei@localhost                         |
+| Grants for root@localhost                         |
 +--------------------------------------------------+
-| GRANT ALL PRIVILEGES ON *.* TO 'kei'@'localhost' |
+| GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' |
 +--------------------------------------------------+
 1 row in set (0.00 sec)
 ```
