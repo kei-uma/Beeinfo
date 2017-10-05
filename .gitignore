@@ -21,3 +21,7 @@ config/database.yml
 
 # task
 lib/tasks/twitter.rake
+
+.Gemfike.lock
+
+db/migrate/*.rb
