@@ -25,3 +25,4 @@ lib/tasks/twitter.rake
 Gemfile.lock
 
 db/migrate/*.rb
+config/secrets.yml
