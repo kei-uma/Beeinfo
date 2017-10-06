@@ -121,6 +121,10 @@ default: &default
   password: 追加
   host: localhost
 
+  ## データベースの作成
+  ```
+  $ rake db:create
+  ```
 
 ```
 
@@ -191,11 +195,6 @@ end
       search(client,trend.name, 10)
   end
   end
-```
-
-## データベースの作成
-```
-$ rake db:create
 ```
 
 ## taskの実行
