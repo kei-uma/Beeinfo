@@ -43,6 +43,7 @@ The Ruby zlib extension was not compiled.
 ERROR: Ruby install aborted due to missing extensions
 Try running `apt-get install -y libssl-dev libreadline-dev zlib1g-dev` to fetch missing dependencies.
 ~~~
+```
 
 以下を実行
 ```
