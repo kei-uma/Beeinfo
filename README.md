@@ -19,7 +19,7 @@ mysql 5.7.19
 
 railtiesのアンインストールが必要
 
-```ruby:kobito.rb
+```
  $ gem uninsrall railties
  $ gem insall rails -v '○.○.○'
 ```
