@@ -86,7 +86,7 @@ $ sudo apt-get install mysql-server
 
 rootのパスワード設定を設定する画面がでるのでパスワードを入力
 
-かならず覚えておく
+パスワードはかならず覚えておく
 
 ## bundleインストール
 
