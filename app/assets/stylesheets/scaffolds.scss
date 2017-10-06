@@ -87,3 +87,18 @@ div {
 label {
   display: block;
 }
+
+.scaffold_table {
+  border-collapse: collapse;
+  border: 1px #DCDCDC solid;
+}
+
+.scaffold_table th {
+  border: 1px #DCDCDC solid;
+  padding: 5px;
+}
+
+.scaffold_table td {
+  border: 1px #DCDCDC solid;
+  padding: 5px;
+}
