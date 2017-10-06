@@ -171,6 +171,8 @@ twitterからコンシューマキーを取得したもを追加する。
 
 twitter.rake.sample.rakeは必ず消去する。(エラーが起きるため)
 ```
+$ vim twitter.rake
+
 require 'twitter'
 
 namespace :twitter do
