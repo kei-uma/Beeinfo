@@ -158,7 +158,7 @@ $ rake db:migrate
 
 ```
 $ rails generate scaffold edit user:string title:string date:date category:string text:text url:string
-$ rake db;migrate
+$ rake db:migrate
 ```
 
 ## taskの作成
