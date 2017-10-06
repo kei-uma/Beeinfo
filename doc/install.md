@@ -1,3 +1,22 @@
+# とりあえずやること
+mysqlのインストール
+
+ruby 2.4.1のインストール
+
+bundlerのインストール
+
+twitterからコンシューマキーを取得
+
+databes.ymlの修正
+
+secrtes.ymlの作成
+
+twitter.rake.sample.rakeをtwitter.rakeに修正しコンシューマーキーを入力
+
+modelの作成(DBを作成するため)
+
+
+
 # ubuntu14.04
 
 ## gitのインストール
@@ -111,7 +130,6 @@ production:
 ## railsアプリのデータベースの設定
 ```
 $ vim config/database.yml
-#
 
 default: &default
   adapter: mysql2
@@ -208,6 +226,9 @@ end
 ```
 
 ## taskの実行
+
+ツイートがDBに格納される。
+
 ```
 $ rails twitter:tweet
 ```
