@@ -117,14 +117,82 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: 5
-  username: 変更
-  password: 変更
+  username: 追加
+  password: 追加
   host: localhost
 
 
+```
+
+## taskの作成
+```
+require 'twitter'
+
+namespace :twitter do
+  desc "tweet hello"
+  task :tweet => :environment do
+    client = get_twitter_client
+    # 動作内容書く
+
+      # DBの中身を一度消去
+      puts 'データベースの中身を消去' if TwitterDatum.delete_all()
+    tweet = "Hello Twitter!"
+    #update(client, tweet)
+    trend(client)
+  end
+end
+
+def get_twitter_client
+  client = Twitter::REST::Client.new do |config|
+
+    config.consumer_key="追加"
+    config.consumer_secret="追加"
+    config.access_token="追加"
+    config.access_token_secret="追加"
+  end
+  client
+end
+
+def update(client, tweet)
+  begin
+    tweet = (tweet.length > 140) ? tweet[0..139].to_s : tweet
+   # client.update(tweet.chomp)
+  rescue => e
+    Rails.logger.error "<<twitter.rake::tweet.update ERROR : #{e.message}>>"
+  end
+end
+  def search(client,word, count)
+    client.search(word).take(count).each do |tweet|
+      tweet = {
+      'trend' =>word,
+      'tweet' =>tweet.text
+      }
+      puts 'データベースに保存しました' if TwitterDatum.create(tweet)
+    end
+  end
+
+  def trend(client)
+    client.trends_place(23424856).take(10).each do |trend| # 23424856:日本のtrend
+
+      # trendに関するツイートを表示 引数: 検索ワード,件数
+      search(client,trend.name, 10)
+  end
+  end
 ```
 
 ## データベースの作成
 ```
 $ rake db:create
 ```
+
+## taskの実行
+```
+$ rails twitter:tweet
+```
+
+## サーバの起動
+```
+rails s
+```
+
+とりあえず、動くはず？
