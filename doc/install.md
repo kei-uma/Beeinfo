@@ -124,6 +124,19 @@ default: &default
 
 ```
 
+## modelの設定
+```
+$ rails generate model TwitterDatum trend:string tweet:text
+$ rake db;migrate
+```
+
+下記を実行すると上書きされるか聞かれるのでnoを入力
+
+```
+$ rails generate scaffold edit user:string title:string date:date category:string text:text url:string
+$ rake db;migrate
+```
+
 ## taskの作成
 ```
 require 'twitter'
