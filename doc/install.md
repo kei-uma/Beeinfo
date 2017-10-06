@@ -133,7 +133,7 @@ default: &default
 ## modelの設定
 ```
 $ rails generate model TwitterDatum trend:string tweet:text
-$ rake db;migrate
+$ rake db:migrate
 ```
 
 下記を実行すると上書きされるか聞かれるのでnoを入力
@@ -144,6 +144,14 @@ $ rake db;migrate
 ```
 
 ## taskの作成
+
+lib/tasks/twitter.rake.sample.rake
+
+の名前をtwitter.rakeに変更し
+
+twitterからコンシューマキーを取得したもを追加する。
+
+twitter.rake.sample.rakeは必ず消去する。(エラーが起きるため)
 ```
 require 'twitter'
 
