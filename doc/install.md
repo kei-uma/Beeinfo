@@ -120,9 +120,9 @@ default: &default
   username: 追加
   password: 追加
   host: localhost
+```
 
   ## データベースの作成
-  ```
 
   ```
   $ rake db:create
