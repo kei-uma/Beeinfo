@@ -123,10 +123,12 @@ default: &default
 
   ## データベースの作成
   ```
+
+  ```
   $ rake db:create
   ```
 
-```
+
 
 ## modelの設定
 ```
