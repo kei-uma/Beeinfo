@@ -239,7 +239,7 @@ $ rails twitter:tweet
 
 mysqlにログインする。
 
-データベースの一覧
+データベースの一覧を表示
 ```
 # show databases;
 ```
