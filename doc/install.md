@@ -239,6 +239,11 @@ $ rails twitter:tweet
 
 mysqlにログインする。
 
+データベースの一覧
+```
+# show databases;
+```
+
 使っているデータベースの変更
 ```
 # use beeinfo_development
