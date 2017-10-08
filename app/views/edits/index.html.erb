@@ -65,7 +65,7 @@
 
 <table class='scaffold_table'>
   <thead>
-    <tr>
+    <tr class='table'>
       <th>User</th>
       <th>Title</th>
       <th>Date</th>
@@ -77,20 +77,6 @@
   </thead>
 
   <tbody>
-    <h2>tweet </h2>
-    <ul>
-    <% str = "a" %>
-    <% @articles.each do |art|%>
-    <% if art.trend.to_s.include?(str.to_s)  %>
-
-
-    <% else %>
-     <h2><%= art.trend %></h2>
-    <%  str = art.trend %>
-    <% end %>
-    <li><%= art.tweet %></li>
-    <% end %>
-    </ul>
 
     <% @edits.each do |edit| %>
       <tr>
