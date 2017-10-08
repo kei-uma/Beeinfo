@@ -271,5 +271,6 @@ encoding: utf8mb4
 ```
 rails s
 ```
+http://localhost:3000
 
 とりあえず、動くはず？
