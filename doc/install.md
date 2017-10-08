@@ -273,4 +273,10 @@ rails s
 ```
 http://localhost:3000
 
-とりあえず、動くはず？
+## cssの変更
+app/asetts/stylesheetsを編集
+
+## indexの編集
+app/views/edits/index.html.erb
+
+## controllerの編集
