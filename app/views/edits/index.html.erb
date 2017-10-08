@@ -50,14 +50,6 @@
         </nav><!--/nav-->
     </header><!--/header-->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/wow.min.js"></script>
-	<script>wow = new WOW({}).init();</script>
-
-
 <p id="notice"><%= notice %></p>
 
 <div class='new_articles'>
@@ -65,7 +57,7 @@
 
 <table class='scaffold_table'>
   <thead>
-    <tr class='table'>
+    <tr>
       <th>User</th>
       <th>Title</th>
       <th>Date</th>
@@ -99,5 +91,12 @@
 <%= link_to 'New Edit', new_edit_path %>
 
 </div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script>wow = new WOW({}).init();</script>
 
 </body>
