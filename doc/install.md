@@ -154,6 +154,34 @@ $ rails generate model TwitterDatum trend:string tweet:text
 $ rake db:migrate
 ```
 
+### rails generateが動かない場合
+```
+# spring stop
+Spring stopped.
+
+# bin/spring
+```
+
+### rake db:migrateでエラーが出る場合
+```
+$ rake db:migrate
+== 20171001140007 CreateTwitterData: migrating ================================
+-- create_table(:twitter_data)
+rake aborted!
+StandardError: An error has occurred, all later migrations canceled:
+~~~
+
+```
+以下を実行
+```
+$ bin/rails db:environment:set RAILS_ENV=development
+$rake db:migrate:reset
+```
+その後もう一度以下を実行
+```
+$ rake db:migrate
+```
+
 下記を実行すると上書きされるか聞かれるのでnoを入力
 
 ```
