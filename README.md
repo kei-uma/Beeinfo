@@ -223,7 +223,7 @@ $ rails generate model TwitterDatum trend:string tweet:text
 #rails db:migrate RAILS_ENV=production
 ```
 
-### modelが作成できない場合
+### rails generateが動かない場合
 ```
 # spring stop
 Spring stopped.
