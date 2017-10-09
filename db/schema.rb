@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(version: 20171007003649) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "twitter_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "twitter_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "trend"
-    t.text     "tweet",      limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "tweet",      limit: 16777215
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end
