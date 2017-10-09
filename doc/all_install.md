@@ -39,7 +39,6 @@ $rbenv install 2.4.1
 ## Beeinfoのビルド
 ### 必要なパッケージをインストール
 ```
-```
 $sudo apt-get install mysql-server
 $sudo apt-get install libmysqld-dev
 $sudo apt-get install bundler
