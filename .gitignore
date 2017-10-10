@@ -29,4 +29,3 @@ config/secrets.yml
 app/views/edits/index0.html.erb
 mac_mysql.sh
 open_chrome.sh
-push.sh
