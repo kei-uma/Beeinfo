@@ -1,6 +1,7 @@
 class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
 
+  require 'date'
   # GET /edits
   # GET /edits.json
   def index
