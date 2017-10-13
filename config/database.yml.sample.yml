@@ -13,8 +13,8 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: 5
-  username: 
-  password: 
+  username: 任意のユーザ名
+  password: 任意のパスワード
   host: localhost
 
 development:
@@ -47,8 +47,12 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
+# 定期実行をする際に使用するDBをデフォルトに設定
+
 production:
   <<: *default
-  database: beeinfo_production
-  username: beeinfo
-  password: <%= ENV['BEEINFO_DATABASE_PASSWORD'] %>
+  database: beeinfo_development
+  #database: beeinfo_production
+  #username: beeinfo
+  #password: <%= ENV['BEEINFO_DATABASE_PASSWORD'] %>
