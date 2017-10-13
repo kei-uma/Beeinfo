@@ -251,15 +251,17 @@ $ rake db:migrate
 
 ## taskの作成
 
-lib/tasks/twitter.rake.sample.rake
-
-の名前をtwitter.rakeに変更し
+```
+$ rails generate task twitter
+```
 
 twitterからコンシューマキーを取得したもを追加する。
 
-twitter.rake.sample.rakeは必ず消去する。(エラーが起きるため)
+下記にタスクを書く
+
+
 ```
-$ vim twitter.rake
+$ vim lib/tasks/twitter.rake
 
 require 'twitter'
 
