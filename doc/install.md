@@ -346,7 +346,11 @@ encoding: utf8mb4
 ```
 上記に変更
 
+editsテーブルの文字コードがutd8mb4になってない場合は下記を実行
 
+```
+alter table edits convert to character set utf8mb4;  
+```
 ## サーバの起動
 ```
 rails s
