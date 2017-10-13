@@ -189,7 +189,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 
-# 定期実行をする際に使用するDBをデフォルトに設定
+# 定期実行用に使用するDBをデフォルトに設定
 
 production:
   <<: *default
