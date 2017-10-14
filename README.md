@@ -386,3 +386,12 @@ vim app/views/edits/index.html.erb
 <% end %>
 </ul>
 ```
+
+## 定期実行の追加
+定期実行したいものをconfig/schedule.rbに記述
+
+現状は一定間隔でrake twitter:tweetをおこなう
+```
+$bundle exec whenever --update-crontab RAILS_ENV=develop
+```
+このようにコマンドを打ってもproduction環境のデータベースにツイートが保存される問題は現在調査中  
