@@ -27,6 +27,7 @@ gem "twitter"
 gem 'oauth'
 gem 'json'
 gem 'whenever', require: false
+gem 'devise'
 
 
 # Use jquery as the JavaScript library
