@@ -1,2 +1,0 @@
-class TwitterDatum < ApplicationRecord
-end
