@@ -20,7 +20,7 @@
 config/database.yml
 
 # task
-lib/tasks/twitter.rake
+#lib/tasks/twitter.rake
 
 Gemfile.lock
 
@@ -29,3 +29,6 @@ config/secrets.yml
 app/views/edits/index0.html.erb
 mac_mysql.sh
 open_chrome.sh
+
+twitterOauth.txt
+*.*~
