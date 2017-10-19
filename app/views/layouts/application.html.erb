@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Beeinfo</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+      <header>
+	      <% if user_signed_in? %>
+	      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+          <% else %>
+              <%= link_to 'Login', new_user_session_path %>
+              <% end %>
+      </header>
+    <% if notice %>
+     <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+     <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
