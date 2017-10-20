@@ -16,8 +16,13 @@
       <tr><td>user_id</td><td><%= art.user_id %></td></tr>
       <tr><td>user_icon_url</td><td><%= art.user_icon_url %></td></tr>
       <tr><td>tweet_time</td><td><%= art.tweet_time %></td></tr>
-      <tr><td>tweet_url</td><td><%= art.tweet_url %></td></tr>
+      <tr><td>image_url</td><td><%= art.image_url %></td></tr>
     <table>
+      <!-- DBの中に画像があれば画像を表示させる -->
+      <!-- 現在はサイズなどは適当に表示している -->
+      <% if art.image_url != nil  %>
+<p style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;" /></p>
+      <% end %>
   <% end %>
 </ul>
 <%= render 'form', edit: @edit %>
