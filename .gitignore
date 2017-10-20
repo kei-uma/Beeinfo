@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore bundler gems.
+vendor/bundle
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -40,3 +43,5 @@ open_chrome.sh
 
 #twitterOauth AccessKey
 twitterOauth.txt
+
+
