@@ -38,10 +38,17 @@ def update(client, tweet)
 end
 
 def search(client,word, count)
-  client.search(word).take(count).each do |tweet|
+  client.search(word, exclude: "retweets").take(count).each do |tweet|
     tweet = {
     'trend' =>word,
-    'tweet' =>tweet.text
+    'tweet' =>tweet.text,
+    'tweet_id' =>tweet.id.to_s,
+    #'image_url' =>tweet.media.media_url, #とりあえずひとつだけ
+    'user' =>tweet.user.name,
+    'user_id' =>tweet.user.screen_name, #userの@以下
+    'user_icon_url' =>tweet.user.profile_image_url,
+    'tweet_time' =>tweet.created_at,
+    'tweet_url' =>tweet.url
     }
     puts 'データベースに保存しました' if TwitterDatum.create(tweet)
   end

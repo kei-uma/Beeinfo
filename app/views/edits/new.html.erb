@@ -1,17 +1,24 @@
 <h1>New Edit</h1>
 <h2>tweet </h2>
 <ul>
-<% str = "a" %>
-<% @articles.each do |art|%>
-<% if art.trend.to_s.include?(str.to_s)  %>
+  <% str = "a" %>
+  <% @articles.each do |art|%>
+    <% if art.trend.to_s.include?(str.to_s)  %>
 
-
-<% else %>
- <h2><%= art.trend %></h2>
-<%  str = art.trend %>
-<% end %>
-<li><%= art.tweet %></li>
-<% end %>
+    <% else %>
+       <h2><%= art.trend %></h2>
+       <% str = art.trend %>
+    <% end %>
+    <table border="1">
+      <tr><td>tweet</td><td><%= art.tweet %></td></tr>
+      <tr><td>tweet_id</td><td><%= art.tweet_id %></td></tr>
+      <tr><td>user_name</td><td><%= art.user %></td></tr>
+      <tr><td>user_id</td><td><%= art.user_id %></td></tr>
+      <tr><td>user_icon_url</td><td><%= art.user_icon_url %></td></tr>
+      <tr><td>tweet_time</td><td><%= art.tweet_time %></td></tr>
+      <tr><td>tweet_url</td><td><%= art.tweet_url %></td></tr>
+    <table>
+  <% end %>
 </ul>
 <%= render 'form', edit: @edit %>
 

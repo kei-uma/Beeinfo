@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016061957) do
+ActiveRecord::Schema.define(version: 20171020005858) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name"
@@ -32,9 +32,16 @@ ActiveRecord::Schema.define(version: 20171016061957) do
 
   create_table "twitter_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "trend"
-    t.text     "tweet",      limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "tweet",         limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "tweet_id"
+    t.text     "image_url",     limit: 65535
+    t.string   "user"
+    t.string   "user_id"
+    t.text     "user_icon_url", limit: 65535
+    t.datetime "tweet_time"
+    t.text     "tweet_url",     limit: 65535
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
