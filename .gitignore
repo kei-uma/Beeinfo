@@ -23,7 +23,7 @@ vendor/bundle
 config/database.yml
 
 # task
-lib/tasks/twitter.rake
+#lib/tasks/twitter.rake
 
 Gemfile.lock
 
@@ -40,3 +40,8 @@ open_chrome.sh
 .DS_Store
 .idea
 .secret
+
+#twitterOauth AccessKey
+twitterOauth.txt
+
+

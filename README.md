@@ -405,6 +405,9 @@ $bundle install
 ```
 
 ```
-$bundle exec rails generate devise user
+$bundle exec rails generate devise user //←migrateしてエラーがでたら実行
 $bundle exec rake db:migrate
 ```
+
+## twitterコンシューマーキーをtwitter.rakeから分離
+(/Beeinfo/twitterOauth.txt)に移動
