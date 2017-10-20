@@ -39,19 +39,42 @@ end
 
 def search(client,word, count)
   client.search(word, exclude: "retweets").take(count).each do |tweet|
+    # ツイートにurlが含まれるか確認
+    if !tweet.media.empty? then
+         # urlがある場合現状ではdbがハッシュではないのurlをひとつだけ取得
+         tweet.media.take(1).each do |media|
+
+    #ツイートに画像が含まれる場合
     tweet = {
     'trend' =>word,
     'tweet' =>tweet.text,
     'tweet_id' =>tweet.id.to_s,
-    #'image_url' =>tweet.media.media_url, #とりあえずひとつだけ
+     #画像をnilとして保存
+    'image_url' =>media.media_url.to_s, #とりあえずひとつだけ
     'user' =>tweet.user.name,
     'user_id' =>tweet.user.screen_name, #userの@以下
     'user_icon_url' =>tweet.user.profile_image_url,
     'tweet_time' =>tweet.created_at,
     'tweet_url' =>tweet.url
     }
+         end
+    else
+    #ツイートに画像が含まれない場合
+    tweet = {
+    'trend' =>word,
+    'tweet' =>tweet.text,
+    'tweet_id' =>tweet.id.to_s,
+     #画像をnilとして保存
+    'image_url' =>nil, #とりあえずひとつだけ
+    'user' =>tweet.user.name,
+    'user_id' =>tweet.user.screen_name, #userの@以下
+    'user_icon_url' =>tweet.user.profile_image_url,
+    'tweet_time' =>tweet.created_at,
+    'tweet_url' =>tweet.url
+    }
+    end
     puts 'データベースに保存しました' if TwitterDatum.create(tweet)
-  end
+    end
 end
 
 def trend(client)
