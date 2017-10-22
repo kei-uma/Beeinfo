@@ -23,7 +23,8 @@
 
   <div class="field">
     <%= f.label :date %>
-    <%= f.date_select :date %>
+    <%= d = Date.today %>
+    <%= f.hidden_field :date, :value => d.year.to_s + '-' + d.month.to_s + '-' + d.day.to_s %>
   </div>
 
   <div class="field">
