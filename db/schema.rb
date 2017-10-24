@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020005858) do
+ActiveRecord::Schema.define(version: 20171024142246) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20171020005858) do
     t.datetime "updated_at",                null: false
     t.integer  "category_id"
     t.index ["category_id"], name: "index_edits_on_category_id", using: :btree
+  end
+
+  create_table "edits_twitters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "edits_id"
+    t.integer  "twitter_data_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["edits_id"], name: "index_edits_twitters_on_edits_id", using: :btree
+    t.index ["twitter_data_id"], name: "index_edits_twitters_on_twitter_data_id", using: :btree
   end
 
   create_table "twitter_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -61,4 +70,6 @@ ActiveRecord::Schema.define(version: 20171020005858) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, length: { reset_password_token: 191 }, using: :btree
   end
 
+  add_foreign_key "edits_twitters", "edits", column: "edits_id"
+  add_foreign_key "edits_twitters", "twitter_data", column: "twitter_data_id"
 end
