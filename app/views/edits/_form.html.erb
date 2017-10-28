@@ -29,9 +29,7 @@
 
   <div class="field">
     <%= f.label :twitter_data %>
-    <%= f.collection_check_boxes(:edit, :twitter_data_ids, Twitter_datum.all, :id, :tweet) do |t| %>
-      <% t.label { t.check_box + t.text } %>
-    <% end %>
+    <%= f.collection_check_boxes :twitter_datum_ids, TwitterDatum.all, :id, :tweet %>
   </div>
 
   <div class="field">

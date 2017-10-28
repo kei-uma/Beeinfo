@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 20171024142246) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "edit_twitter", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "edit_id"
+    t.integer  "twitter_data_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["edit_id"], name: "index_edit_twitter_on_edit_id", using: :btree
+    t.index ["twitter_data_id"], name: "index_edit_twitter_on_twitter_data_id", using: :btree
+  end
+
   create_table "edits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "user"
     t.string   "title"
@@ -28,15 +37,6 @@ ActiveRecord::Schema.define(version: 20171024142246) do
     t.datetime "updated_at",                null: false
     t.integer  "category_id"
     t.index ["category_id"], name: "index_edits_on_category_id", using: :btree
-  end
-
-  create_table "edits_twitters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.integer  "edits_id"
-    t.integer  "twitter_data_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["edits_id"], name: "index_edits_twitters_on_edits_id", using: :btree
-    t.index ["twitter_data_id"], name: "index_edits_twitters_on_twitter_data_id", using: :btree
   end
 
   create_table "twitter_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -70,6 +70,6 @@ ActiveRecord::Schema.define(version: 20171024142246) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, length: { reset_password_token: 191 }, using: :btree
   end
 
-  add_foreign_key "edits_twitters", "edits", column: "edits_id"
-  add_foreign_key "edits_twitters", "twitter_data", column: "twitter_data_id"
+  add_foreign_key "edit_twitter", "edits"
+  add_foreign_key "edit_twitter", "twitter_data", column: "twitter_data_id"
 end
