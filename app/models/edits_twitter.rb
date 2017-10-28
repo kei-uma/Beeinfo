@@ -1,4 +1,4 @@
 class EditsTwitter < ApplicationRecord
-  belongs_to :edit
-  belongs_to :twitter_data
+  belongs_to :edit, optional: true
+  belongs_to :twitter_datum
 end
