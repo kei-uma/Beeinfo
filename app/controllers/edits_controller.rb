@@ -30,9 +30,10 @@ class EditsController < ApplicationController
   # POST /edits.json
   def create
     @edit = Edit.new(edit_params)
+    @articles = TwitterDatum.all
 
     respond_to do |format|
-      if @edit.save
+      if @edit.save!
         format.html { redirect_to @edit, notice: 'Edit was successfully created.' }
         format.json { render :show, status: :created, location: @edit }
       else
@@ -69,11 +70,11 @@ class EditsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_edit
-      @edit = Edit.find(params[:id])
+      @edit = Edit.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
-      params.require(:edit).permit(:user, :title, :date, :category_id, :text, :url)
+      params.require(:edit).permit(:user, :title, :date, { :twitter_datum_ids=> [] }, :category_id, :text, :url)
     end
 end

@@ -8,7 +8,7 @@ namespace :twitter do
     # 動作内容書く
 
     # DBの中身を一度消去
-    puts 'データベースの中身を消去' if TwitterDatum.delete_all()
+    #puts 'データベースの中身を消去' if TwitterDatum.delete_all()
     tweet = "Hello Twitter!"
     #update(client, tweet)
     trend(client)

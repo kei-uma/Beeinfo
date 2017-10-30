@@ -16,6 +16,26 @@
 </p>
 
 <p>
+  <strong>Tweet:</strong>
+  <% @edit.edits_twitters.each do |twe| %>
+   <table border="1">
+      <tr><td>tweet</td><td><%= twe.twitter_datum.tweet %></td></tr>
+      <tr><td>tweet_id</td><td><%= twe.twitter_datum.tweet_id %></td></tr>
+      <tr><td>user_name</td><td><%= twe.twitter_datum.user %></td></tr>
+      <tr><td>user_id</td><td><%= twe.twitter_datum.user_id %></td></tr>
+      <tr><td>user_icon_url</td><td><%= twe.twitter_datum.user_icon_url %></td></tr>
+      <tr><td>tweet_time</td><td><%= twe.twitter_datum.tweet_time %></td></tr>
+      <tr><td>image_url</td><td><%= twe.twitter_datum.image_url %></td></tr>
+    <table>
+      <!-- DBの中に画像があれば画像を表示させる -->
+      <!-- 現在はサイズなどは適当に表示している -->
+      <% if twe.twitter_datum.image_url != nil  %>
+<p style="text-align:center;"><img src="<%= twe.twitter_datum.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;" /></p>
+      <% end %>
+  <% end %>
+</p>
+
+<p>
   <strong>Category:</strong>
   <%= @edit.category.name %>
 </p>

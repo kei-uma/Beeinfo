@@ -28,6 +28,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :twitter_data %>
+    <%= f.collection_check_boxes :twitter_datum_ids, TwitterDatum.all, :id, :tweet %>
+  </div>
+
+  <div class="field">
     <%= f.label :category_id %>
     <%= f.collection_select :category_id, Category.all, :id, :name %>
   </div>
