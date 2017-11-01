@@ -87,39 +87,50 @@ default: &default
 development:
  <<: *default
  database: Beeinfo
+
+production:
+ <<: *default
+ database: Beeinfo
 ```
 ### mysqlの諸操作
+```
     $mysql -u root -p //mysqlのrootでログイン
     >create user ‘user-name’@localhost identified by ‘pass’; //先述のdatabase.ymlと同じものにする
-    >create database Beeinfo; //Beeinfoのデータベースを作成
     >grant all privileges on Beeinfo.* to ‘user-name’@‘localhost’; //user-nameに権限を付与
+```
  
-### .bashsrcに追記
+### .bashrcに追記
+```
     $cd //ホームディレクトリに移動
-    $echo 'export RAILS_ENV=development' >> .bashsrc
+    $echo 'export RAILS_ENV=development' >> .bashrc
     $cd - //元のディレクトリに移動
+```
  
 ### データベースの作成
+```
     $rake db:create
- 
-### modelの設定
-    $rails generate model TwitterDatum trend:string tweet:text
-    $rails generate scaffold edit user:string title:string date:date category:string text:text url:string
     $rake db:migrate
- 
-### taskの作成
-    $mv lib/tasks/twitter.rake.sample.rake lib/tasks/twitter.rake //sampleファイルをリネーム
-    $gedit lib/tasks/twitter.rake //viでも構わない, twitterOauthの認証キーを4つ入力
- 
+```
+
+### mysqlの諸操作
+```
+    $mysql -u root -p //mysqlのrootでログイン
+    >grant all privileges on Beeinfo.* to ‘user-name’@‘localhost’; //user-nameに権限を付与
+```
+    
  ### データベースの文字コードの変更
+ ```
     $mysql -u root -p
     >use Beeinfo
-    >alter table twitter_data convert to character set utf8mb4;
-    >alter table edits convert to character set utf8mb4;
+    >alter table twitter_data convert to character set utf8mb4; //調べてutf8mb4でなかったら
+    >alter table edits convert to character set utf8mb4;
+```
  
 ### taskの実行
+```
     $rails twitter:tweet
-    
+```
+
 ### サーバの起動
 ```
 $rails s //ローカルでWebサーバを起動, 以後サービスを確認するときはこのコマンドを打つ
@@ -127,3 +138,8 @@ $rails s //ローカルでWebサーバを起動, 以後サービスを確認す�
  
 ### サービスを確認する
 <http://localhost:3000>
+
+### tweetの取得を定期実行させる
+```
+$bundle exec whenever --update-crontab RAILS_ENV=develop
+```
