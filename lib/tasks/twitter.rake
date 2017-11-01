@@ -1,6 +1,7 @@
 require 'twitter'
 require 'oauth'
 require 'time'
+require 'json'
 
 namespace :twitter do
   desc "tweet hello"
@@ -82,7 +83,7 @@ def search(client, word, count)
       i += 1
     end
   end
-  print("トレンド: #{word}, 件数: #{i}個保存\n")
+  print("トレンド: #{word}, 件数: #{i}件保存\n")
 end
 
 def trend(client)
@@ -107,10 +108,14 @@ def apiLimit
   response = endpoint.get('https://api.twitter.com/1.1/application/rate_limit_status.json')
 
   puts 'rest API'
-  response.header.each do |head|
-    print head + ':'
-    puts response.header[head]
-  end
-
-  puts response.body  
+  #response.header.each do |head|
+  #  print head + ':'
+  #  puts response.header[head]
+  #end
+  restAPI = JSON.parse(response.body)
+  
+  print 'trends/place: '
+  puts restAPI["resources"]["trends"]["/trends/place"]
+  print 'search/tweets: '
+  puts restAPI["resources"]["search"]["/search/tweets"] 
 end
