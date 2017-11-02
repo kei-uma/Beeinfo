@@ -5,5 +5,25 @@
   <%= @category.name %>
 </p>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
+<table class='scaffold_table'>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Title</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <% @edits.each do |edit| %>
+            <tr>
+              <td><%= edit.user %></td>
+              <td><%= link_to edit.title, edit %></td>
+              <td><%= edit.date %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
 <%= link_to 'Back', edits_path %>
