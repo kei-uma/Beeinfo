@@ -7,6 +7,7 @@ class EditsController < ApplicationController
   def index
     @edits = Edit.all
     @articles = TwitterDatum.all
+    @categories = Category.all
  	 #@articles = TwitterDatum.all.order(created_at: 'desc')g
   end
 
