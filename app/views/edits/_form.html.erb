@@ -28,8 +28,12 @@
   </div>
 
   <div class="field">
-    <%= f.label :twitter_data %>
-    <%= f.collection_check_boxes :twitter_datum_ids, TwitterDatum.all, :id, :tweet %>
+    <% $twiGetId.each do |twi| %>
+    <!-- <%= hidden_field_tag 'twitter_datum_ids[]',twi %> -->
+          <!-- multiple:配列を渡す -->
+            <%= f.hidden_field( :twitter_datum_ids,  :multiple => true, :value => twi) %>
+        <% end %>
+
   </div>
 
   <div class="field">

@@ -86,9 +86,9 @@
 
           <tbody>
 
-            <% @edits.each do |edit| %>
+            <% @edits.where(date: DateTime.now.strftime('%Y-%m-%d')).limit(3).each do |edit| %>
             <!--  新着記事のみ表示 1日分-->
-            <% if edit.date.to_s == DateTime.now.strftime('%Y-%m-%d').to_s then %>
+
             <tr>
               <td><%= edit.user %></td>
               <td><%= link_to edit.title, edit %></td>
@@ -100,7 +100,7 @@
               <!-- <td><%= link_to 'Edit', edit_edit_path(edit) %></td> -->
               <!-- <td><%= link_to 'Destroy', edit, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
             </tr>
-            <% end %>
+
             <% end %>
           </tbody>
         </table>
@@ -130,7 +130,7 @@
 
           <tbody>
 
-            <% @edits.each do |edit| %>
+            <% @edits.where(category_id: 2).each do |edit| %>
             <tr>
               <td><%= edit.user %></td>
               <td><%= link_to edit.title, edit %></td>
@@ -169,9 +169,8 @@
 
           <tbody>
 
-            <% @edits.each do |edit| %>
+            <% @edits.where(date: DateTime.now.strftime('%Y-%m-%d')).limit(3).limit(4).each do |edit| %>
             <!--  新着記事のみ表示 1日分-->
-            <% if edit.date.to_s == DateTime.now.strftime('%Y-%m-%d').to_s then %>
             <tr>
               <td><%= edit.user %></td>
               <td><%= link_to edit.title, edit %></td>
@@ -183,7 +182,6 @@
               <!-- <td><%= link_to 'Edit', edit_edit_path(edit) %></td> -->
               <!-- <td><%= link_to 'Destroy', edit, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
             </tr>
-            <% end %>
             <% end %>
           </tbody>
         </table>
@@ -198,8 +196,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/wow.min.js"></script>
-    <script>
-      wow = new WOW({}).init();
-    </script>
+
 
   </body>

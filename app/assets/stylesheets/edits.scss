@@ -1,3 +1,50 @@
 // Place all the styles related to the edits controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.dropzone p {
+    margin: 0;
+    padding: 0;
+    background-color: #0000E9;
+  }
+
+  .dropzone.small {
+    height: 40px;
+  }
+
+  .dropzone {
+    border: 1px solid #555;
+    margin-top: 5px;
+    /*width: 246px;*/
+    min-height: 100px;
+    font-size: 12px;
+
+    text-align: center;
+    line-height: 100px;
+
+    color: gray;
+    background-color: ghostwhite;
+    border-color: gray;
+  }
+
+  .dragging {
+    color: rgba(0, 0, 0, .4);
+    background-color: rgba(0, 0, 255, .1);
+    border-color: rgba(0, 0, 255, .3);
+  }
+
+  .dragging:after {
+  }
+
+  .dragenter {
+    border-color: rgba(255, 0, 0, .3);
+    background-color: rgba(255, 0, 0, .1);
+  }
+
+.table1 {
+  border-collapse: collapse;
+  width: 250px;
+}
+
+#invisible_data {
+  display: none;
+}

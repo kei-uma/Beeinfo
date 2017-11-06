@@ -1,30 +1,221 @@
 <h1>New Edit</h1>
-<h2>tweet </h2>
-<ul>
-  <% str = "a" %>
-  <% @articles.each do |art|%>
-    <% if art.trend.to_s.include?(str.to_s)  %>
-
-    <% else %>
-       <h2><%= art.trend %></h2>
-       <% str = art.trend %>
-    <% end %>
-    <table border="1">
-      <tr><td>tweet</td><td><%= art.tweet %></td></tr>
-      <tr><td>tweet_id</td><td><%= art.tweet_id %></td></tr>
-      <tr><td>user_name</td><td><%= art.user %></td></tr>
-      <tr><td>user_id</td><td><%= art.user_id %></td></tr>
-      <tr><td>user_icon_url</td><td><%= art.user_icon_url %></td></tr>
-      <tr><td>tweet_time</td><td><%= art.tweet_time %></td></tr>
-      <tr><td>image_url</td><td><%= art.image_url %></td></tr>
-    <table>
-      <!-- DBの中に画像があれば画像を表示させる -->
-      <!-- 現在はサイズなどは適当に表示している -->
-      <% if art.image_url != nil  %>
-<p style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;" /></p>
-      <% end %>
+<table border="1" width='100%'>
+  <tr>
+    <th id='invisible_data'>id</th>
+    <th>tweet</th>
+    <th id='invisible_data'>tweet_id</th>
+    <th>user_name</th>
+    <th>user_id</th>
+    <th>user_icon_url</th>
+    <th>tweet_time</th>
+    <th>image_url</th>
+  </tr>
+<% $twiGetId.each do |twi| %>
+<% @articles.where(id: twi).each do |art|%>
+<tr>
+  <td id='invisible_data'><%= art.id %></td>
+  <td><%= art.tweet %></td>
+  <td id='invisible_data'><%= art.tweet_id %></td>
+  <td><%= art.user %></td>
+  <td><%= art.user_id %></td>
+  <td><%= art.user_icon_url %></td>
+  <td><%= art.tweet_time %></td>
+  <% if art.image_url != nil  %>
+  <td style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></td>
+  <% else %>
+  <td><%= art.image_url %></td>
   <% end %>
-</ul>
+<% end %>
+</tr>
+  <% end %>
+  <tr>
+    <!-- ドロップエリア -->
+    <td colspan="3" id="dropzone" class="dropzone"></td>
+  </tr>
+</table>
+
+<h2>tweet
+</h2>
+<div id="list">
+  <% str = '1111111111111111111111111111111111111111' %>
+  <% @articles.limit(100).each do |art|%>
+
+  <% if art.trend.to_s.include?(str.to_s)  %>
+
+  <% else %>
+
+<table border="1" width="300">
+  <h2><%= art.trend %></h2>
+  <tr>
+    <th id='invisible_data'>id</th>
+    <th>tweet</th>
+    <th id='invisible_data'>tweet_id</th>
+    <th>user_name</th>
+    <th>user_id</th>
+    <th>user_icon_url</th>
+    <th>tweet_time</th>
+    <th>image_url</th>
+  </tr>
+
+  <% str = art.trend %>
+  <% end %>
+
+  <tr class="item" draggable="true" >
+    <td id='invisible_data'><%= art.id %></td>
+    <td><%= art.tweet %></td>
+    <td id='invisible_data'><%= art.tweet_id %></td>
+    <td><%= art.user %></td>
+    <td><%= art.user_id %></td>
+    <td><%= art.user_icon_url %></td>
+    <td><%= art.tweet_time %></td>
+    <% if art.image_url != nil  %>
+    <td style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></td>
+    <% else %>
+    <td><%= art.image_url %></td>
+    <% end %>
+
+  </tr>
+
+
+<!-- DBの中に画像があれば画像を表示させる -->
+<!-- 現在はサイズなどは適当に表示している -->
+<!-- <% if art.image_url != nil  %>
+<p style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;"/></p>
+<% end %> -->
+<% end %>
+
+</table>
+</div>
+
+
 <%= render 'form', edit: @edit %>
 
 <%= link_to 'Back', edits_path %>
+
+<script>
+
+     var getTwiId = [];
+
+  $(function () {
+
+    // dropzoneの表示テキストを初期化
+    initDropzone();
+
+    // listテーブルのitem行が操作された時のリスナーを設定
+    items = document.getElementById('list').getElementsByClassName('item');
+
+    Array.prototype.forEach.call(items, function (item) {
+      $(item).on('dragstart', onDragStart);
+      $(item).on('dragend', onDragEnd);
+    });
+
+    // dropzoneのリスナーを設定
+    var $dropzone = $('#dropzone').on('dragover', onDragOver).on('dragenter', onDragEnter).on('dragleave', onDragLeave).on('drop', onDrop);
+
+    // dropzoneの表示テキストを指定
+    function initDropzone() {
+      $('#dropzone').text("ここにドロップできます。");
+    }
+
+    function startDropzone() {
+      $('#dropzone').text("ドラッグ中。");
+    }
+
+    function endDropzone(name) {
+      $('#dropzone').text(name + "をドロップしました。");
+    }
+
+    // ドロップ時の処理 (1) ドロップされた行のidをPOSTする (2) 成功したらリダイレクトする (3) 失敗したらダイアログを表示する
+    function doAction(id) {
+
+      getTwiId.push(id)
+      console.log(getTwiId)
+      $.ajax({
+        url: "<%=  edits_add_path  %>",
+        type: "POST",
+        data: {
+          id: id
+        },
+        dataType: "html",
+        success: function (data) {
+          //alert("success"); dataにドラッグ＆ドロップした Userのid, nameがjson形式で 渡される
+          console.log(data);
+
+          // alert('success');
+          // {"id":1,"name":"Yamada Taro"} 暫定的にページを再読込
+          location.href = "<%= new_edit_path %>"
+        },
+        error: function (data) {
+          alert("errror");
+        }
+      });
+    }
+
+    // ドラッグ＆ドロップ操作
+    function onDragStart(e) {
+      var name = e.originalEvent.target.cells[1].innerHTML;
+      var id = e.originalEvent.target.cells[0].innerHTML;
+      var tweet = e.originalEvent.target.cells[2].innerHTML;
+      var t1 = e.originalEvent.target.cells[3].innerHTML;
+      var t2 = e.originalEvent.target.cells[4].innerHTML;
+      console.log(id);
+      console.log(name);
+      console.log(tweet);
+      console.log(t1);
+      console.log(t2);
+
+      e.originalEvent.dataTransfer.setData('id', id);
+      e.originalEvent.dataTransfer.setData('name', name);
+      e.originalEvent.dataTransfer.setData('tweet', tweet);
+      addDraggingEffect();
+      startDropzone();
+    }
+
+    function onDragEnter(e) {
+      addEnterEffect();
+    }
+
+    function onDragLeave(e) {
+      removeEnterEffect();
+    }
+
+    function onDragOver(e) {
+      e.preventDefault();
+    }
+
+    function onDragEnd(e) {
+      resetAllEffect();
+    }
+
+    function onDrop(e) {
+      e.preventDefault();
+      var id = e.originalEvent.dataTransfer.getData('id');
+      var name = e.originalEvent.dataTransfer.getData('name');
+      endDropzone(name);
+      doAction(id);
+    }
+
+    function addDraggingEffect() {
+      $dropzone.addClass('dragging');
+    }
+
+    function removeDraggingEffect() {
+      $dropzone.removeClass('dragging');
+      initDropzone();
+    }
+
+    function addEnterEffect() {
+      $dropzone.addClass('dragenter');
+    }
+
+    function removeEnterEffect() {
+      $dropzone.removeClass('dragenter');
+    }
+
+    function resetAllEffect(e) {
+      removeDraggingEffect();
+      removeEnterEffect();
+    }
+
+  });
+</script>
