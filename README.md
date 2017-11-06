@@ -394,20 +394,17 @@ vim app/views/edits/index.html.erb
 ```
 $bundle exec whenever --update-crontab RAILS_ENV=develop
 ```
-このようにコマンドを打ってもproduction環境のデータベースにツイートが保存される問題は現在調査中  
+ 
 
 ## ログイン機能の追加
 <https://qiita.com/Salinger/items/873e3c667462746ae707>
 
 上記のサイトの手順でdeviseを導入
-```
-$bundle install
-```
 
-```
-$bundle exec rails generate devise user //←migrateしてエラーがでたら実行
-$bundle exec rake db:migrate
-```
 
 ## twitterコンシューマーキーをtwitter.rakeから分離
 (/Beeinfo/twitterOauth.txt)に移動
+
+## デバッグ用にDB初期値を設定
+rake db:reset //←DBのリセット
+rake db:seed //←DB初期値をinsert

@@ -11,6 +11,9 @@ helper_method :twitter_datum_ids
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
  # 	 @articles = TwitterDatum.all.order(created_at: 'asc')
+    @categories = Category.all
+ 	 #@articles = TwitterDatum.all.order(created_at: 'desc')g
+
   end
 
   # GET /edits/1

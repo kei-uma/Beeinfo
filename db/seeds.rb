@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#users
+User.create(:email => 'a@com', :password => 'shimane')
+User.create(:email => 'a@1', :password => '123456')
+
+#categories
+Category.create(name: '総合')
+Category.create(name: 'ニュース')
+Category.create(name: 'カルチャー')
+Category.create(name: 'おでかけ')
+Category.create(name: 'アイデア')
+Category.create(name: '雑学')
+Category.create(name: 'アニメ')
+Category.create(name: 'おもしろ')
+Category.create(name: 'レシピ')
+Category.create(name: 'IT')

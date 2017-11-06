@@ -113,7 +113,7 @@
     </div>
       <div class='article_left'>
         <h1>
-          カテゴリー
+          過去記事
         </h1>
         <table class='scaffold_table'>
           <thead>
@@ -148,18 +148,17 @@
 
         <br>
 
-        <%= link_to 'New Category', new_category_path %>
+        <%= link_to 'New Edit', new_edit_path %>
       </div>
       <div class='article_right'>
         <h1>
-          ランキング
+          カテゴリー
         </h1>
         <table class='scaffold_table'>
           <thead>
             <tr>
-              <th>User</th>
-              <th>Title</th>
-              <th>Date</th>
+              <th>Name</th>
+
               <!-- <th>Category</th> -->
               <!-- <th>Text</th> -->
               <!-- <th>Url</th> -->
@@ -169,26 +168,20 @@
 
           <tbody>
 
+
             <% @edits.where(date: DateTime.now.strftime('%Y-%m-%d')).limit(3).limit(4).each do |edit| %>
             <!--  新着記事のみ表示 1日分-->
+
             <tr>
-              <td><%= edit.user %></td>
-              <td><%= link_to edit.title, edit %></td>
-              <td><%= edit.date %></td>
-              <!-- <td><%= edit.category %></td> -->
-              <!-- <td><%= edit.text %></td> -->
-              <!-- <td><%= edit.url %></td> -->
-              <!-- <td><%= link_to 'Show', edit %></td> -->
-              <!-- <td><%= link_to 'Edit', edit_edit_path(edit) %></td> -->
-              <!-- <td><%= link_to 'Destroy', edit, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+              <td><%= link_to category.name, category %></td>
             </tr>
             <% end %>
           </tbody>
         </table>
 
         <br>
+　　　　　　　　<%= link_to 'New Category', new_category_path %>
 
-        <%= link_to 'New Edit', new_edit_path %>
       </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
