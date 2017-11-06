@@ -1,7 +1,7 @@
 class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
 helper_method :twitter_datum_ids
-
+$twiGetId = Array.new
   require 'date'
   # GET /edits
   # GET /edits.json
