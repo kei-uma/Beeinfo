@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024142246) do
+ActiveRecord::Schema.define(version: 20171109134052) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name"
@@ -37,6 +37,22 @@ ActiveRecord::Schema.define(version: 20171024142246) do
     t.datetime "updated_at",       null: false
     t.index ["edit_id"], name: "index_edits_twitters_on_edit_id", using: :btree
     t.index ["twitter_datum_id"], name: "index_edits_twitters_on_twitter_datum_id", using: :btree
+  end
+
+  create_table "trend_twitters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "trend_id"
+    t.integer  "twitter_datum_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["trend_id"], name: "index_trend_twitters_on_trend_id", using: :btree
+    t.index ["twitter_datum_id"], name: "index_trend_twitters_on_twitter_datum_id", using: :btree
+  end
+
+  create_table "trends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string   "name"
+    t.string   "trend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "twitter_data", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -72,4 +88,6 @@ ActiveRecord::Schema.define(version: 20171024142246) do
 
   add_foreign_key "edits_twitters", "edits"
   add_foreign_key "edits_twitters", "twitter_data"
+  add_foreign_key "trend_twitters", "trends"
+  add_foreign_key "trend_twitters", "twitter_data"
 end
