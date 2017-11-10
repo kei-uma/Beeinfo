@@ -12,7 +12,7 @@
   <tbody>
     <% @trends.each do |trend| %>
       <tr>
-        <td><%= trend.name %></td>
+        <td><%= link_to trend.name, new_edit_path(select_trend: trend.id) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,4 +1,4 @@
 class Trend < ApplicationRecord
-  has_many :twitter_datum, :through => :trend_twitters
-  has_many :twitter_datum, foreign_key: 'twitter_data_id'
+  has_many :twitter_data, :through => :trend_twitters
+  has_many :trend_twitters, foreign_key: 'trend_id'
 end

@@ -11,7 +11,7 @@ class TrendsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_trend
-      #@trend = Trend.find(params[:id])
+      @trend = Trend.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

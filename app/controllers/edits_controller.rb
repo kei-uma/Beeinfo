@@ -2,6 +2,7 @@ class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
 helper_method :twitter_datum_ids
 $twiGetId = Array.new
+$t = 0
   require 'date'
   # GET /edits
   # GET /edits.json
@@ -10,9 +11,7 @@ $twiGetId = Array.new
     @edits = Edit.all
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
- # 	 @articles = TwitterDatum.all.order(created_at: 'asc')
     @categories = Category.all
- 	 #@articles = TwitterDatum.all.order(created_at: 'desc')g
 
   end
 
@@ -24,10 +23,16 @@ $twiGetId = Array.new
 
   # GET /edits/new
   def new
+    #ページが再読み込みされるのでパラメータを保持
+    if params[:select_trend] == nil
+      params[:select_trend] = $t
+    else
+      $t = params[:select_trend]
+    end
     @edit = Edit.new
     @edits = Edit.all
     @articles = TwitterDatum.all.order(created_at: 'desc')
- 	 #@articles = TwitterDatum.all.order(created_at: 'desc')
+    @trend = Trend.find(params[:select_trend])
   end
 
   # GET /edits/1/edit
@@ -57,33 +62,7 @@ $twiGetId = Array.new
   def add
     $twiGetId << params[:id]
     $twiGetId.uniq!
-    # @getEdit = Edit.all.order(created_at: 'desc')
-# @edit = Edit.new(params[:id])
-# @edits[twitter_datum_ids] << selected_user.user_id
-#twitter_datum_ids << params[:id]
-#  hash = {id: twitter_datum_ids}
-#  require 'json'
-#  render :json => hash.to_json
-  # twi = EditsTwitter.new
-  #   twi.twitter_datum_id = params[:id]
-  #   @getEdit.each do |getedit|
-
-  #  edits_id = @getedit.id + 1
-
-  # end
-    # twi.edit_id = 36
-    # if twi.save #上の処理をするといらない
-    #   #head 201
-    #   user = TwitterDatum.find(twi.twitter_datum_id)
-    #   #ここの値がdataに入る
-    #   hash = {id: user.id, user: user.user,tweet: user.tweet}
-    #   require 'json'
-    #   render :json => hash.to_json
-    # else
-    #   head 500
-    # end
-
-end
+  end
 
   # PATCH/PUT /edits/1
   # PATCH/PUT /edits/1.json
@@ -117,7 +96,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
-      # params.require(:edit).permit(:user, :title, :date, { :twitter_datum_ids=> [] }, :category_id, :text, :url)
       params.require(:edit).permit(:user, :title, :date, :category_id, :text, :url ,{ :twitter_datum_ids=> [] })
 
     end

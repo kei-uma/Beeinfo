@@ -10,23 +10,23 @@
     <th>tweet_time</th>
     <th>image_url</th>
   </tr>
-<% $twiGetId.each do |twi| %>
-<% @articles.where(id: twi).each do |art|%>
-<tr>
-  <td id='invisible_data'><%= art.id %></td>
-  <td><%= art.tweet %></td>
-  <td id='invisible_data'><%= art.tweet_id %></td>
-  <td><%= art.user %></td>
-  <td><%= art.user_id %></td>
-  <td><%= art.user_icon_url %></td>
-  <td><%= art.tweet_time %></td>
-  <% if art.image_url != nil  %>
-  <td style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></td>
-  <% else %>
-  <td><%= art.image_url %></td>
-  <% end %>
-<% end %>
-</tr>
+  <% $twiGetId.each do |twi| %>
+    <% @articles.where(id: twi).each do |art|%>
+      <tr>
+        <td id='invisible_data'><%= art.id %></td>
+        <td><%= art.tweet %></td>
+        <td id='invisible_data'><%= art.tweet_id %></td>
+        <td><%= art.user %></td>
+        <td><%= art.user_id %></td>
+        <td><%= art.user_icon_url %></td>
+        <td><%= art.tweet_time %></td>
+        <% if art.image_url != nil  %>
+          <td style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></td>
+        <% else %>
+          <td><%= art.image_url %></td>
+        <% end %>
+      </tr>
+    <% end %>
   <% end %>
   <tr>
     <!-- ドロップエリア -->
@@ -34,57 +34,44 @@
   </tr>
 </table>
 
-<h2>tweet
-</h2>
+<h2>tweet</h2>
 <div id="list">
-  <% str = '1111111111111111111111111111111111111111' %>
-  <% @articles.limit(100).each do |art|%>
+  <h2><%= @trend.name %></h2>
+  <% @trend.trend_twitters.each do |art|%>
 
-  <% if art.trend.to_s.include?(str.to_s)  %>
+    <table border="1" width="300">
+      <tr>
+        <th id='invisible_data'>id</th>
+        <th>tweet</th>
+        <th id='invisible_data'>tweet_id</th>
+        <th>user_name</th>
+        <th>user_id</th>
+        <th>user_icon_url</th>
+        <th>tweet_time</th>
+        <th>image_url</th>
+      </tr>
 
-  <% else %>
-
-<table border="1" width="300">
-  <h2><%= art.trend %></h2>
-  <tr>
-    <th id='invisible_data'>id</th>
-    <th>tweet</th>
-    <th id='invisible_data'>tweet_id</th>
-    <th>user_name</th>
-    <th>user_id</th>
-    <th>user_icon_url</th>
-    <th>tweet_time</th>
-    <th>image_url</th>
-  </tr>
-
-  <% str = art.trend %>
+    <tr class="item" draggable="true" >
+      <td id='invisible_data'><%= art.twitter_datum.id %></td>
+      <td><%= art.twitter_datum.tweet %></td>
+      <td id='invisible_data'><%= art.twitter_datum.tweet_id %></td>
+      <td><%= art.twitter_datum.user %></td>
+      <td><%= art.twitter_datum.user_id %></td>
+      <td><%= art.twitter_datum.user_icon_url %></td>
+      <td><%= art.twitter_datum.tweet_time %></td>
+      <% if art.twitter_datum.image_url != nil  %>
+        <td style="text-align:center;"><img src="<%= art.twitter_datum.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></td>
+      <% else %>
+        <td><%= art.twitter_datum.image_url %></td>
+      <% end %>
+    </tr>
+    <!-- DBの中に画像があれば画像を表示させる -->
+    <!-- 現在はサイズなどは適当に表示している -->
+    <!-- <% if art.twitter_datum.image_url != nil  %>
+      <p style="text-align:center;"><img src="<%= art.twitter_datum.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;"/></p>
+    <% end %> -->
+    </table>
   <% end %>
-
-  <tr class="item" draggable="true" >
-    <td id='invisible_data'><%= art.id %></td>
-    <td><%= art.tweet %></td>
-    <td id='invisible_data'><%= art.tweet_id %></td>
-    <td><%= art.user %></td>
-    <td><%= art.user_id %></td>
-    <td><%= art.user_icon_url %></td>
-    <td><%= art.tweet_time %></td>
-    <% if art.image_url != nil  %>
-    <td style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></td>
-    <% else %>
-    <td><%= art.image_url %></td>
-    <% end %>
-
-  </tr>
-
-
-<!-- DBの中に画像があれば画像を表示させる -->
-<!-- 現在はサイズなどは適当に表示している -->
-<!-- <% if art.image_url != nil  %>
-<p style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;"/></p>
-<% end %> -->
-<% end %>
-
-</table>
 </div>
 
 
