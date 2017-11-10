@@ -16,6 +16,11 @@
 </p>
 
 <p>
+  <strong>Trend:</strong>
+  <%= @edit.trend.name %>
+</p>
+
+<p>
   <strong>Tweet:</strong>
   <% @edit.edits_twitters.each do |twe| %>
    <table border="1">
@@ -30,7 +35,7 @@
       <!-- DBの中に画像があれば画像を表示させる -->
       <!-- 現在はサイズなどは適当に表示している -->
       <% if twe.twitter_datum.image_url != nil  %>
-<p style="text-align:center;"><img src="<%= twe.twitter_datum.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;" /></p>
+        <p style="text-align:center;"><img src="<%= twe.twitter_datum.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;" /></p>
       <% end %>
   <% end %>
 </p>
