@@ -37,6 +37,7 @@ $t = 0
 
   # GET /edits/1/edit
   def edit
+    @trend = Trend.find(@edit.trend_id)
   end
 
   # POST /edits
