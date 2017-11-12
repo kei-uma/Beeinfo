@@ -12,7 +12,7 @@ $t = 0
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
     @categories = Category.all
-
+    @user = current_user
   end
 
   # GET /edits/1

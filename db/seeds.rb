@@ -8,7 +8,7 @@
 
 #users
 User.create(:email => 'a@com', :password => 'shimane')
-User.create(:email => 'a@1', :password => '123456')
+User.create(:email => 'a@1', :password => '123456', 'authority' => true)
 
 #categories
 Category.create(name: '総合')
