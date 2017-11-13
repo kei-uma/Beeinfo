@@ -16,6 +16,20 @@
     <%= f.text_field :name %>
   </div>
 
+  <div class="field">
+    <%= f.label :category %>
+    <% count = 1 %>
+    <% @user.user_categories.each do |user_category| %>
+      <%= f.fields_for :user_categories, user_category do |uc| %>
+        <%= count %>
+        <%= uc.hidden_field :priority, :value => count %>
+        <%= uc.collection_select :category_id, Category.all, :id, :name %>
+        <br>
+        <% count += 1%>
+      <% end %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -13,16 +13,13 @@
       <% if user_signed_in? %>
         <%= current_user.name %>
         <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+        <% if current_user.authority %>
+          <%= link_to '管理者ページへ', edits_path %>
+        <% end %>
       <% else %>
         <%= link_to 'Login', new_user_session_path %>
       <% end %>
-      </header>
-    <% if notice %>
-     <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-     <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>

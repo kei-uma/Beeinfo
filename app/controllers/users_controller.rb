@@ -10,15 +10,30 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    unless @user.user_categories.exists?
+      redirect_to edit_user_path(@user)
+    end
+    @edits = Edit.all
+    @category = Category.all
   end
 
   # GET /users/new
   def new
     @user = User.new
+    @category = Category.all
+    3.times {
+      @user.user_categories.build
+    }
   end
 
   # GET /users/1/edit
   def edit
+    @category = Category.all
+    unless @user.user_categories.exists?
+      3.times {
+        @user.user_categories.build
+      }
+    end
   end
 
   # POST /users
@@ -40,6 +55,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user.user_categories.destroy_all
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -69,6 +85,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name)
+      params.require(:user).permit(:name, user_categories_attributes: [:category_id, :priority])
     end
 end
