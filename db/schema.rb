@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20171112121635) do
 
   create_table "trends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name"
-    t.string   "trend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
