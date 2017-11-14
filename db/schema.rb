@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171112121635) do
+ActiveRecord::Schema.define(version: 20171113235530) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20171112121635) do
   end
 
   create_table "edits", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.string   "user"
     t.string   "title"
     t.date     "date"
     t.text     "text",        limit: 65535
@@ -28,6 +27,8 @@ ActiveRecord::Schema.define(version: 20171112121635) do
     t.datetime "updated_at",                null: false
     t.integer  "category_id"
     t.integer  "trend_id"
+    t.integer  "User_id"
+    t.index ["User_id"], name: "index_edits_on_User_id", using: :btree
     t.index ["category_id"], name: "index_edits_on_category_id", using: :btree
     t.index ["trend_id"], name: "index_edits_on_trend_id", using: :btree
   end

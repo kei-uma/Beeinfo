@@ -12,9 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user %>
-    <%= u = current_user.name %>
-    <%= f.hidden_field :user, :value => u %>
+    <%= f.label :User_id %>
+    <%= current_user.name %>
+    <%= f.hidden_field :User_id, :value => current_user.id %>
   </div>
 
   <div class="field">

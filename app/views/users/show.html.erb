@@ -19,7 +19,7 @@
         <% #ソートが無駄なので時間があったらcontrollerの処理する %>
         <% @edits.where(category_id: @user.user_categories.find_by(priority: tmp+1).category_id).each do |edit| %>
           <tr>
-            <td><%= edit.user %></td>
+            <td><%= edit.User.name %></td>
             <td><%= link_to edit.title, edit %></td>
             <td><%= edit.date %></td>
           </tr>

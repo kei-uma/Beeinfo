@@ -97,6 +97,6 @@ $t = 0
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
-      params.require(:edit).permit(:user, :title, :date, :category_id, :text, :url, { :twitter_datum_ids=> [] }, :trend_id)
+      params.require(:edit).permit(:title, :date, :category_id, :text, :url, { :twitter_datum_ids=> [] }, :trend_id, :User_id)
     end
 end

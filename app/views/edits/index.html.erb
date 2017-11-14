@@ -26,7 +26,7 @@
             <!--  新着記事のみ表示 1日分-->
 
             <tr>
-              <td><%= edit.user %></td>
+              <td><%= edit.User.name %></td>
               <td><%= link_to edit.title, edit %></td>
               <td><%= edit.date %></td>
               <!-- <td><%= edit.category %></td> -->
@@ -68,7 +68,7 @@
 
             <% @edits.where(category_id: 2).each do |edit| %>
             <tr>
-              <td><%= edit.user %></td>
+              <td><%= edit.User.name %></td>
               <td><%= link_to edit.title, edit %></td>
               <td><%= edit.date %></td>
               <!-- <td><%= edit.category %></td> -->
