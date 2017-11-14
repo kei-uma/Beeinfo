@@ -2,7 +2,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @edit.user %>
+  <%= @edit.User.name %>
 </p>
 
 <p>
@@ -55,5 +55,7 @@
   <%= @edit.url %>
 </p>
 
-<%= link_to 'Edit', edit_edit_path(@edit) %> |
-<%= link_to 'Back', edits_path %>
+<% if current_user.authority %>
+  <%= link_to 'Edit', edit_edit_path(@edit) %> |
+<% end %>
+<%= link_to 'Back', current_user %>

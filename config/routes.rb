@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   resources :edits
   resources :trends
+  resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root :to => 'edits#index'
+  root :to => 'users#show'
   #root :to => 'home#index'
 end

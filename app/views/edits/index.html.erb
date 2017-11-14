@@ -26,7 +26,7 @@
             <!--  新着記事のみ表示 1日分-->
 
             <tr>
-              <td><%= edit.user %></td>
+              <td><%= edit.User.name %></td>
               <td><%= link_to edit.title, edit %></td>
               <td><%= edit.date %></td>
               <!-- <td><%= edit.category %></td> -->
@@ -49,7 +49,7 @@
     </div>
       <div class='article_left'>
         <h1>
-          興味のある記事?
+          なにかのスペース?(トレンド一覧?)
         </h1>
         <table class='scaffold_table'>
           <thead>
@@ -68,7 +68,7 @@
 
             <% @edits.where(category_id: 2).each do |edit| %>
             <tr>
-              <td><%= edit.user %></td>
+              <td><%= edit.User.name %></td>
               <td><%= link_to edit.title, edit %></td>
               <td><%= edit.date %></td>
               <!-- <td><%= edit.category %></td> -->
@@ -84,7 +84,6 @@
 
         <br>
 
-        <%= link_to 'New Edit', new_edit_path %>
       </div>
       <div class='article_right'>
         <h1>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<%= @user.name %>
+<br>
+
+<% 3.times do |tmp| %>
+  <h1>興味のある記事<%= tmp+1 %></h1>
+  <% #ソートが無駄なので時間があったらcontrollerの処理する %>
+  <%= @category.find_by(id: @user.user_categories.find_by(priority: tmp+1).category_id).name %>
+    <table class='scaffold_table'>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Title</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% #ソートが無駄なので時間があったらcontrollerの処理する %>
+        <% @edits.where(category_id: @user.user_categories.find_by(priority: tmp+1).category_id).each do |edit| %>
+          <tr>
+            <td><%= edit.User.name %></td>
+            <td><%= link_to edit.title, edit %></td>
+            <td><%= edit.date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+  </div>
+<% end %>
+<%= link_to 'カスタマイズ', edit_user_path(@user) %>
