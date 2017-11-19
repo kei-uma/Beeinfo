@@ -147,7 +147,9 @@ def apiLimit
   restAPI = JSON.parse(response.body)
   
   print 'trends/place: '
-  puts restAPI["resources"]["trends"]["/trends/place"]
+  trendAPI =  restAPI["resources"]["trends"]["/trends/place"]
+  print("#{trendAPI}\n\t\treset => #{Time.at(trendAPI["reset"]).strftime("%Y/%m/%d %H:%M:%S")}\n")
   print 'search/tweets: '
-  puts restAPI["resources"]["search"]["/search/tweets"] 
+  searchAPI = restAPI["resources"]["search"]["/search/tweets"]
+  print("#{searchAPI}\n\t\treset => #{Time.at(searchAPI["reset"]).strftime("%Y/%m/%d %H:%M:%S")}\n")
 end
