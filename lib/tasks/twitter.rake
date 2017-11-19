@@ -44,54 +44,65 @@ end
 
 def search(client, word, count, trend_id)
   i = 0
+  l = 0
   client.search(word, exclude: "retweets").take(count).each do |tweet|
-    # ツイートにurlが含まれるか確認
-    if !tweet.media.empty? then
-        # urlがある場合現状ではdbがハッシュではないのurlをひとつだけ取得
-        tweet.media.take(1).each do |media|
-
-          #ツイートに画像が含まれる場合
-          tweet = {
-            'trend' =>word,
-            'tweet' =>tweet.text,
-            'tweet_id' =>tweet.id.to_s,
-            #画像をnilとして保存
-            'image_url' =>media.media_url.to_s, #とりあえずひとつだけ
-            'user' =>tweet.user.name,
-            'user_id' =>tweet.user.screen_name, #userの@以下
-            'user_icon_url' =>tweet.user.profile_image_url,
-            'tweet_time' =>tweet.created_at,
-            'tweet_url' =>tweet.url
-          }
-        end
-    else
-      #ツイートに画像が含まれない場合
-      tweet = {
-        'trend' =>word,
-        'tweet' =>tweet.text,
-        'tweet_id' =>tweet.id.to_s,
-        #画像をnilとして保存
-        'image_url' =>nil,
-        'user' =>tweet.user.name,
-        'user_id' =>tweet.user.screen_name, #userの@以下
-        'user_icon_url' =>tweet.user.profile_image_url,
-        'tweet_time' =>tweet.created_at,
-        'tweet_url' =>tweet.url
-      }
-    end
-    if TwitterDatum.create(tweet)
-      trend_twitter = {
-        'twitter_datum_id' => TwitterDatum.last.id,
-        'trend_id' => trend_id
-      }
-      if TrendTwitter.create(trend_twitter)
-        i += 1
-      else
-        print("中間テーブル作成失敗, トレンド: #{word}, tweet: #{tweet_id}\n")
+    t = TwitterDatum.find_by(tweet_id: tweet.id.to_s)
+    if t == nil
+      # ツイートにurlが含まれるか確認
+      if !tweet.media.empty? then
+          # urlがある場合現状ではdbがハッシュではないのurlをひとつだけ取得
+          tweet.media.take(1).each do |media|
+            #ツイートに画像が含まれる場合
+            tweet = {
+              'trend' =>word,
+              'tweet' =>tweet.text,
+              'tweet_id' =>tweet.id.to_s,
+              #画像をnilとして保存
+              'image_url' =>media.media_url.to_s, #とりあえずひとつだけ
+              'user' =>tweet.user.name,
+              'user_id' =>tweet.user.screen_name, #userの@以下
+              'user_icon_url' =>tweet.user.profile_image_url,
+              'tweet_time' =>tweet.created_at,
+              'tweet_url' =>tweet.url
+            }
+          end
+      else	#ツイートに画像が含まれない場合
+        tweet = {
+          'trend' =>word,
+          'tweet' =>tweet.text,
+          'tweet_id' =>tweet.id.to_s,
+          #画像をnilとして保存
+          'image_url' =>nil,
+          'user' =>tweet.user.name,
+          'user_id' =>tweet.user.screen_name, #userの@以下
+          'user_icon_url' =>tweet.user.profile_image_url,
+          'tweet_time' =>tweet.created_at,
+          'tweet_url' =>tweet.url
+        }
+      end
+      if TwitterDatum.create(tweet)
+        l += 1
+        trend_twitter = {
+          'twitter_datum_id' => TwitterDatum.last.id,
+          'trend_id' => trend_id
+        }
+      end
+    else	#tweetがすでに存在した場合
+      tt = TrendTwitter.find_by(twitter_datum_id: t.id, trend_id: trend_id)
+      if tt == nil
+        trend_twitter = {
+          'twitter_datum_id' => t.id,
+          'trend_id' => trend_id
+        }
+      else	#すでに中間テーブルも存在する場合
+        next	#次の繰り返しへ
       end
     end
+    if TrendTwitter.create(trend_twitter)
+      i += 1
+    end
   end
-  print("トレンド: #{word}, 件数: #{i}件保存\n")
+  print("trend: #{word}, tweet: #{l}, intermidiate: #{i} saved\n")
 end
 
 def trend(client)
