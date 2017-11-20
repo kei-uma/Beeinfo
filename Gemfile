@@ -28,6 +28,7 @@ gem 'oauth'
 gem 'json'
 gem 'whenever', require: false
 gem 'devise'
+gem 'config'
 
 
 # Use jquery as the JavaScript library
