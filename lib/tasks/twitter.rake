@@ -20,15 +20,11 @@ namespace :twitter do
 end
 
 def get_twitter_client
-  s = []
-  File.foreach("twitterOauth.txt") { |line|
-    s << line.chomp
-  }
   client = Twitter::REST::Client.new do |config|
-    config.consumer_key = s[0]
-    config.consumer_secret = s[1]
-    config.access_token = s[2]
-    config.access_token_secret = s[3]
+    config.consumer_key = Settings.twitter[:consumer_key]
+    config.consumer_secret = Settings.twitter[:consumer_secret]
+    config.access_token = Settings.twitter[:access_token]
+    config.access_token_secret = Settings.twitter[:access_token_secret]
   end
   client
 end
@@ -127,16 +123,12 @@ def trend(client)
 end
 
 def apiLimit
-  s = []
-  File.foreach("twitterOauth.txt") { |line|
-    s << line.chomp
-  }
   client = OAuth::Consumer.new( #limitはTwitterGemでは提供されないので直接取得
-    s[0],
-    s[1],
+    Settings.twitter[:consumer_key],
+    Settings.twitter[:consumer_secret],
     site:'https://api.twitter.com/'
   )
-  endpoint = OAuth::AccessToken.new(client, s[2], s[3])
+  endpoint = OAuth::AccessToken.new(client, Settings.twitter[:access_token], Settings.twitter[:access_token_secret])
   response = endpoint.get('https://api.twitter.com/1.1/application/rate_limit_status.json')
 
   puts 'rest API'
