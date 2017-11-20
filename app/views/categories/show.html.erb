@@ -18,7 +18,7 @@
 
             <% @edits.each do |edit| %>
             <tr>
-              <td><%= edit.user %></td>
+              <td><%= edit.User.name %></td>
               <td><%= link_to edit.title, edit %></td>
               <td><%= edit.date %></td>
               </tr>
