@@ -1,92 +1,152 @@
-<h1>New Edit</h1>
-<table border="1" width='100%'>
-  <tr>
-    <th id='invisible_data'>id</th>
-    <th>tweet</th>
-    <th id='invisible_data'>tweet_id</th>
-    <th>user_name</th>
-    <th>user_id</th>
-    <th>user_icon_url</th>
-    <th>tweet_time</th>
-    <th>image_url</th>
-  </tr>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/jquery-1.7.2.js"></script>
+    <script src="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/ui/jquery.ui.core.js"></script>
+    <script src="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/ui/jquery.ui.widget.js"></script>
+    <script src="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/ui/jquery.ui.mouse.js"></script>
+    <script src="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/ui/jquery.ui.draggable.js"></script>
+    <script src="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/ui/jquery.ui.sortable.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/themes/base/jquery.ui.theme.css">
+
+
+    <style>
+
+/* 大枠 */
+#waku {
+    width:580px;
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+    padding: 10px;
+}
+
+/* 右枠・ドラッグ枠 */
+#dragArea {
+    width:255px;
+    padding: 10px;
+    border-style:solid;
+    border-width:3px;
+    border-color:blue;
+    float:right;
+}
+
+/* divのfloatの解除用 */
+.clear {
+    clear:both;
+}
+#dropArea {
+      width: 30%;
+      height: 1000px;
+      padding: 0.5em 1em;
+      margin: 2em 0;
+      color: #5d627b;
+      background: white;
+      border-top: solid 5px #5d627b;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+      float: left;
+  }
+  .#dropArea p {
+      margin: 0;
+      padding: 0;
+  }
+
+#sort-drop-area {
+    border: 1px dashed yellow;
+    border-radius: 10px;
+    border-width: 3px;
+}
+
+#list {
+    float: left;
+}
+#Contents {
+  width: auto;
+  margin:0 auto;
+  background:#CCCCCC;
+  display: flex;
+
+}
+
+
+    </style>
+</head>
+
+<body>
+<div id="Contents">
   <% $twiGetId.each do |twi| %>
-    <% @articles.where(id: twi).each do |art|%>
-      <tr>
-        <td id='invisible_data'><%= art.id %></td>
-        <td><%= art.tweet %></td>
-        <td id='invisible_data'><%= art.tweet_id %></td>
-        <td><%= art.user %></td>
-        <td><%= art.user_id %></td>
-        <td><%= art.user_icon_url %></td>
-        <td><%= art.tweet_time %></td>
-        <% if art.image_url != nil  %>
-          <td style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></td>
-        <% else %>
-          <td><%= art.image_url %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  <% end %>
-  <tr>
-    <!-- ドロップエリア -->
-    <td colspan="3" id="dropzone" class="dropzone"></td>
-  </tr>
-</table>
-
-<h2>tweet</h2>
-<div id="list">
-  <h2><%= @trend.name %></h2>
-  <% @trend.trend_twitters.each do |art|%>
-
-    <table border="1" width="300">
-      <tr>
-        <th id='invisible_data'>id</th>
-        <th>tweet</th>
-        <th id='invisible_data'>tweet_id</th>
-        <th>user_name</th>
-        <th>user_id</th>
-        <th>user_icon_url</th>
-        <th>tweet_time</th>
-        <th>image_url</th>
-      </tr>
-
-    <tr class="item" draggable="true" >
-      <td id='invisible_data'><%= art.twitter_datum.id %></td>
-      <td><%= art.twitter_datum.tweet %></td>
-      <td id='invisible_data'><%= art.twitter_datum.tweet_id %></td>
-      <td><%= art.twitter_datum.user %></td>
-      <td><%= art.twitter_datum.user_id %></td>
-      <td><%= art.twitter_datum.user_icon_url %></td>
-      <td><%= art.twitter_datum.tweet_time %></td>
-      <% if art.twitter_datum.image_url != nil  %>
-        <td style="text-align:center;"><img src="<%= art.twitter_datum.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></td>
-      <% else %>
-        <td><%= art.twitter_datum.image_url %></td>
+      <%= twi %>
       <% end %>
-    </tr>
-    <!-- DBの中に画像があれば画像を表示させる -->
-    <!-- 現在はサイズなどは適当に表示している -->
-    <!-- <% if art.twitter_datum.image_url != nil  %>
-      <p style="text-align:center;"><img src="<%= art.twitter_datum.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;"/></p>
-    <% end %> -->
-    </table>
-  <% end %>
+<h1>Drag And Drop Sample</h1>
+
+    <h3>枠内に要素をドロップする</h3>
+<div>
+    <div id="dropArea" class="dropArea">
+
+        <% $twiGetId.each do |twi| %>
+          <% @articles.where(id: twi).each do |art|%>
+
+          <li class="ui-state-default" id='invisible_data'><%= art.id %></li>
+          <li class="ui-state-default"><%= art.tweet %></li>
+          <li class="ui-state-default" id='invisible_data'><%= art.tweet_id %></li>
+          <li class="ui-state-default"><%= art.user %></li>
+          <li class="ui-state-default">%= art.user_id %></li>
+          <li class="ui-state-default"><%= art.user_icon_url %></li>
+          <li class="ui-state-default"><%= art.tweet_time %></li>
+          <% if art.image_url != nil  %>
+          <li class="ui-state-default" style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></li>
+          <% else %>
+            <li class="ui-state-default"><%= art.image_url %></li>
+          <% end %>
+
+
+          <% end %>
+        <% end %>
+
+</div>
+</div>
+
+          <h2><%= @trend.name %></h2>
+
+<div id="list">
+
+          <% @trend.trend_twitters.each do |art|%>
+
+          <ul class="item" draggable="true" id= "<%= art.twitter_datum.tweet_id %>">
+              <li ><%= art.twitter_datum.id %></li>
+              <li ><%= art.twitter_datum.tweet %></li>
+              <li ><%= art.twitter_datum.tweet_id %></li>
+              <li ><%= art.twitter_datum.user %></li>
+              <li ><%= art.twitter_datum.user_id %></li>
+              <li ><%= art.twitter_datum.user_icon_url %></li>
+              <li ><%= art.twitter_datum.tweet_time %></li>
+              <% if art.twitter_datum.image_url != nil  %>
+                <li style="text-align:center;"><img src="<%= art.twitter_datum.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></li>
+              <% else %>
+                <li ><%= art.twitter_datum.image_url %></li>
+              <% end %>
+
+             <% if art.twitter_datum.image_url != nil  %>
+              <li style="text-align:center;"><img src="<%= art.twitter_datum.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;"/></li>
+            <% end %>
+</ul>
+
+          <% end %>
 </div>
 
 
-<%= render 'form', edit: @edit %>
-
-<%= link_to 'Back', trends_path %>
-
+    <div class="clear"></div>
+</div>
 <script>
-
-     var getTwiId = [];
+var getTwiId = [];
 
   $(function () {
 
     // dropzoneの表示テキストを初期化
-    initDropzone();
+    // initDropzone();
 
     // listテーブルのitem行が操作された時のリスナーを設定
     items = document.getElementById('list').getElementsByClassName('item');
@@ -97,27 +157,42 @@
     });
 
     // dropzoneのリスナーを設定
-    var $dropzone = $('#dropzone').on('dragover', onDragOver).on('dragenter', onDragEnter).on('dragleave', onDragLeave).on('drop', onDrop);
+    var $dropArea = $('#dropArea').on('dragover', onDragOver).on('dragenter', onDragEnter).on('dragleave', onDragLeave).on('drop', onDrop);
 
     // dropzoneの表示テキストを指定
-    function initDropzone() {
-      $('#dropzone').text("ここにドロップできます。");
-    }
+    // function initDropzone() {
+    //   $('#dropArea').text("ここにドロップできます。");
+    // }
 
-    function startDropzone() {
-      $('#dropzone').text("ドラッグ中。");
+    // function startDropzone() {
+    //   $('#dropArea').text("ドラッグ中。");
+    // }
+    //
+    // function endDropzone(name) {
+    //   $('#dropArea').text(name + "をドロップしました。");
+    // }
+    function onHidden(tweet_id) {
+      $("#list #" + tweet_id).hide();
+      // document.getElementById(tweet_id).style.display="none";
     }
-
-    function endDropzone(name) {
-      $('#dropzone').text(name + "をドロップしました。");
-    }
-
     // ドロップ時の処理 (1) ドロップされた行のidをPOSTする (2) 成功したらリダイレクトする (3) 失敗したらダイアログを表示する
     function doAction(id) {
 
+      // $newLi = $('<li>').text('これは挿入するli要素');
+      //
+      // // li要素の直後に新たなli要素を挿入
+      // $('#dropArea li').after($newLi);
+      // $newLi.insertAfter($('#dropArea li'));
+      //
+      // // li要素の直前に新たなli要素を挿入
+      // $('#dropArea li').before($newLi);
+      // $newLi.insertBefore($('#dropArea ul'));
+      //
       getTwiId.push(id)
       console.log(getTwiId)
-      $.ajax({
+// window.location.reload(true);
+      $.ajax(
+        {
         url: "<%=  edits_add_path  %>",
         type: "POST",
         data: {
@@ -125,12 +200,22 @@
         },
         dataType: "html",
         success: function (data) {
+          var iframe = document.getElementById('dropArea');
+        console.log(iframe)
+        // フレームをreload
+        // iframe.contentWindow.location.reload();
+        update("sample.txt", "result");
+          // $('#test').load(location.href);
+          // $('#test').load('<%= new_edit_path %> #test');
+
           //alert("success"); dataにドラッグ＆ドロップした Userのid, nameがjson形式で 渡される
-          console.log(data);
+          // console.log(data);
 
           // alert('success');
           // {"id":1,"name":"Yamada Taro"} 暫定的にページを再読込
-          location.href = "<%= new_edit_path %>"
+          // location.href = "<%= new_edit_path %>"
+          // location.href = ""
+
         },
         error: function (data) {
           alert("errror");
@@ -140,22 +225,58 @@
 
     // ドラッグ＆ドロップ操作
     function onDragStart(e) {
-      var name = e.originalEvent.target.cells[1].innerHTML;
-      var id = e.originalEvent.target.cells[0].innerHTML;
-      var tweet = e.originalEvent.target.cells[2].innerHTML;
-      var t1 = e.originalEvent.target.cells[3].innerHTML;
-      var t2 = e.originalEvent.target.cells[4].innerHTML;
+
+      dragElement = event.target;
+      var li1 = this.getElementsByTagName("li").item(0);
+      var li2 = this.getElementsByTagName("li").item(1);
+      var li3 = this.getElementsByTagName("li").item(2);
+      var li4 = this.getElementsByTagName("li").item(3);
+      var li5 = this.getElementsByTagName("li").item(4);
+      var li6 = this.getElementsByTagName("li").item(5);
+      var li7 = this.getElementsByTagName("li").item(6);
+      var li8 = this.getElementsByTagName("li").item(7);
+      var id = li1.firstChild.nodeValue;
+      var tweet = li2.firstChild.nodeValue;
+      var tweet_id= li3.firstChild.nodeValue;
+      var name = li4.firstChild.nodeValue;
+      var user_id = li5.firstChild.nodeValue;
+      var icon = li6.firstChild.nodeValue;
+      var date = li7.firstChild.nodeValue;
+      // var img_url = li8.firstChild.nodeValue;
+      // var id = e.originalEvent.target.id;
+
+      // dragElement = e.originalEvent.target;
+      // console.log(dragElement.innerHTML);
+          // e.dataTransfer.setData('id', dragElement.innerHTML);
+      // var name = e.originalEvent.target.cells[1].innerHTML;
+      // var name = e.originalEvent.target.cells[1].innerHTML;
+      // var id = e.originalEvent.target.cells[0].innerHTML;
+      // var tweet = e.originalEvent.target.cells[2].innerHTML;
+      // var t1 = e.originalEvent.target.cells[3].innerHTML;
+      // var t2 = e.originalEvent.target.cells[4].innerHTML;
       console.log(id);
       console.log(name);
       console.log(tweet);
-      console.log(t1);
-      console.log(t2);
+      console.log(user_id);
+      console.log(icon);
+      console.log(date);
+      console.log(tweet_id);
+      // console.log(img_url);
+
 
       e.originalEvent.dataTransfer.setData('id', id);
       e.originalEvent.dataTransfer.setData('name', name);
       e.originalEvent.dataTransfer.setData('tweet', tweet);
+      e.originalEvent.dataTransfer.setData('tweet_id', tweet_id);
+      e.originalEvent.dataTransfer.setData('user_id', user_id);
+      e.originalEvent.dataTransfer.setData('icon', icon);
+      e.originalEvent.dataTransfer.setData('date', date);
+      // e.originalEvent.dataTransfer.setData('img_url', img_url);
+
+
+
       addDraggingEffect();
-      startDropzone();
+      // startDropzone();
     }
 
     function onDragEnter(e) {
@@ -178,25 +299,28 @@
       e.preventDefault();
       var id = e.originalEvent.dataTransfer.getData('id');
       var name = e.originalEvent.dataTransfer.getData('name');
-      endDropzone(name);
+      var tweet = e.originalEvent.dataTransfer.getData('tweet_id');
+      // endDropzone(name);
       doAction(id);
+      onHidden(tweet);
     }
 
     function addDraggingEffect() {
-      $dropzone.addClass('dragging');
+      $dropArea.addClass('dragging');
+       $('p').addClass('color');
     }
 
     function removeDraggingEffect() {
-      $dropzone.removeClass('dragging');
-      initDropzone();
+      $dropArea.removeClass('dragging');
+      // initDropzone();
     }
 
     function addEnterEffect() {
-      $dropzone.addClass('dragenter');
+      $dropArea.addClass('dragenter');
     }
 
     function removeEnterEffect() {
-      $dropzone.removeClass('dragenter');
+      $dropArea.removeClass('dragenter');
     }
 
     function resetAllEffect(e) {
@@ -204,5 +328,17 @@
       removeEnterEffect();
     }
 
+    // $( "#dropArea" ).sortable({
+    //   }).disableSelection();
+
   });
+
+
 </script>
+
+</body>
+</html>
+
+<%= render 'form', edit: @edit %>
+
+<%= link_to 'Back', trends_path %>
