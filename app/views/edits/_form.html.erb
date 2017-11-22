@@ -19,7 +19,7 @@
 
   <div class="field">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true %>
   </div>
 
   <div class="field">
@@ -59,6 +59,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit '投稿', data: { disable_with: '投稿中' }%>
   </div>
 <% end %>
