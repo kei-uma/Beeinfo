@@ -19,7 +19,7 @@
 
   <div class="field">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, required: true %>
   </div>
 
   <div class="field">
@@ -59,6 +59,17 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <input type="button" value="投稿" id="articleSubmit" onClick="_submit()" >
   </div>
 <% end %>
+
+<script>
+  function _submit() {
+    var $submitId = document.getElementsByTagName('form');
+    if (!(document.getElementById('edit_title').value.match(/\S/g))) {
+      alert('タイトルが空です');
+    } else {
+      $submitId[0].submit();
+    }
+  }
+</script>
