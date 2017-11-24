@@ -10,6 +10,10 @@
     <script src="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/ui/jquery.ui.sortable.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <link rel="stylesheet" href="http://kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/themes/base/jquery.ui.theme.css">
 
 
@@ -83,7 +87,6 @@
     <h3>枠内に要素をドロップする</h3>
 <div>
     <div id="dropArea" class="dropArea">
-    <ul></ul>
 </div>
 </div>
 
@@ -152,8 +155,6 @@ var getTwiId = [];
     }
     // ドロップ時の処理 (1) ドロップされた行のidをPOSTする (2) 成功したらリダイレクトする (3) 失敗したらダイアログを表示する
     function doAction(id,name,tweet_id,tweet,user_id,icon,date,img_url) {
-      $( "#dropArea" ).sortable({
-        }).disableSelection();
 
       console.log('Log1 : ' + img_url)
 if (img_url != '') {
@@ -162,7 +163,9 @@ $('#dropArea').append('<ul><li>'+ id +'</li><li>'+ tweet +'</li><li>'+ tweet_id 
 else {
   $('#dropArea').append('<ul><li>'+ id +'</li><li>'+ tweet +'</li><li>'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li>'+ icon +'</li></ul>');
 }
-$('#dropArea ul').append('<ul></ul>');
+
+$( "#dropArea" ).sortable({
+  }).disableSelection();
 
       getTwiId.push(id)
       console.log(getTwiId)
