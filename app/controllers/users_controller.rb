@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     unless @user.user_categories.exists?
       redirect_to edit_user_path(@user)
     end
-    @edits = Edit.all
+    @edits = Edit.includes(:User)
     @category = Category.all
   end
 

@@ -22,7 +22,7 @@
 
 <p>
   <strong>Tweet:</strong>
-  <% @edit.edits_twitters.each do |twe| %>
+  <% @twes.each do |twe| %>
    <table border="1">
       <tr><td>tweet</td><td><%= twe.twitter_datum.tweet %></td></tr>
       <tr><td>tweet_id</td><td><%= twe.twitter_datum.tweet_id %></td></tr>

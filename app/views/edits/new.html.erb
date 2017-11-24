@@ -91,7 +91,7 @@
 
 <div id="list">
 
-          <% @trend.trend_twitters.each do |art|%>
+          <% @arts.each do |art|%>
 
           <ul class="item" draggable="true" id= "<%= art.twitter_datum.tweet_id %>">
               <li ><%= art.twitter_datum.id %></li>
