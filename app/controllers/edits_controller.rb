@@ -44,8 +44,10 @@ $t = 0
   # POST /edits.json
   def create
     #クリエイト画面の際に配列を初期化
-    $twiGetId = Array.new
+    # $twiGetId = Array.new
     @edit = Edit.new(edit_params)
+      @edit.twitter_datum_ids = $twiGetId
+
     @articles = TwitterDatum.all.order(created_at: 'desc')
 # format.json { render json: @edit.errors, status: :unprocessable_entity }
     respond_to do |format|

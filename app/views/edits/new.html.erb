@@ -39,7 +39,7 @@
     clear:both;
 }
 #dropArea {
-      width: 30%;
+      width: 300px;
       height: 1000px;
       padding: 0.5em 1em;
       margin: 2em 0;
@@ -86,9 +86,9 @@
 <div>
     <div id="dropArea" class="dropArea">
 
-        <% $twiGetId.each do |twi| %>
+        <!-- <% $twiGetId.each do |twi| %>
           <% @articles.where(id: twi).each do |art|%>
-
+<ul>
           <li class="ui-state-default" id='invisible_data'><%= art.id %></li>
           <li class="ui-state-default"><%= art.tweet %></li>
           <li class="ui-state-default" id='invisible_data'><%= art.tweet_id %></li>
@@ -102,9 +102,9 @@
             <li class="ui-state-default"><%= art.image_url %></li>
           <% end %>
 
-
+</ul>
           <% end %>
-        <% end %>
+        <% end %> -->
 
 </div>
 </div>
@@ -177,7 +177,7 @@ var getTwiId = [];
     }
     // ドロップ時の処理 (1) ドロップされた行のidをPOSTする (2) 成功したらリダイレクトする (3) 失敗したらダイアログを表示する
     function doAction(id) {
-
+$('#dropArea').append('<ul>追加されました</ul>');
       // $newLi = $('<li>').text('これは挿入するli要素');
       //
       // // li要素の直後に新たなli要素を挿入
@@ -204,7 +204,7 @@ var getTwiId = [];
         console.log(iframe)
         // フレームをreload
         // iframe.contentWindow.location.reload();
-        update("sample.txt", "result");
+        // update("sample.txt", "result");
           // $('#test').load(location.href);
           // $('#test').load('<%= new_edit_path %> #test');
 
@@ -328,8 +328,8 @@ var getTwiId = [];
       removeEnterEffect();
     }
 
-    // $( "#dropArea" ).sortable({
-    //   }).disableSelection();
+    $( "#dropArea" ).sortable({
+      }).disableSelection();
 
   });
 
