@@ -8,7 +8,7 @@ $t = 0
   # GET /edits.json
   def index
     $twiGetId = Array.new
-    @edits = Edit.all
+    @edits = Edit.includes(:User).includes(:category)
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
     @categories = Category.all
@@ -19,6 +19,7 @@ $t = 0
   # GET /edits/1.json
   def show
     $twiGetId = Array.new
+    @twes = @edit.edits_twitters.includes(:twitter_datum)
   end
 
   # GET /edits/new
@@ -33,6 +34,7 @@ $t = 0
     @edits = Edit.all
     @articles = TwitterDatum.all.order(created_at: 'desc')
     @trend = Trend.find(params[:select_trend])
+    @arts = @trend.trend_twitters.includes(:twitter_datum)
   end
 
   # GET /edits/1/edit
@@ -43,13 +45,9 @@ $t = 0
   # POST /edits
   # POST /edits.json
   def create
-    #クリエイト画面の際に配列を初期化
-    # $twiGetId = Array.new
     @edit = Edit.new(edit_params)
-      @edit.twitter_datum_ids = $twiGetId
-
+    @edit.twitter_datum_ids = $twiGetId
     @articles = TwitterDatum.all.order(created_at: 'desc')
-# format.json { render json: @edit.errors, status: :unprocessable_entity }
     respond_to do |format|
       if @edit.save!
         format.html { redirect_to @edit, notice: 'Edit was successfully created.' }
