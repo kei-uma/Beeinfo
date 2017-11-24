@@ -77,34 +77,12 @@
 
 <body>
 <div id="Contents">
-  <% $twiGetId.each do |twi| %>
-      <%= twi %>
-      <% end %>
+
 <h1>Drag And Drop Sample</h1>
 
     <h3>枠内に要素をドロップする</h3>
 <div>
     <div id="dropArea" class="dropArea">
-
-        <!-- <% $twiGetId.each do |twi| %>
-          <% @articles.where(id: twi).each do |art|%>
-<ul>
-          <li class="ui-state-default" id='invisible_data'><%= art.id %></li>
-          <li class="ui-state-default"><%= art.tweet %></li>
-          <li class="ui-state-default" id='invisible_data'><%= art.tweet_id %></li>
-          <li class="ui-state-default"><%= art.user %></li>
-          <li class="ui-state-default">%= art.user_id %></li>
-          <li class="ui-state-default"><%= art.user_icon_url %></li>
-          <li class="ui-state-default"><%= art.tweet_time %></li>
-          <% if art.image_url != nil  %>
-          <li class="ui-state-default" style="text-align:center;"><img src="<%= art.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></li>
-          <% else %>
-            <li class="ui-state-default"><%= art.image_url %></li>
-          <% end %>
-
-</ul>
-          <% end %>
-        <% end %> -->
 
 </div>
 </div>
@@ -128,10 +106,7 @@
               <% else %>
                 <li ><%= art.twitter_datum.image_url %></li>
               <% end %>
-<!--
-             <% if art.twitter_datum.image_url != nil  %>
-              <li style="text-align:center;"><img src="<%= art.twitter_datum.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;"/></li>
-            <% end %> -->
+
 </ul>
 
           <% end %>
@@ -179,17 +154,8 @@ var getTwiId = [];
     function doAction(id,name,tweet_id,tweet,user_id,icon,date,img_url) {
       $( "#dropArea" ).sortable({
         }).disableSelection();
-      // var id = e.originalEvent.dataTransfer.getData('id');
-      // var name = e.originalEvent.dataTransfer.getData('name');
-      // var tweet = e.originalEvent.dataTransfer.getData('tweet_id');
-      //
-      //
-      //
-      // var tweet = e.originalEvent.dataTransfer.getData('tweet');
-      // var user_id = e.originalEvent.dataTransfer.getData('user_id');
-      // var icon =e.originalEvent.dataTransfer.getData('icon');
-      // var date = e.originalEvent.dataTransfer.getData('date');
-      console.log(img_url +'asa')
+
+      console.log('Log1 : ' + img_url)
 if (img_url != '') {
 $('#dropArea').append('<ul><li>'+ id +'</li><li>'+ tweet +'</li><li>'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li>'+ icon +'</li><li style="text-align:center;"><img src='+img_url+' alt="" width="100" height="100" style="border: solid 1px #000000;"></li></ul>');
 }
@@ -198,19 +164,9 @@ else {
 }
 $('#dropArea ul').append('<ul></ul>');
 
-      // $newLi = $('<li>').text('これは挿入するli要素');
-      //
-      // // li要素の直後に新たなli要素を挿入
-      // $('#dropArea li').after($newLi);
-      // $newLi.insertAfter($('#dropArea li'));
-      //
-      // // li要素の直前に新たなli要素を挿入
-      // $('#dropArea li').before($newLi);
-      // $newLi.insertBefore($('#dropArea ul'));
-      //
       getTwiId.push(id)
       console.log(getTwiId)
-// window.location.reload(true);
+
       $.ajax(
         {
         url: "<%=  edits_add_path  %>",
@@ -222,9 +178,7 @@ $('#dropArea ul').append('<ul></ul>');
         success: function (data) {
           var iframe = document.getElementById('dropArea');
         console.log(iframe)
-        // フレームをreload
-        // iframe.contentWindow.location.reload();
-        // update("sample.txt", "result");
+
           // $('#test').load(location.href);
           // $('#test').load('<%= new_edit_path %> #test');
 
@@ -296,9 +250,6 @@ $('#dropArea ul').append('<ul></ul>');
       e.originalEvent.dataTransfer.setData('user_id', user_id);
       e.originalEvent.dataTransfer.setData('icon', icon);
       e.originalEvent.dataTransfer.setData('date', date);
-      // e.originalEvent.dataTransfer.setData('img_url', img_url);
-
-
 
       addDraggingEffect();
       // startDropzone();
@@ -359,7 +310,6 @@ $('#dropArea ul').append('<ul></ul>');
     }
 
   });
-
 
 </script>
 
