@@ -55,6 +55,16 @@
   <%= @edit.url %>
 </p>
 
+<p>
+  <strong>Thumbnail:</strong>
+  <% if @edit.url != '' %>
+    <% image_url = @edit.url %>
+  <% else %>
+    <% image_url = '/assets/default.jpg' %>
+  <% end %>
+  <td style="text-align:center;"><img src="<%= image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/>
+</p>
+
 <% if current_user.authority %>
   <%= link_to 'Edit', edit_edit_path(@edit) %> |
 <% end %>
