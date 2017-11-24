@@ -176,8 +176,24 @@ var getTwiId = [];
       // document.getElementById(tweet_id).style.display="none";
     }
     // ドロップ時の処理 (1) ドロップされた行のidをPOSTする (2) 成功したらリダイレクトする (3) 失敗したらダイアログを表示する
-    function doAction(id) {
-$('#dropArea').append('<ul>追加されました</ul>');
+    function doAction(id,name,tweet_id,tweet,user_id,icon,date) {
+      $( "#dropArea" ).sortable({
+        }).disableSelection();
+      // var id = e.originalEvent.dataTransfer.getData('id');
+      // var name = e.originalEvent.dataTransfer.getData('name');
+      // var tweet = e.originalEvent.dataTransfer.getData('tweet_id');
+      //
+      //
+      //
+      // var tweet = e.originalEvent.dataTransfer.getData('tweet');
+      // var user_id = e.originalEvent.dataTransfer.getData('user_id');
+      // var icon =e.originalEvent.dataTransfer.getData('icon');
+      // var date = e.originalEvent.dataTransfer.getData('date');
+
+$('#dropArea').append('<ul><li>'+ id +'</li><li>'+ tweet +'</li><li>'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li>'+ icon +'</li></ul>');
+
+$('#dropArea ul').append('<ul></ul>');
+
       // $newLi = $('<li>').text('これは挿入するli要素');
       //
       // // li要素の直後に新たなli要素を挿入
@@ -299,10 +315,14 @@ $('#dropArea').append('<ul>追加されました</ul>');
       e.preventDefault();
       var id = e.originalEvent.dataTransfer.getData('id');
       var name = e.originalEvent.dataTransfer.getData('name');
-      var tweet = e.originalEvent.dataTransfer.getData('tweet_id');
+      var tweet_id = e.originalEvent.dataTransfer.getData('tweet_id');
+      var tweet = e.originalEvent.dataTransfer.getData('tweet');
+      var user_id = e.originalEvent.dataTransfer.getData('user_id');
+      var icon =e.originalEvent.dataTransfer.getData('icon');
+      var date = e.originalEvent.dataTransfer.getData('date');
       // endDropzone(name);
-      doAction(id);
-      onHidden(tweet);
+      doAction(id,name,tweet_id,tweet,user_id,icon,date);
+      onHidden(tweet_id);
     }
 
     function addDraggingEffect() {
@@ -327,9 +347,6 @@ $('#dropArea').append('<ul>追加されました</ul>');
       removeDraggingEffect();
       removeEnterEffect();
     }
-
-    $( "#dropArea" ).sortable({
-      }).disableSelection();
 
   });
 
