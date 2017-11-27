@@ -5,7 +5,6 @@ rails : 5.0.6
 
 mysql 5.7.19
 
-
 # とりあえずやること
 mysqlのインストール
 
@@ -19,11 +18,7 @@ databes.ymlの修正
 
 secrtes.ymlの作成
 
-twitter.rake.sample.rakeをtwitter.rakeに修正しコンシューマーキーを入力
-
 modelの作成(DBを作成するため)
-
-
 
 # ubuntu14.04
 
@@ -206,21 +201,11 @@ production:
   $ rake db:create
   ```
 
+  ## マイグレーションの実行
 
-
-## modelの設定
-```
-$ rails generate model TwitterDatum trend:string tweet:text
+  ```
 $ rake db:migrate
-```
-
-### rails generateが動かない場合
-```
-# spring stop
-Spring stopped.
-
-# bin/spring
-```
+  ```
 
 ### rake db:migrateでエラーが出る場合
 ```
@@ -242,90 +227,18 @@ $rake db:migrate:reset
 $ rake db:migrate
 ```
 
-下記を実行すると上書きされるか聞かれるのでnoを入力
-
-```
-$ rails generate scaffold edit user:string title:string date:date category:string text:text url:string
-$ rake db:migrate
-```
-
-## taskの作成
-
-```
-$ rails generate task twitter
-```
-
-twitterからコンシューマキーを取得したもを追加する。
-
-下記にタスクを書く
-
-
-```
-$ vim lib/tasks/twitter.rake
-
-require 'twitter'
-
-namespace :twitter do
-  desc "tweet hello"
-  task :tweet => :environment do
-    client = get_twitter_client
-    # 動作内容書く
-
-      # DBの中身を一度消去
-      puts 'データベースの中身を消去' if TwitterDatum.delete_all()
-    tweet = "Hello Twitter!"
-    #update(client, tweet)
-    trend(client)
-  end
-end
-
-def get_twitter_client
-  client = Twitter::REST::Client.new do |config|
-
-    config.consumer_key="追加"
-    config.consumer_secret="追加"
-    config.access_token="追加"
-    config.access_token_secret="追加"
-  end
-  client
-end
-
-def update(client, tweet)
-  begin
-    tweet = (tweet.length > 140) ? tweet[0..139].to_s : tweet
-   # client.update(tweet.chomp)
-  rescue => e
-    Rails.logger.error "<<twitter.rake::tweet.update ERROR : #{e.message}>>"
-  end
-end
-  def search(client,word, count)
-    client.search(word).take(count).each do |tweet|
-      tweet = {
-      'trend' =>word,
-      'tweet' =>tweet.text
-      }
-      puts 'データベースに保存しました' if TwitterDatum.create(tweet)
-    end
-  end
-
-  def trend(client)
-    client.trends_place(23424856).take(10).each do |trend| # 23424856:日本のtrend
-
-      # trendに関するツイートを表示 引数: 検索ワード,件数
-      search(client,trend.name, 10)
-  end
-  end
-```
-
 ## taskの実行
 
 ツイートがDBに格納される。
 
+基本的にはクローンで定期実行されるため使わない。
 ```
 $ rails twitter:tweet
 ```
 
-ここでテーブルの文字コードが「utf8mb4」でない場合エラーがでる。
+taskを実行しエラーが出る場合。
+
+DBのテーブルの文字コードが「utf8mb4」でない場合エラーがでている可能性がある。
 
 mysqlにログインする。
 
@@ -366,11 +279,3 @@ alter table edits convert to character set utf8mb4;  
 rails s
 ```
 http://localhost:3000
-
-## cssの変更
-app/asetts/stylesheetsを編集
-
-## indexの編集
-app/views/edits/index.html.erb
-
-## controllerの編集
