@@ -274,6 +274,22 @@ editsテーブルの文字コードがutd8mb4になってない場合は下記�
 ```
 alter table edits convert to character set utf8mb4;  
 ```
+
+## 定期実行の設定
+定期実行したいものをconfig/schedule.rbに記述
+
+現状は一定間隔でrake twitter:tweetをおこなう
+```
+$bundle exec whenever --update-crontab RAILS_ENV=develop
+```
+
+## twitterコンシューマーキーをtwitter.rakeから分離
+(/Beeinfo/twitterOauth.txt)に移動
+
+## デバッグ用にDB初期値を設定
+rake db:reset //←DBのリセット
+rake db:seed //←DB初期値をinsert
+
 ## サーバの起動
 ```
 rails s
