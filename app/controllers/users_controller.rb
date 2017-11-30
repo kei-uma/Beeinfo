@@ -15,24 +15,35 @@ class UsersController < ApplicationController
     end
     @edits = Edit.includes(:User)
     @category = Category.all
+    @layout = Layout.all
   end
 
   # GET /users/new
   def new
     @user = User.new
     @category = Category.all
+    @layout = Layout.all
     3.times {
       @user.user_categories.build
     }
+      1.times {
+        @user.user_layouts.build
+      }
   end
 
   # GET /users/1/edit
   def edit
     @category = Category.all
+    @layout = Layout.all
     unless @user.user_categories.exists?
       3.times {
         @user.user_categories.build
       }
+    end
+      unless @user.user_layouts.exists?
+        1.times {
+          @user.user_layouts.build
+        }
     end
   end
 
@@ -40,7 +51,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -56,6 +66,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     @user.user_categories.destroy_all
+    @user.user_layouts.destroy_all
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -85,6 +96,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, user_categories_attributes: [:category_id, :priority])
+      params.require(:user).permit(:name, user_categories_attributes: [:category_id, :priority], user_layouts_attributes: [:layout_id])
     end
 end
