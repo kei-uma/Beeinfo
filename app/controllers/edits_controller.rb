@@ -13,6 +13,8 @@ $t = 0
     @ed = EditsTwitter.all
     @categories = Category.all
     @user = current_user
+    #今日の日付が取れないので昨日+1で対応
+    @trends = Trend.where('updated_at > ?', DateTime.yesterday+1)
   end
 
   # GET /edits/1
