@@ -37,7 +37,7 @@
       <%= f.fields_for :user_layouts, user_layout do |ul| %>
       <%= ul.collection_radio_buttons(:layout_id, Layout.all.limit(3), :id, :layout) do |b| %>
 <%= count %>
-  <%= b.label {b.radio_button + b.text} %>
+  <%= b.label {b.radio_button} %>
   <% count += 1%>
 <% end %>
       <% end %>
