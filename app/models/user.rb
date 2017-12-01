@@ -27,5 +27,8 @@ class User < ApplicationRecord
   has_many :edits
   has_many :user_categories
   has_many :categories, through: :user_categories
+  has_many :user_layouts  # 追記
+  has_many :layouts, through: :user_layouts  # 追記
   accepts_nested_attributes_for :user_categories, allow_destroy: true
+  accepts_nested_attributes_for :user_layouts, allow_destroy: true
 end
