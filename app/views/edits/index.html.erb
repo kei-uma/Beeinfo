@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<%= stylesheet_link_tag 'edits' , :media => "all" %>
+
     <p id="notice"><%= notice %></p>
 
     <div class='article_center'>
@@ -52,12 +54,12 @@
           本日のトレンド一覧
         </h1>
         <table class='scaffold_table'>
-　　　　　　　　　　<tbody>
-　　　　　　　　　　　　<% @trends.each do |trend| %>
-      　　　　　　　　<tr>
-        　　　　　　　　<td><%= link_to trend.name, new_edit_path(select_trend: trend.id) %></td>
-      　　　　　　　　</tr>
-   　　　　　　　　 <% end %>
+          <tbody>
+            <% @trends.each do |trend| %>
+            <tr>
+              <td><%= link_to trend.name, new_edit_path(select_trend: trend.id) %></td>
+            </tr>
+            <% end %>
           </tbody>
         </table>
 
