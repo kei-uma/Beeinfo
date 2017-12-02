@@ -1,26 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
+    <meta charset="utf8">
     <title>Beeinfo</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= analytics_init if Rails.env.producion? %>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+    .navbar {
+      min-height: 60px !important
+    }
+
+    .navbar-brand {
+      height: 60px;
+      padding: 10px 0 10ox 0;
+    }
+
+    .navbar-nav > li > a {
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;
+      color: black
+    }
+    table {
+      width: 100%;
+    }
+    </style>
   </head>
 
   <body>
-    <header>
-      <% if user_signed_in? %>
-        <%= current_user.name %>
-        <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-        <% if current_user.authority %>
-          <%= link_to '管理者ページへ', edits_path %>
-        <% end %>
-      <% else %>
-        <%= link_to 'Login', new_user_session_path %>
-      <% end %>
-    </header>
-    <%= yield %>
-  </body>
+    <nav class="navbar navbar-fixed-top" style = "background-color: #4274b3;">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+				    <img alt="Brand" src="/assets/logo.png" style = "width: 100px;">
+			    </a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right" style="font-size: 20px;">
+            <li style="color: white">
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+            </li>
+            <li>
+              <% if current_user.authority %>
+                <%= link_to '管理者ページへ', edits_path %>
+              <% end %>
+            </li>
+          </ul>
+          <div class="navbar-text navbar-right" style="font-size: 22px;">
+            <% if user_signed_in? %>
+              <%= current_user.name %>さん
+            <% else %>
+              <%= link_to 'Login', new_user_session_path %>
+            <% end %>
+          </div>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+    <div style="padding-top: 70px;">
+      <%= yield %>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
 </html>
