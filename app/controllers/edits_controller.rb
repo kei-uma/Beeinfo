@@ -49,7 +49,7 @@ $t = 0
   def create
     @edit = Edit.new(edit_params)
     @edit.twitter_datum_ids = $twiGetId
-    logger.debug("Log2 : " +@edit.twitter_datum_ids)
+    logger.debug($twiGetId)
     @articles = TwitterDatum.all.order(created_at: 'desc')
     respond_to do |format|
       if @edit.save!
@@ -66,7 +66,7 @@ $t = 0
   def add
     $twiGetId << params[:id]
     $twiGetId.uniq!
-    logger.debug("Log1 : " +$twiGetId)
+    logger.debug($twiGetId)
     end
 
   # PATCH/PUT /edits/1
