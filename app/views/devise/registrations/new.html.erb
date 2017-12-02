@@ -1,8 +1,7 @@
 <%= stylesheet_link_tag 'registerAccount' , :media => "all" %>
 
 <div class="wrapper">
-<div class="top">
-</div>
+
 <body>
 <h2>アカウント登録</h2>
 
@@ -17,7 +16,7 @@
   <div class="field">
     <%= f.label :パスワード%>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字以内)</em>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
