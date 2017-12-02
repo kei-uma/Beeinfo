@@ -30,6 +30,15 @@
     <% end %>
   </div>
 
+  <div class="field">
+    <%= f.label :layout %><br>
+<%= f.radio_button :Layout_id, 1 %> <%= f.label :rate_1, 1 %>
+<%= f.radio_button :Layout_id, 2 %> <%= f.label :rate_2, 2 %>
+<%= f.radio_button :Layout_id, 3 %> <%= f.label :rate_3, 3 %>
+
+  </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
