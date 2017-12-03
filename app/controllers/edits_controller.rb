@@ -2,7 +2,7 @@ class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
 helper_method :twitter_datum_ids
 @@twiGetId = Array.new
-$t = 0
+@@t = 0
   require 'date'
   # GET /edits
   # GET /edits.json
@@ -31,9 +31,9 @@ $t = 0
     logger.debug("Log0 : " + @@twiGetId.to_s)
     #ページが再読み込みされるのでパラメータを保持
     if params[:select_trend] == nil
-      params[:select_trend] = $t
+      params[:select_trend] = @@t
     else
-      $t = params[:select_trend]
+      @@t = params[:select_trend]
     end
     @edit = Edit.new
     @edits = Edit.all
@@ -49,6 +49,7 @@ $t = 0
   # ドラッグアンドドロップされた時に呼ばれる
     def add
       @@twiGetId << params[:id]
+      @@twiGetId.uniq!
       logger.debug("Log1 : " + @@twiGetId.to_s)
     end
 
@@ -56,7 +57,7 @@ $t = 0
   # POST /edits.json
   def create
     @edit = Edit.new(edit_params)
-    @edit.twitter_datum_ids = @@twiGetId.uniq
+    @edit.twitter_datum_ids = @@twiGetId
     logger.debug("Log2 : " + @@twiGetId.to_s)
     @articles = TwitterDatum.all.order(created_at: 'desc')
     respond_to do |format|
