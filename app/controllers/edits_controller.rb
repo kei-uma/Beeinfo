@@ -44,12 +44,19 @@ $t = 0
     @trend = Trend.find(@edit.trend_id)
   end
 
+  # ドラッグアンドドロップされた時に呼ばれる
+    def add
+      $twiGetId << params[:id]
+      $twiGetId.uniq!
+      logger.debug("Log1 : " + $twiGetId.to_s)
+      end
+
   # POST /edits
   # POST /edits.json
   def create
     @edit = Edit.new(edit_params)
     @edit.twitter_datum_ids = $twiGetId
-    logger.debug($twiGetId)
+    logger.debug("Log2 : " + $twiGetId.to_s)
     @articles = TwitterDatum.all.order(created_at: 'desc')
     respond_to do |format|
       if @edit.save!
@@ -61,13 +68,6 @@ $t = 0
       end
     end
   end
-
-# ドラッグアンドドロップされた時に呼ばれる
-  def add
-    $twiGetId << params[:id]
-    $twiGetId.uniq!
-    logger.debug($twiGetId)
-    end
 
   # PATCH/PUT /edits/1
   # PATCH/PUT /edits/1.json
