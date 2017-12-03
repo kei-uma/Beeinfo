@@ -6,11 +6,9 @@ helper_method :twitter_datum_ids
   require 'date'
   # GET /edits
   # GET /edits.json
-  def initialize
-
-  end
 
   def index
+    @@twiGetId = Array.new
     @edits = Edit.includes(:User).includes(:category)
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
@@ -23,11 +21,13 @@ helper_method :twitter_datum_ids
   # GET /edits/1
   # GET /edits/1.json
   def show
+    @@twiGetId = Array.new
     @twes = @edit.edits_twitters.includes(:twitter_datum)
   end
 
   # GET /edits/new
   def new
+    @@twiGetId = Array.new
     logger.debug("Log0 : " + @@twiGetId.to_s)
     #ページが再読み込みされるのでパラメータを保持
     if params[:select_trend] == nil
@@ -48,7 +48,10 @@ helper_method :twitter_datum_ids
   end
   # ドラッグアンドドロップされた時に呼ばれる
     def add
-      @@twiGetId.push(params[:id])
+      @@twiGetId = Array.new
+      params[:id].each do |twi_id|
+        @@twiGetId.push(twi_id)
+end
       @@twiGetId.uniq!
       logger.debug("Log1 : " + @@twiGetId.to_s)
     end
