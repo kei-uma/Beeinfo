@@ -60,6 +60,7 @@ helper_method :twitter_datum_ids
   # POST /edits
   # POST /edits.json
   def create
+    @@twiGetId
     @edit = Edit.new(edit_params)
     @edit.twitter_datum_ids = @@twiGetId
     logger.debug("Log2 : " + @@twiGetId.to_s)
@@ -107,6 +108,7 @@ helper_method :twitter_datum_ids
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
+      @@twiGetId = @@twiGetId
       logger.debug("Log3 : " + @@twiGetId.to_s)
       params.require(:edit).permit(:title, :date, :category_id, :text, :url, { :twitter_datum_ids=> [] }, :trend_id, :User_id)
     end
