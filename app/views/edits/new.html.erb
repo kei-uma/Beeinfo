@@ -115,7 +115,7 @@ $( "#dropArea" ).sortable({
         url: "<%=  edits_add_path  %>",
         type: "POST",
         data: {
-          id: id
+          id: getTwiId
         },
         dataType: "html",
         success: function (data) {
