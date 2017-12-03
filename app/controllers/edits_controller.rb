@@ -23,7 +23,6 @@ $t = 0
 
   # GET /edits/new
   def new
-    $twiGetId = Array.new
     logger.debug("Log0 : " + $twiGetId.to_s)
     #ページが再読み込みされるのでパラメータを保持
     if params[:select_trend] == nil
@@ -42,11 +41,11 @@ $t = 0
   def edit
     @trend = Trend.find(@edit.trend_id)
   end
+$twiGetId = Array.new
   # ドラッグアンドドロップされた時に呼ばれる
     def add
-
       $twiGetId << params[:id]
-      $twiGetId.uniq!
+      $twiGetId
       logger.debug("Log1 : " + $twiGetId.to_s)
     end
 
