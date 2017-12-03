@@ -1,13 +1,11 @@
 class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
 helper_method :twitter_datum_ids
-$twiGetId = Array.new
 $t = 0
   require 'date'
   # GET /edits
   # GET /edits.json
   def index
-    $twiGetId = Array.new
     @edits = Edit.includes(:User).includes(:category)
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
@@ -20,14 +18,13 @@ $t = 0
   # GET /edits/1
   # GET /edits/1.json
   def show
-    $twiGetId = Array.new
     @twes = @edit.edits_twitters.includes(:twitter_datum)
   end
 
   # GET /edits/new
   def new
-    logger.debug("Log0 : " + $twiGetId.to_s)
     $twiGetId = Array.new
+    logger.debug("Log0 : " + $twiGetId.to_s)
     #ページが再読み込みされるのでパラメータを保持
     if params[:select_trend] == nil
       params[:select_trend] = $t
@@ -43,16 +40,15 @@ $t = 0
 
   # GET /edits/1/edit
   def edit
-    $twiGetId = Array.new
     @trend = Trend.find(@edit.trend_id)
   end
-
   # ドラッグアンドドロップされた時に呼ばれる
     def add
+
       $twiGetId << params[:id]
       $twiGetId.uniq!
       logger.debug("Log1 : " + $twiGetId.to_s)
-      end
+    end
 
   # POST /edits
   # POST /edits.json
@@ -89,7 +85,6 @@ $t = 0
   # DELETE /edits/1
   # DELETE /edits/1.json
   def destroy
-    $twiGetId = Array.new
     @edit.destroy
     respond_to do |format|
       format.html { redirect_to edits_url, notice: 'Edit was successfully destroyed.' }
@@ -100,13 +95,11 @@ $t = 0
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_edit
-      $twiGetId = Array.new
       @edit = Edit.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
-      $twiGetId = Array.new
       params.require(:edit).permit(:title, :date, :category_id, :text, :url, { :twitter_datum_ids=> [] }, :trend_id, :User_id)
     end
 end
