@@ -226,6 +226,7 @@ $( "#dropArea" ).sortable({
       var img_url = e.originalEvent.dataTransfer.getData('img_url');
       // endDropzone(name);
       doAction(id,name,tweet_id,tweet,user_id,icon,date,img_url);
+      doAction(null,name,tweet_id,tweet,user_id,icon,date,img_url);
       onHidden(tweet_id);
     }
 
