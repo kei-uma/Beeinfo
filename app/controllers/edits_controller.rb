@@ -26,6 +26,7 @@ $t = 0
 
   # GET /edits/new
   def new
+    logger.debug("Log0 : " + $twiGetId.to_s)
     $twiGetId = Array.new
     #ページが再読み込みされるのでパラメータを保持
     if params[:select_trend] == nil
