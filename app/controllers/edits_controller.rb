@@ -107,6 +107,7 @@ helper_method :twitter_datum_ids
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
+      logger.debug("Log3 : " + @@twiGetId.to_s)
       params.require(:edit).permit(:title, :date, :category_id, :text, :url, { :twitter_datum_ids=> [] }, :trend_id, :User_id)
     end
 end
