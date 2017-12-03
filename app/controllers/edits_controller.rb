@@ -1,10 +1,15 @@
 class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
 helper_method :twitter_datum_ids
+@@twiGetId = Array.new
 $t = 0
   require 'date'
   # GET /edits
   # GET /edits.json
+  def initialize
+
+  end
+
   def index
     @edits = Edit.includes(:User).includes(:category)
     @articles = TwitterDatum.all
@@ -41,20 +46,18 @@ $t = 0
   def edit
     @trend = Trend.find(@edit.trend_id)
   end
-$twiGetId = Array.new
   # ドラッグアンドドロップされた時に呼ばれる
     def add
-      $twiGetId << params[:id]
-      $twiGetId
-      logger.debug("Log1 : " + $twiGetId.to_s)
+      @@twiGetId << params[:id]
+      logger.debug("Log1 : " + @@twiGetId.to_s)
     end
 
   # POST /edits
   # POST /edits.json
   def create
     @edit = Edit.new(edit_params)
-    @edit.twitter_datum_ids = $twiGetId
-    logger.debug("Log2 : " + $twiGetId.to_s)
+    @edit.twitter_datum_ids = @@twiGetId.uniq
+    logger.debug("Log2 : " + @@twiGetId.to_s)
     @articles = TwitterDatum.all.order(created_at: 'desc')
     respond_to do |format|
       if @edit.save!
