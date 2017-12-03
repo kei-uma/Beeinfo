@@ -48,7 +48,7 @@ helper_method :twitter_datum_ids
   end
   # ドラッグアンドドロップされた時に呼ばれる
     def add
-      @@twiGetId << params[:id]
+      @@twiGetId.push(params[:id])
       @@twiGetId.uniq!
       logger.debug("Log1 : " + @@twiGetId.to_s)
     end
