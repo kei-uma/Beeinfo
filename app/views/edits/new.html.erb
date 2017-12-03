@@ -97,11 +97,13 @@ var getTwiId = [];
     function doAction(id,name,tweet_id,tweet,user_id,icon,date,img_url) {
 
       console.log('Log1 : ' + img_url)
+      if (id != null) {
 if (img_url != '') {
 $('#dropArea').append('<ul><li>'+ id +'</li><li>'+ tweet +'</li><li>'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li>'+ icon +'</li><li style="text-align:center;"><img src='+img_url+' alt="" width="100" height="100" style="border: solid 1px #000000;"></li></ul>');
 }
 else {
   $('#dropArea').append('<ul><li>'+ id +'</li><li>'+ tweet +'</li><li>'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li>'+ icon +'</li></ul>');
+}
 }
 
 $( "#dropArea" ).sortable({
