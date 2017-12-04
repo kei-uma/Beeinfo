@@ -109,7 +109,9 @@ else {
 $( "#dropArea" ).sortable({
   }).disableSelection();
 
+      if (id != null) {
       getTwiId.push(id)
+    }
       console.log(getTwiId)
 
       $.ajax(
