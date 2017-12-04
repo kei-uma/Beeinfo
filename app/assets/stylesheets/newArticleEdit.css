@@ -1,0 +1,163 @@
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 33px;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 33px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a {
+  color: #000;
+
+  &:visited {
+    color: #666;
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: #000;
+  }
+}
+
+th {
+  padding-bottom: 5px;
+}
+
+td {
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
+
+label {
+  display: block;
+}
+
+.scaffold_table {
+  border-collapse: collapse;
+  border: 1px #DCDCDC solid;
+}
+
+.scaffold_table th {
+  border: 1px #DCDCDC solid;
+  padding: 5px;
+  color: #000000;
+}
+
+.scaffold_table td {
+  border: 1px #DCDCDC solid;
+  padding: 5px;
+  color: #000000;
+}
+
+
+/* 大枠 */
+#waku {
+    width:580px;
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+    padding: 10px;
+}
+
+/* 右枠・ドラッグ枠 */
+#dragArea {
+    width:255px;
+    padding: 10px;
+    border-style:solid;
+    border-width:3px;
+    border-color:blue;
+    float:right;
+}
+
+/* divのfloatの解除用 */
+.clear {
+    clear:both;
+}
+#dropArea {
+      width: 300px;
+      height: 1000px;
+      padding: 0.5em 1em;
+      margin: 2em 0;
+      color: #5d627b;
+      background: white;
+      border-top: solid 5px #5d627b;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+      float: left;
+  }
+  .#dropArea p {
+      margin: 0;
+      padding: 0;
+  }
+
+#sort-drop-area {
+    border: 1px dashed yellow;
+    border-radius: 10px;
+    border-width: 3px;
+}
+
+#list {
+    float: left;
+}
+#Contents {
+  width: auto;
+  margin:0 auto;
+  background:#CCCCCC;
+  display: flex;
+
+}
