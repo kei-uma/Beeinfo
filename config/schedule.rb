@@ -18,7 +18,8 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-set :output, "log/cron_log.log"
+set :output, "log/cron.log"
+set :environment, :development
 
 every 15.minutes do
  rake "twitter:tweet"
