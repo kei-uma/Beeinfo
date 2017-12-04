@@ -71,4 +71,6 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.rails_logger = true
   end
+
+  GA.tracker = "UA-109688900-1"
 end
