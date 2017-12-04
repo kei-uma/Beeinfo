@@ -1,13 +1,14 @@
 class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
 helper_method :twitter_datum_ids
-$twiGetId = Array.new
-$t = 0
+@@twiGetId = Array.new
+@@t = 0
   require 'date'
   # GET /edits
   # GET /edits.json
+
   def index
-    $twiGetId = Array.new
+    @@twiGetId = Array.new
     @edits = Edit.includes(:User).includes(:category)
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
@@ -20,17 +21,19 @@ $t = 0
   # GET /edits/1
   # GET /edits/1.json
   def show
-    $twiGetId = Array.new
+    @@twiGetId = Array.new
     @twes = @edit.edits_twitters.includes(:twitter_datum)
   end
 
   # GET /edits/new
   def new
+    @@twiGetId = Array.new
+    logger.debug("Log0 : " + @@twiGetId.to_s)
     #ページが再読み込みされるのでパラメータを保持
     if params[:select_trend] == nil
-      params[:select_trend] = $t
+      params[:select_trend] = @@t
     else
-      $t = params[:select_trend]
+      @@t = params[:select_trend]
     end
     @edit = Edit.new
     @edits = Edit.all
@@ -43,12 +46,22 @@ $t = 0
   def edit
     @trend = Trend.find(@edit.trend_id)
   end
+  # ドラッグアンドドロップされた時に呼ばれる
+    def add
+      @@twiGetId = Array.new
+      logger.debug("Log1 : " + params[:id].to_s)
+      params[:id].each do |twi_id|
+        @@twiGetId.push(twi_id)
+      end
+      @@twiGetId.uniq!
+      logger.debug("Log1 : " + @@twiGetId.to_s)
+    end
 
   # POST /edits
   # POST /edits.json
   def create
     @edit = Edit.new(edit_params)
-    @edit.twitter_datum_ids = $twiGetId
+    @edit.twitter_datum_ids = @@twiGetId
     @articles = TwitterDatum.all.order(created_at: 'desc')
     respond_to do |format|
       if @edit.save!
@@ -59,12 +72,6 @@ $t = 0
         format.json { render json: @edit.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-# ドラッグアンドドロップされた時に呼ばれる
-  def add
-    $twiGetId << params[:id]
-    $twiGetId.uniq!
   end
 
   # PATCH/PUT /edits/1
@@ -99,6 +106,7 @@ $t = 0
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
-      params.require(:edit).permit(:title, :date, :category_id, :text, :url, { :twitter_datum_ids=> [] }, :trend_id, :User_id)
+      logger.debug("Log3 : " + @@twiGetId.to_s)
+      params.require(:edit).permit(:title, :date, :category_id, :text, :url, :trend_id, :User_id)
     end
 end
