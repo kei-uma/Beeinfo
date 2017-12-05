@@ -34,14 +34,6 @@
     <%= f.hidden_field :trend_id, :value => @trend.id %>
   </div>
 
-  <div class="field">
-    <% $twiGetId.each do |twi| %>
-    <!-- <%= hidden_field_tag 'twitter_datum_ids[]',twi %> -->
-          <!-- multiple:配列を渡す -->
-            <%= f.hidden_field( :twitter_datum_ids,  :multiple => true, :value => twi) %>
-        <% end %>
-
-  </div>
 
   <div class="field">
     <%= f.label :category_id %>
