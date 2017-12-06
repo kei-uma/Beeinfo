@@ -12,31 +12,26 @@
 
 <body>
 <div id="Contents">
-
-<h1>Drag And Drop Sample</h1>
-
-    <h3>枠内に要素をドロップする</h3>
 <div>
     <div id="dropArea" class="dropArea">
 </div>
 </div>
 
-          <h2><%= @trend.name %></h2>
-
 <div id="list">
-
+          <h2><%= @trend.name %></h2>
+          <div id="list_item">
           <% @arts.each do |art|%>
 
           <ul class="item" draggable="true" id= "<%= art.twitter_datum.tweet_id %>">
-              <li ><%= art.twitter_datum.id %></li>
+              <li style="display:none" ><%= art.twitter_datum.id %></li>
               <li ><%= art.twitter_datum.tweet %></li>
-              <li ><%= art.twitter_datum.tweet_id %></li>
+              <li style="display:none" ><%= art.twitter_datum.tweet_id %></li>
               <li ><%= art.twitter_datum.user %></li>
               <li ><%= art.twitter_datum.user_id %></li>
-              <li ><%= art.twitter_datum.user_icon_url %></li>
+              <li ><img src=<%= art.twitter_datum.user_icon_url %>></li>
               <li ><%= art.twitter_datum.tweet_time %></li>
               <% if art.twitter_datum.image_url != nil  %>
-                <li style="text-align:center;"><img src="<%= art.twitter_datum.image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/></li>
+                <li style="text-align:center;"><img src=<%= art.twitter_datum.image_url %> alt="" width="100" height="100" style="border: solid 1px #000000;"/></li>
               <% else %>
                 <li ><%= art.twitter_datum.image_url %></li>
               <% end %>
@@ -44,11 +39,15 @@
 </ul>
 
           <% end %>
+        </div>
 </div>
 
 
     <div class="clear"></div>
+
+    <%= render 'form', edit: @edit %>
 </div>
+    <%= link_to 'Back', trends_path %>
 <script>
 var getTwiId = [];
 $("#dropArea").sortable({
@@ -87,15 +86,15 @@ $("#dropArea").sortable({
       // document.getElementById(tweet_id).style.display="none";
     }
     // ドロップ時の処理 (1) ドロップされた行のidをPOSTする (2) 成功したらリダイレクトする (3) 失敗したらダイアログを表示する
-    function doAction(id,name,tweet_id,tweet,user_id,icon,date,img_url) {
+    function doAction(id,name,tweet_id,tweet,user_id,user_icon,date,img_url,date) {
 
       console.log('Log1 : ' + img_url)
       if (id != null) {
-if (img_url != '') {
-$('#dropArea').append('<ul><li>'+ id +'</li><li>'+ tweet +'</li><li>'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li>'+ icon +'</li><li style="text-align:center;"><img src='+img_url+' alt="" width="100" height="100" style="border: solid 1px #000000;"></li></ul>');
+if (img_url != "null") {
+$('#dropArea').append('<ul><li style="display:none"'+ id +'</li><li>'+ tweet +'</li><li style="display:none" >'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li><img src='+ user_icon +'></li><li style="text-align:center;"><img src='+img_url+' alt="" width="100" height="100" style="border: solid 1px #000000;"></li><li>'+ date +'</li></ul>');
 }
 else {
-  $('#dropArea').append('<ul><li>'+ id +'</li><li>'+ tweet +'</li><li>'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li>'+ icon +'</li></ul>');
+  $('#dropArea').append('<ul><li style="display:none" >'+ id +'</li><li>'+ tweet +'</li><li style="display:none">'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li><img src='+ user_icon +'></li><li>'+ date +'</li></ul>');
 }
 }
 
@@ -147,19 +146,33 @@ else {
       var li6 = this.getElementsByTagName("li").item(5);
       var li7 = this.getElementsByTagName("li").item(6);
       var li8 = this.getElementsByTagName("img").item(0);
+      var li9 = this.getElementsByTagName("img").item(1);
 
       var id = li1.firstChild.nodeValue;
       var tweet = li2.firstChild.nodeValue;
       var tweet_id= li3.firstChild.nodeValue;
       var name = li4.firstChild.nodeValue;
       var user_id = li5.firstChild.nodeValue;
-      var icon = li6.firstChild.nodeValue;
+      var user_icon = li6.firstChild.nodeValue;
       var date = li7.firstChild.nodeValue;
 
        if (li8 != null) {
       console.log(li8.src);
-      e.originalEvent.dataTransfer.setData('img_url', li8.src);
-      }
+      var user_icon = li8.src;
+      e.originalEvent.dataTransfer.setData('user_icon', li8.src);
+    } else {
+      var user_icon = null;
+      e.originalEvent.dataTransfer.setData('user_icon', null);
+    }
+
+    if (li9 != null) {
+   console.log(li9.src);
+   var img_url = li9.src;
+   e.originalEvent.dataTransfer.setData('img_url', li9.src);
+ } else {
+   var img_url = null;
+   e.originalEvent.dataTransfer.setData('img_url', null);
+ }
       // var id = e.originalEvent.target.id;
 
       // dragElement = e.originalEvent.target;
@@ -175,10 +188,10 @@ else {
       console.log(name);
       console.log(tweet);
       console.log(user_id);
-      console.log(icon);
+      console.log("user_icon : "+user_icon);
       console.log(date);
       console.log(tweet_id);
-      // console.log(img_url);
+      console.log("img_url : " + img_url);
 
 
       e.originalEvent.dataTransfer.setData('id', id);
@@ -186,8 +199,9 @@ else {
       e.originalEvent.dataTransfer.setData('tweet', tweet);
       e.originalEvent.dataTransfer.setData('tweet_id', tweet_id);
       e.originalEvent.dataTransfer.setData('user_id', user_id);
-      e.originalEvent.dataTransfer.setData('icon', icon);
+      e.originalEvent.dataTransfer.setData('icon', user_icon);
       e.originalEvent.dataTransfer.setData('date', date);
+
 
       addDraggingEffect();
       // startDropzone();
@@ -220,8 +234,9 @@ else {
       var date = e.originalEvent.dataTransfer.getData('date');
       var img_url = e.originalEvent.dataTransfer.getData('img_url');
       // endDropzone(name);
-      doAction(id,name,tweet_id,tweet,user_id,icon,date,img_url);
-      doAction(null,name,tweet_id,tweet,user_id,icon,date,img_url);
+      console.log("icon : " + icon)
+      doAction(id,name,tweet_id,tweet,user_id,icon,date,img_url,date);
+      doAction(null,name,tweet_id,tweet,user_id,icon,date,img_url,date);
       onHidden(tweet_id);
     }
 
@@ -254,7 +269,3 @@ else {
 
 </body>
 </html>
-
-<%= render 'form', edit: @edit %>
-
-<%= link_to 'Back', trends_path %>

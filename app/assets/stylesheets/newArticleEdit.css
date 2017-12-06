@@ -8,10 +8,11 @@ body {
 }
 
 p, ol, ul, td {
+  list-style-type: none!important;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  margin: 33px;
+  margin: 0px;
 }
 
 pre {
@@ -67,17 +68,6 @@ div {
   margin-bottom: 20px;
   background-color: #f0f0f0;
 
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0;
-    background-color: #c00;
-    color: #fff;
-  }
-
   ul li {
     font-size: 12px;
     list-style: square;
@@ -106,39 +96,24 @@ label {
 }
 
 
-/* 大枠 */
-#waku {
-    width:580px;
-    border-style:solid;
-    border-width:1px;
-    border-color:black;
-    padding: 10px;
-}
 
-/* 右枠・ドラッグ枠 */
-#dragArea {
-    width:255px;
-    padding: 10px;
-    border-style:solid;
-    border-width:3px;
-    border-color:blue;
-    float:right;
-}
 
 /* divのfloatの解除用 */
 .clear {
     clear:both;
 }
 #dropArea {
-      width: 300px;
-      height: 1000px;
+      width: 500px;
+      height: 1379px;
       padding: 0.5em 1em;
-      margin: 2em 0;
+      margin: 2em 0 0 2em;
       color: #5d627b;
       background: white;
-      border-top: solid 5px #5d627b;
+      /*border-top: solid 5px #5d627b;*/
+      border: solid 1px #5d627b;
       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
       float: left;
+      overflow-y: scroll;
   }
   .#dropArea p {
       margin: 0;
@@ -152,12 +127,32 @@ label {
 }
 
 #list {
-    float: left;
+    width: 600px;
+    height: 1400px;
+}
+
+#list h2 {
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 30px;
+}
+#list #list_item {
+    overflow-y: scroll;
+    height: 1332px;
+    background: white;
+    border: inset 1px black;
 }
 #Contents {
-  width: auto;
-  margin:0 auto;
+  width: 1000px;
   background:#CCCCCC;
+  margin:0 0 0 0;
   display: flex;
-
+  padding-top: 0px;
+  width: 1000px;
+}
+#Contents #newform {
+  display: flex;
+  padding-left: 10px
 }
