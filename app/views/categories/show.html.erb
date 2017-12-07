@@ -8,24 +8,23 @@
 </p>
 
 <table class='scaffold_table'>
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Title</th>
-              <th>Date</th>
-            </tr>
-          </thead>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Title</th>
+      <th>Date</th>
+    </tr>
+  </thead>
 
-          <tbody>
+  <tbody>
 
-            <% @edits.each do |edit| %>
-            <tr>
-              <td><%= edit.User.name %></td>
-              <td><%= link_to edit.title, edit %></td>
-              <td><%= edit.date %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+    <% @edits.each do |edit| %>
+      <tr>
+        <td><%= edit.User.name %></td>
+        <td><%= link_to edit.title, edit %></td>
+        <td><%= edit.date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to 'Back', edits_path %>
