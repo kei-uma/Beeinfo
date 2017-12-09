@@ -208,3 +208,15 @@ tbody {
   color: #000000;
   width: 270px;
 }
+
+.wrapper-layout {
+  display: flex;
+}
+
+.wrapper-layout #layoutlist {
+  margin-right: 20px;
+}
+  
+.wrapper-layout #layoutlist #radio-button {
+text-align: center;
+}
