@@ -6,6 +6,28 @@ margin-left: 20px
 display: flex;
 }
 
+ul{
+ list-style: none;
+ 
+ line-heigh: 1.5;
+
+}
+
+
+.wrapper li{
+ font-size: 14px;
+ background-color: red;
+}
+
+table,th,td{
+ border: none;
+ margin-left: 40px;
+}
+
+h1{
+ margin-left: 20px;
+}
+
 .wrapper_category {
     margin-left: 50px;
 }
@@ -13,3 +35,4 @@ display: flex;
 .wrapper_category td {
     width: 100px;
 }
+

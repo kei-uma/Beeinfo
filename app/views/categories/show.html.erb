@@ -1,30 +1,33 @@
-<%= stylesheet_link_tag 'scaffold' , :media => "all" %>
+<%= stylesheet_link_tag 'category' , :media => "all" %>
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
 
-<table class='scaffold_table'>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Title</th>
-      <th>Date</th>
-    </tr>
-  </thead>
+  <h1> <%= @category.name %> </h1>  
 
-  <tbody>
 
-    <% @edits.each do |edit| %>
-      <tr>
-        <td><%= edit.User.name %></td>
-        <td><%= link_to edit.title, edit %></td>
-        <td><%= edit.date %></td>
-      </tr>
+
+<table border="2">
+
+
+<% @edits.each do |edit| %>
+
+
+           
+<ul>            
+<tr>
+<div class="wrapper">
+<td><%= edit.User.name %></td>
+<td><%= link_to edit.title, edit %></td>
+<td><%= edit.date %></td>
+</tr>
+</ul>
+   
+
+
+</div>
     <% end %>
+</table>  
   </tbody>
 </table>
 
