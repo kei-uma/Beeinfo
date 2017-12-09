@@ -1,4 +1,3 @@
-# coding: utf-8
 class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
 helper_method :twitter_datum_ids
