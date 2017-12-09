@@ -10,13 +10,15 @@
       </ul>
     </div>
   <% end %>
-
+<%= f.label :カテゴリ名 %><br>
+<div id="submitForm" >
   <div class="field">
-    <%= f.label :name %>
+    
     <%= f.text_field :name %>
   </div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
+</div>
 <% end %>
