@@ -28,3 +28,11 @@ h1{
  margin-left: 20px;
 }
 
+.wrapper_category {
+    margin-left: 50px;
+}
+
+.wrapper_category td {
+    width: 100px;
+}
+
