@@ -20,7 +20,6 @@
       <div class="col-md-12">
     <% end %>
       <h1>注目記事</h1>
-      <%= @category.find_by(id: @user.user_categories.find_by(priority: 1).category_id).name %>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 1).category_id).each do |edit| %>
       <div class="row">
         <div class="col-md-12">
@@ -37,23 +36,14 @@
           <h2><%= link_to edit.title, edit %></h2>
         </div>
       </div>
+      <br>
       <% end %>
 
     <% if check == 0 then %>
       <br>
       </div>
       <div class="col-md-12">
-    <% elsif check == 1 then %>
-      <br>
-      <br>
-      </div>
-      <div class="col-md-6">
-    <% else %>
-      </div>
-      <div class="col-md-12">
-    <% end %>
       <h1>新着記事</h1>
-      <%= @category.find_by(id: @user.user_categories.find_by(priority: 2).category_id).name %>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
       <div class="row">
         <div class="col-md-3">
@@ -71,6 +61,55 @@
         </div>
       </div>
       <% end %>
+    <% elsif check == 1 then %>
+      <br>
+      <br>
+      </div>
+      <div class="col-md-6">
+      <h1>新着記事</h1>
+      <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
+      <div class="row">
+        <div class="col-md-5">
+          <% if edit.url != '' %>
+            <% image_url = edit.url %>
+          <% else %>
+            <% image_url = '/assets/image1.JPG' %>
+          <% end %>
+          <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+          <br>
+        </div>
+
+        <div class="col-md-7">
+          <h3><%= link_to edit.title, edit %></h3>
+        </div>
+      </div>
+      <% end %>
+    <% else %>
+      </div>
+      <div class="col-md-12">
+      <h1>新着記事</h1>
+      <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
+      <div class="row">
+        <div class="col-md-3">
+          <% if edit.url != '' %>
+            <% image_url = edit.url %>
+          <% else %>
+            <% image_url = '/assets/image1.JPG' %>
+          <% end %>
+          <div style="text-align:center;">
+            <img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/>
+          </div>
+          <br>
+        </div>
+
+        <div class="col-md-9">
+          <h3><%= link_to edit.title, edit %></h3>
+        </div>
+      </div>
+      <% end %>
+      <br>
+      <br>
+    <% end %>
 
       <% if check == 0 then %>
           </div>
@@ -85,13 +124,45 @@
 
     <% if check == 0 then %>
       <div class="col-md-4">
+      <h1>ランキング</h1>
+      <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+        <div class="row">
+          <div class="col-md-6">
+            <% if edit.url != '' %>
+              <% image_url = edit.url %>
+            <% else %>
+              <% image_url = '/assets/default.jpg' %>
+            <% end %>
+            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+            <br>
+          </div>
+          <div class="col-md-6">
+            <h3><%= link_to edit.title, edit %></h3>
+          </div>
+        </div>
+        <% end %>
     <% elsif check == 1 then %>
       <div class="col-md-6">
+      <h1>ランキング</h1>
+      <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+        <div class="row">
+          <div class="col-md-5">
+            <% if edit.url != '' %>
+              <% image_url = edit.url %>
+            <% else %>
+              <% image_url = '/assets/default.jpg' %>
+            <% end %>
+            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+            <br>
+          </div>
+          <div class="col-md-7">
+            <h3><%= link_to edit.title, edit %></h3>
+          </div>
+        </div>
+        <% end %>
     <% elsif check == 2 %>
       <div class="col-md-12">
-    <% end %>
       <h1>ランキング</h1>
-      <%= @category.find_by(id: @user.user_categories.find_by(priority: 3).category_id).name %>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
         <div class="row">
           <div class="col-md-3">
@@ -108,7 +179,8 @@
           </div>
         </div>
         <% end %>
+    <% end %>
     </div>
   </div>
+  <div class="text-center" style="font-size: 24px; padding: 30px 0;"><%= link_to 'カスタマイズ', edit_user_path(@user) %></div>
 </div>
-<%= link_to 'カスタマイズ', edit_user_path(@user) %>
