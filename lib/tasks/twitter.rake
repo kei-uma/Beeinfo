@@ -1,30 +1,26 @@
 require 'twitter'
-require 'oauth'
-require 'time'
-require 'json'
 
 namespace :twitter do
   desc "tweet hello"
   task :tweet => :environment do
-    p Time.new
     client = get_twitter_client
     # 動作内容書く
 
-    # DBの中身を一度消去
-    #puts 'データベースの中身を消去' if TwitterDatum.delete_all()
+      # DBの中身を一度消去
+      puts 'データベースの中身を消去' if TwitterDatum.delete_all()
     tweet = "Hello Twitter!"
     #update(client, tweet)
     trend(client)
-    apiLimit
   end
 end
 
 def get_twitter_client
   client = Twitter::REST::Client.new do |config|
-    config.consumer_key = Settings.twitter[:consumer_key]
-    config.consumer_secret = Settings.twitter[:consumer_secret]
-    config.access_token = Settings.twitter[:access_token]
-    config.access_token_secret = Settings.twitter[:access_token_secret]
+
+    config.consumer_key="追加"
+    config.consumer_secret="追加"
+    config.access_token="追加"
+    config.access_token_secret="追加"
   end
   client
 end
@@ -37,111 +33,20 @@ def update(client, tweet)
     Rails.logger.error "<<twitter.rake::tweet.update ERROR : #{e.message}>>"
   end
 end
-
-def search(client, word, count, trend_id)
-  i = 0
-  l = 0
-  client.search(word, exclude: "retweets").take(count).each do |tweet|
-    t = TwitterDatum.find_by(tweet_id: tweet.id.to_s)
-    if t == nil
-      # ツイートにurlが含まれるか確認
-      if !tweet.media.empty? then
-          # urlがある場合現状ではdbがハッシュではないのurlをひとつだけ取得
-          tweet.media.take(1).each do |media|
-            #ツイートに画像が含まれる場合
-            tweet = {
-              'trend' =>word,
-              'tweet' =>tweet.text,
-              'tweet_id' =>tweet.id.to_s,
-              #画像をnilとして保存
-              'image_url' =>media.media_url.to_s, #とりあえずひとつだけ
-              'user' =>tweet.user.name,
-              'user_id' =>tweet.user.screen_name, #userの@以下
-              'user_icon_url' =>tweet.user.profile_image_url,
-              'tweet_time' =>tweet.created_at,
-              'tweet_url' =>tweet.url
-            }
-          end
-      else	#ツイートに画像が含まれない場合
-        tweet = {
-          'trend' =>word,
-          'tweet' =>tweet.text,
-          'tweet_id' =>tweet.id.to_s,
-          #画像をnilとして保存
-          'image_url' =>nil,
-          'user' =>tweet.user.name,
-          'user_id' =>tweet.user.screen_name, #userの@以下
-          'user_icon_url' =>tweet.user.profile_image_url,
-          'tweet_time' =>tweet.created_at,
-          'tweet_url' =>tweet.url
-        }
-      end
-      if TwitterDatum.create(tweet)
-        l += 1
-        trend_twitter = {
-          'twitter_datum_id' => TwitterDatum.last.id,
-          'trend_id' => trend_id
-        }
-      end
-    else	#tweetがすでに存在した場合
-      tt = TrendTwitter.find_by(twitter_datum_id: t.id, trend_id: trend_id)
-      if tt == nil
-        trend_twitter = {
-          'twitter_datum_id' => t.id,
-          'trend_id' => trend_id
-        }
-      else	#すでに中間テーブルも存在する場合
-        next	#次の繰り返しへ
-      end
-    end
-    if TrendTwitter.create(trend_twitter)
-      i += 1
-    end
-  end
-  print("trend: #{word}, tweet: #{l}, intermidiate: #{i} saved\n")
-end
-
-def trend(client)
-  client.trends_place(23424856).take(5).each do |trend| # 23424856:日本のtrend
-    t = Trend.find_by(name: trend.name)
-    if t == nil
-      trend_new = {
-        'name' => trend.name
+  def search(client,word, count)
+    client.search(word).take(count).each do |tweet|
+      tweet = {
+      'trend' =>word,
+      'tweet' =>tweet.text
       }
-      if Trend.create(trend_new)
-        t_id = Trend.last.id
-      else
-        puts("トレンドの取得に失敗")
-        return
-      end
-    else
-      t_id = t.id
+      puts 'データベースに保存しました' if TwitterDatum.create(tweet)
     end
-    # trendに関するツイートを表示 引数: 検索ワード,件数
-    search(client,trend.name, 3, t_id)
   end
-end
 
-def apiLimit
-  client = OAuth::Consumer.new( #limitはTwitterGemでは提供されないので直接取得
-    Settings.twitter[:consumer_key],
-    Settings.twitter[:consumer_secret],
-    site:'https://api.twitter.com/'
-  )
-  endpoint = OAuth::AccessToken.new(client, Settings.twitter[:access_token], Settings.twitter[:access_token_secret])
-  response = endpoint.get('https://api.twitter.com/1.1/application/rate_limit_status.json')
+  def trend(client)
+    client.trends_place(23424856).take(10).each do |trend| # 23424856:日本のtrend
 
-  puts 'rest API'
-  #response.header.each do |head|
-  #  print head + ':'
-  #  puts response.header[head]
-  #end
-  restAPI = JSON.parse(response.body)
-  
-  print 'trends/place: '
-  trendAPI =  restAPI["resources"]["trends"]["/trends/place"]
-  print("#{trendAPI}\n\t\treset => #{Time.at(trendAPI["reset"]).strftime("%Y/%m/%d %H:%M:%S")}\n")
-  print 'search/tweets: '
-  searchAPI = restAPI["resources"]["search"]["/search/tweets"]
-  print("#{searchAPI}\n\t\treset => #{Time.at(searchAPI["reset"]).strftime("%Y/%m/%d %H:%M:%S")}\n")
-end
+      # trendに関するツイートを表示 引数: 検索ワード,件数
+      search(client,trend.name, 10)
+  end
+  end
