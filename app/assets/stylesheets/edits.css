@@ -203,3 +203,15 @@ label {
   padding: 5px;
   color: #000000;
 }
+
+.wrapper-layout {
+  display: flex;
+}
+
+.wrapper-layout #layoutlist {
+  margin-right: 20px;
+}
+  
+.wrapper-layout #layoutlist #radio-button {
+text-align: center;
+}
