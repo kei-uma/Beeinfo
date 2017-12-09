@@ -1,3 +1,7 @@
 .content {
-margin-left : 20px
+margin-left: 20px
+}
+
+#submitForm{
+display: flex;
 }
