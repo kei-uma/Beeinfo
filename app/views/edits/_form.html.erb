@@ -13,41 +13,41 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :User_id %>
+    <%= f.label :ユーザID %>
     <%= current_user.name %>
     <%= f.hidden_field :User_id, :value => current_user.id %>
   </div>
 
   <div class="field">
-    <%= f.label :title %>
+    <%= f.label :タイトル %>
     <%= f.text_field :title, required: true %>
   </div>
 
   <div class="field">
-    <%= f.label :date %>
+    <%= f.label :日付 %>
     <%= d = Date.today %>
     <%= f.hidden_field :date, :value => d.year.to_s + '-' + d.month.to_s + '-' + d.day.to_s %>
   </div>
 
   <div class="field">
-    <%= f.label :trend %>
+    <%= f.label :トレンド %>
     <%= t = @trend.name %>
     <%= f.hidden_field :trend_id, :value => @trend.id %>
   </div>
 
 
   <div class="field">
-    <%= f.label :category_id %>
+    <%= f.label :カテゴリ %>
     <%= f.collection_select :category_id, Category.all, :id, :name %>
   </div>
 
   <div class="field">
-    <%= f.label :text %>
+    <%= f.label :記事の詳細 %>
     <%= f.text_area :text %>
   </div>
 
   <div class="field">
-    <%= f.label :url %>
+    <%= f.label :画像のurl %>
     <%= f.text_field :url %>
   </div>
 

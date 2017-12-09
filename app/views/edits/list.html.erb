@@ -1,3 +1,12 @@
+<%= search_form_for @q, url: edits_list_url do |f| %>
+
+    <%= f.label :title_cont,"Title" %>
+    <%= f.search_field :title_cont %>
+
+
+    <%= f.submit %>
+<% end %>
+
 <table class='scaffold_table'>
   <thead>
     <tr>
