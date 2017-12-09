@@ -20,6 +20,6 @@ class Edit < ApplicationRecord
   belongs_to :trend
   belongs_to :User
   has_many :twitter_datum, :through => :edits_twitters, :source => :twitter_datum
-  has_many :edits_twitters, foreign_key: 'edit_id'
+  has_many :edits_twitters, dependent: :destroy, foreign_key: 'edit_id'
   accepts_nested_attributes_for :edits_twitters, allow_destroy: true
 end

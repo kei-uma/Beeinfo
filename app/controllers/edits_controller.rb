@@ -46,16 +46,24 @@ helper_method :twitter_datum_ids
   def edit
     @trend = Trend.find(@edit.trend_id)
   end
+
   # ドラッグアンドドロップされた時に呼ばれる
-    def add
-      @@twiGetId = Array.new
-      logger.debug("Log1 : " + params[:id].to_s)
-      params[:id].each do |twi_id|
-        @@twiGetId.push(twi_id)
-      end
-      @@twiGetId.uniq!
-      logger.debug("Log1 : " + @@twiGetId.to_s)
+  def add
+    @@twiGetId = Array.new
+    logger.debug("Log1 : " + params[:id].to_s)
+    params[:id].each do |twi_id|
+      @@twiGetId.push(twi_id)
     end
+    @@twiGetId.uniq!
+    logger.debug("Log1 : " + @@twiGetId.to_s)
+  end
+
+  #GET /edits/list
+  def list
+    @q = Edit.includes(:User).ransack(params[:q])
+    @edits = @q.result(distinct: true)
+    @user = current_user
+  end
 
   # POST /edits
   # POST /edits.json
