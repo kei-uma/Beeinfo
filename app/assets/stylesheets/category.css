@@ -5,3 +5,11 @@ margin-left: 20px
 #submitForm{
 display: flex;
 }
+
+.wrapper_category {
+    margin-left: 50px;
+}
+
+.wrapper_category td {
+    width: 100px;
+}
