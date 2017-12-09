@@ -21,6 +21,6 @@
 set :output, "log/cron.log"
 set :environment, :development
 
-every 15.minutes do
- rake "twitter:tweet"
-end
+#every 15.minutes do
+# rake "twitter:tweet"
+#end
