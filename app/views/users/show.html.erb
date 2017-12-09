@@ -1,6 +1,11 @@
 
-<% check = 0 %>
-
+<% if user_signed_in? %>
+  <% if current_user.Layout_id.blank? then %>
+    <% check = 0 %>
+  <% else %>
+    <% check = current_user.Layout_id - 1 %>
+  <% end %>
+<% end %>
 
 <div class="container container-large">
   <div class="col-md-2 sidebar">
@@ -28,7 +33,10 @@
           <% else %>
             <% image_url = '/assets/image1.JPG' %>
           <% end %>
-          <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="100%" style="border: solid 1px #000000;"/></div>
+          
+          <a href=<%= edit_path(edit) %>>
+            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="100%" style="border: solid 1px #000000;"/></div>
+          </a>
           <br>
         </div>
 
@@ -52,7 +60,9 @@
           <% else %>
             <% image_url = '/assets/image1.JPG' %>
           <% end %>
-          <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+          <a href=<%= edit_path(edit) %>>
+            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+          </a>
           <br>
         </div>
 
@@ -75,7 +85,9 @@
           <% else %>
             <% image_url = '/assets/image1.JPG' %>
           <% end %>
-          <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+          <a href=<%= edit_path(edit) %>>
+            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+          </a>
           <br>
         </div>
 
@@ -96,9 +108,9 @@
           <% else %>
             <% image_url = '/assets/image1.JPG' %>
           <% end %>
-          <div style="text-align:center;">
-            <img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/>
-          </div>
+          <a href=<%= edit_path(edit) %>>
+            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+          </a>
           <br>
         </div>
 
@@ -133,11 +145,13 @@
             <% else %>
               <% image_url = '/assets/default.jpg' %>
             <% end %>
-            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+            <a href=<%= edit_path(edit) %>>
+              <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+            </a>
             <br>
           </div>
           <div class="col-md-6">
-            <h3><%= link_to edit.title, edit %></h3>
+            <h4><%= link_to edit.title, edit %></h4>
           </div>
         </div>
         <% end %>
@@ -152,7 +166,9 @@
             <% else %>
               <% image_url = '/assets/default.jpg' %>
             <% end %>
-            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+            <a href=<%= edit_path(edit) %>>
+              <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+            </a>
             <br>
           </div>
           <div class="col-md-7">
@@ -171,7 +187,9 @@
             <% else %>
               <% image_url = '/assets/default.jpg' %>
             <% end %>
-            <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+            <a href=<%= edit_path(edit) %>>
+              <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="180" height="110" style="border: solid 1px #000000;"/></div>
+            </a>
             <br>
           </div>
           <div class="col-md-9">
