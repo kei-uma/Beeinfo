@@ -1,6 +1,8 @@
+<%= stylesheet_link_tag 'trends' , :media => "all" %>
 <p id="notice"><%= notice %></p>
 
-<h1>Trends</h1>
+<div id=trend>
+<h1>トレンド一覧</h1>
 
 <table>
   <thead>
@@ -12,9 +14,10 @@
   <tbody>
     <% @trends.each do |trend| %>
       <tr>
-        <td><%= link_to trend.name, new_edit_path(select_trend: trend.id) %></td>
+        <td><font size="4"><%= link_to trend.name, new_edit_path(select_trend: trend.id) %></font></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 <br>
