@@ -192,7 +192,7 @@ tbody {
 
 .scaffold_table {
   border-collapse: collapse;
-  border: none;
+  border: 1px #DCDCDC solid;
 }
 
 .scaffold_table th {

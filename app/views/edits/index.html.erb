@@ -24,7 +24,7 @@
           </tbody>
         </table>
         <br>
-        <%= link_to 'New Edit(過去のトレンドから)', trends_path %>
+        <%= link_to '記事作成(過去のトレンドから)', trends_path %>
       </div>
     </div>
       <div class='article_left'>
@@ -43,9 +43,11 @@
         <br>
       </div>
       <div class='article_right'>
+<%= link_to categories_path do %>
         <h1>
-          カテゴリー
+          カテゴリー一覧へ
         </h1>
+<% end %>
         <table class='scaffold_table'>
           <tbody>
             <% @categories.each do |category| %>
@@ -56,7 +58,6 @@
           </tbody>
         </table>
         <br>
-        <%= link_to 'New Category', new_category_path %>
       </div>
 
   </body>
