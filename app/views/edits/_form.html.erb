@@ -20,7 +20,7 @@
 
   <div class="field">
     <%= f.label :タイトル %>
-    <%= f.text_field :title, required: true %>
+    <%= f.text_field :title, required: true, :size => "60x10" %>
   </div>
 
   <div class="field">
@@ -43,12 +43,12 @@
 
   <div class="field">
     <%= f.label :記事の詳細 %>
-    <%= f.text_area :text %>
+    <%= f.text_area :text , :size => "60x10"%>
   </div>
 
   <div class="field">
     <%= f.label :画像のurl %>
-    <%= f.text_field :url %>
+    <%= f.text_field :url , :size => "60x10" %>
   </div>
 
   <div class="actions">
