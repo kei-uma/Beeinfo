@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//kazefuku.net/sample/jQueryDnD/js/jquery-ui-1.8.20/themes/base/jquery.ui.theme.css">
 
 <%= stylesheet_link_tag 'newArticleEdit' , :media => "all" %>
 
-</head>
-
-<body>
-  <h2><%= @trend.name %></h2>
+  <h2 id="trend-name"><%= @trend.name %></h2>
 <div id="Contents">
   <div id="list">
             <div id="list_item">
@@ -263,6 +256,3 @@ else {
   });
 
 </script>
-
-</body>
-</html>
