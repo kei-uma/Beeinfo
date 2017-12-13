@@ -1,5 +1,17 @@
-<p id="notice"><%= notice %></p>
-
+<% #ページを再読み込みしないと表示されない %>
+共有:<div class="line-it-button" data-lang="ja" data-type="share-b" data-url=<%= url_for(only_path: false) %> style="display: none;"></div>
+ <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+<a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet?original_referer=<%= url_for(only_path: false) %>&tw_p=<%= @edit.title %>&url=<%= url_for(only_path: false) %>">Twitter</a>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-share-button" data-href="<%= url_for(only_path: false) %>" data-layout="box_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= url_for(only_path: false) %>&amp;src=sdkpreparse">シェア</a></div>
 <p>
   <strong>User:</strong>
   <%= @edit.User.name %>
