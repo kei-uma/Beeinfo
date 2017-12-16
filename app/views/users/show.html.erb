@@ -137,7 +137,8 @@
     <% if check == 0 then %>
       <div class="col-md-4">
       <h1>ランキング</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+      <% @rankings.each do |rank| %>
+      <% @edits.where(id: rank.edit_id).each do |edit| %>
         <div class="row">
           <div class="col-md-6">
             <% if edit.url != '' %>
@@ -155,10 +156,12 @@
           </div>
         </div>
         <% end %>
+    <% end %>
     <% elsif check == 1 then %>
       <div class="col-md-6">
       <h1>ランキング</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+      <% @rankings.each do |rank| %>
+        <% @edits.where(id: rank.edit_id).each do |edit| %>
         <div class="row">
           <div class="col-md-5">
             <% if edit.url != '' %>
@@ -176,6 +179,7 @@
           </div>
         </div>
         <% end %>
+      <% end %>
     <% elsif check == 2 %>
       <div class="col-md-12">
       <h1>ランキング</h1>

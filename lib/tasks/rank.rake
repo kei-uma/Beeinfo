@@ -30,7 +30,7 @@ namespace :rank do
   service.authorization.fetch_access_token!
 
   ## 取得するデータの期間を指定する
-  start_date = (DateTime.now - 20).strftime("%Y-%m-%d")
+  start_date = (DateTime.now - 2).strftime("%Y-%m-%d")
   end_date   = DateTime.now.strftime("%Y-%m-%d")
 
   ## URL(pagepath)ごとのページビュー、ユニークページビューを
@@ -52,26 +52,23 @@ namespace :rank do
   )
 
   # 取得結果を表示
-  puts gadata.column_headers.collect{|c| c.name}.join("\t")
-  gadata.rows.each do |r|
-    puts r.join("\t")
-  end
+  # puts gadata.column_headers.collect{|c| c.name}.join("\t")
+  # gadata.rows.each do |r|
+  #   puts r.join("\t")
+  # end
 
   puts gadata.column_headers.collect{|c| c.name}.join("\t")
   gadata.rows.each do |r|
-    tmp = r[0].gsub("edits/","")
-    tt = Edit.find_by(id: tmp)
+    tmp = r[0].gsub("/edits/","")
+    tt = Edit.find_by(id: tmp.to_i)
 
     ranking = {
       'edit_id' => tt.id,
       'category_id' => tt.category_id
     }
 
-    if Ranking.create(ranking)
+    puts "データベース登録" if Ranking.create(ranking)
     end
-
-    end
-
   end
 
 end
