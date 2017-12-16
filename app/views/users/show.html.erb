@@ -20,9 +20,9 @@
     <% if check == 0 then %>
     <div class="col-md-8">
       <div class="row">
-        <div class = "col-md-12">
+        <div class = "col-md-12" style="background-color: #FFFFE0;">
     <% else %>
-      <div class="col-md-12">
+      <div class="col-md-12" style="background-color: #FFFFE0;">
     <% end %>
       <h1>注目記事</h1>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 1).category_id).each do |edit| %>
@@ -50,7 +50,7 @@
     <% if check == 0 then %>
       <br>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12" style="background-color: #F0F8FF;">
       <h1>新着記事</h1>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
       <div class="row">
@@ -75,7 +75,7 @@
       <br>
       <br>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" style="background-color: #F0F8FF;">
       <h1>新着記事</h1>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
       <div class="row">
@@ -98,7 +98,7 @@
       <% end %>
     <% else %>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12" style="background-color: #F0F8FF;">
       <h1>新着記事</h1>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
       <div class="row">
@@ -135,7 +135,7 @@
 
 
     <% if check == 0 then %>
-      <div class="col-md-4">
+      <div class="col-md-4" style="background-color: #FFEFD5;">
       <h1>ランキング</h1>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
         <div class="row">
@@ -156,7 +156,7 @@
         </div>
         <% end %>
     <% elsif check == 1 then %>
-      <div class="col-md-6">
+      <div class="col-md-6" style="background-color: #FFEFD5;">
       <h1>ランキング</h1>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
         <div class="row">
@@ -177,7 +177,7 @@
         </div>
         <% end %>
     <% elsif check == 2 %>
-      <div class="col-md-12">
+      <div class="col-md-12" style="background-color: #FFEFD5;">
       <h1>ランキング</h1>
       <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
         <div class="row">
