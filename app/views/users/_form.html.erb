@@ -1,55 +1,72 @@
-<%= stylesheet_link_tag 'edits' , :media => "all" %>
-<%= form_for(user) do |f| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="container container-large">
+  <%= stylesheet_link_tag 'edits' , :media => "all" %>
+  <%= form_for(user) do |f| %>
+    <% if user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <h2><%= f.label :name %></h2>
+      <%= f.text_field :name %>
+    </div>
+
+    <br>
+
+    <div class="field">
+      <h2><%= f.label :レイアウト変更 %></h2>
+      <br>
+      <div class="wrapper-layout">
+        <div id="layoutlist" class="col-md-4 text-center">
+          <%= f.label :rate_1, image_tag("layout1.png"  ,:size =>'300x250') %>
+          <div id="radio-button">
+            <%= f.radio_button :Layout_id, 1 %>
+          </div>
+        </div>
+        
+        <div id="layoutlist" class="col-md-4 text-center">
+          <%= f.label :rate_2, image_tag("layout2.png"  ,:size =>'300x250') %>
+          <div id="radio-button">
+            <%= f.radio_button :Layout_id, 2 %>
+          </div>
+        </div>
+
+        <div id="layoutlist" class="col-md-4 text-center">
+          <%= f.label :rate_3, image_tag("layout3.png"  ,:size =>'300x253') %>
+          <div id="radio-button">
+            <%= f.radio_button :Layout_id, 3 %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="field">
+      <h2><%= f.label :カテゴリ選択 %></h2>
+      <% count = 1 %>
+      <% @user.user_categories.each do |user_category| %>
+        <%= f.fields_for :user_categories, user_category do |uc| %>
+          <%= count %>
+          <%= uc.hidden_field :priority, :value => count %>
+          <%= uc.collection_select :category_id, Category.all, :id, :name %>
+          <br>
+          <% count += 1%>
+        <% end %>
       <% end %>
-      </ul>
+    </div>
+    
+    <br>
+
+    <div class="actions text-right" style="padding-right: 300px;">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <h1><%= f.label :name %></h1>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <h1><%= f.label :カテゴリ選択 %></h1>
-    <% count = 1 %>
-    <% @user.user_categories.each do |user_category| %>
-      <%= f.fields_for :user_categories, user_category do |uc| %>
-        <%= count %>
-        <%= uc.hidden_field :priority, :value => count %>
-        <%= uc.collection_select :category_id, Category.all, :id, :name %>
-        <br>
-        <% count += 1%>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="field">
-    <h1><%= f.label :レイアウト変更 %><h1><br>
-    <div class="wrapper-layout">
-    <div id="layoutlist">
-<%= f.label :rate_1, image_tag("layout1.png"  ,:size =>'300x250') %>
-<div id="radio-button"><%= f.radio_button :Layout_id, 1 %></div>
 </div>
-<div id="layoutlist">
-<%= f.label :rate_2, image_tag("layout2.png"  ,:size =>'300x250') %>
-<div id="radio-button"><%= f.radio_button :Layout_id, 2 %></div>
-</div>
-<div id="layoutlist">
-<%= f.label :rate_3, image_tag("layout3.png"  ,:size =>'300x253') %>
-<div id="radio-button"><%= f.radio_button :Layout_id, 3 %></div>
-</div>
-</div>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
