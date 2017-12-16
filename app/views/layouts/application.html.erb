@@ -91,13 +91,10 @@
         margin: 0;
         padding: 0;
     }
-    a:hover {
+    li a:hover {
       color: #4274b3 !important;
       background: #ffffff !important;
     } /*カーソルが乗っているリンクの色*/
-    a.hover img {
-      opacity: 1;
-    }
     </style>
   </head>
 
@@ -112,8 +109,8 @@
           <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="<%= user_signed_in?? root_path :  new_user_session_path %>">
-	    <img alt="Brand" src="/assets/logo.png" style = "width: 100px;">
-	  </a>
+	          <img alt="Brand" src="/assets/logo.png" style = "width: 100px;">
+	        </a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
