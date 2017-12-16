@@ -126,7 +126,9 @@
             </li>
 
             <li>
-              <%= link_to 'カスタマイズ', edit_user_path(current_user) %>
+              <% if user_signed_in? %>
+                <%= link_to 'カスタマイズ', edit_user_path(current_user) %>
+              <% end %>
             </li>
 
 
@@ -145,8 +147,6 @@
           <div class="navbar-text navbar-right" style="font-size: 22px; color:white">
             <% if user_signed_in? %>
               <%= current_user.name %>さん
-            <% else %>
-              <%= link_to 'ログイン', new_user_session_path %>
             <% end %>
           </div>
         </div><!--/.nav-collapse -->
