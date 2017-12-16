@@ -184,7 +184,7 @@
       <div class="col-md-6" style="background-color: #FFEFD5; margin-bottom: 50px;">
       <h1>ランキング</h1>
       <% @rankings.each do |rank| %>
-        <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).limit(5).category_id).each do |edit| %>
+        <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).limit(5).each do |edit| %>
         <div class="row">
           <div class="col-md-5">
             <% if edit.url != '' %>
