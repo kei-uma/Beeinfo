@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @rankings = Ranking.all 
     @categories = Category.all
     unless @user.user_categories.exists?
       redirect_to edit_user_path(@user)

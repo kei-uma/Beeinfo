@@ -53,10 +53,7 @@ namespace :rank do
 
   # 取得結果を表示
   puts gadata.column_headers.collect{|c| c.name}.join("\t")
-  count = 0
   gadata.rows.each do |r|
-    count += 1
-    print count
     puts r.join("\t")
   end
 
