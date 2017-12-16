@@ -1,26 +1,28 @@
-<%= stylesheet_link_tag 'category' , :media => "all" %>
+<div class="container container-large">
+  <%= stylesheet_link_tag 'category' , :media => "all" %>
 
-<div class='search'>
-  <%= search_form_for @q, url: edits_list_url do |f| %>
-    <%= f.label :title_cont,"Title" %>
-    <%= f.search_field :title_cont %>
-    <%= f.submit %>
-  <% end %>
-</div>
+  <div class="search" style="padding: 30px 0;">
+    <%= search_form_for @q, url: edits_list_url do |f| %>
+      <%= f.label :title_cont,"Title" %>
+      <%= f.search_field :title_cont %>
+      <%= f.submit %>
+    <% end %>
+  </div>
 
-<div class="list">
-  <table>
-    <tbody>
-      <% @edits.each do |edit| %>
-        <tr>
-          <td><%= edit.User.name %></td>
-          <td><%= link_to edit.title, edit %></td>
-          <td><%= edit.date %></td>
-          <% if @user.authority %>
-            <td><%= link_to 'Destroy', edit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="list" style="font-size: 20px;">
+    <table>
+      <tbody>
+        <% @edits.each do |edit| %>
+          <tr>
+            <td><%= edit.User.name %></td>
+            <td><%= link_to edit.title, edit %></td>
+            <td><%= edit.date %></td>
+            <% if @user.authority %>
+              <td><%= link_to 'Destroy', edit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
