@@ -1,33 +1,16 @@
 <%= stylesheet_link_tag 'category' , :media => "all" %>
 
 <p id="notice"><%= notice %></p>
-
-
-  <h1> <%= @category.name %> </h1>  
-
-
-
+<h1> <%= @category.name %> </h1>  
 <table border="2">
-
-
-<% @edits.each do |edit| %>
-
-
-           
-<ul>            
-<tr>
-<div class="wrapper">
-<td><%= edit.User.name %></td>
-<td><%= link_to edit.title, edit %></td>
-<td><%= edit.date %></td>
-</tr>
-</ul>
-   
-
-
-</div>
-    <% end %>
-</table>  
-  </tbody>
+  <% @edits.each do |edit| %>
+    <tr>
+      <div class="wrapper">
+        <td><%= edit.User.name %></td>
+        <td><%= link_to edit.title, edit %></td>
+        <td><%= edit.date %></td>
+      </div>
+    </tr>
+  <% end %>
 </table>
 

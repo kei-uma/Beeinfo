@@ -1,32 +1,26 @@
-<%= search_form_for @q, url: edits_list_url do |f| %>
+<%= stylesheet_link_tag 'category' , :media => "all" %>
 
+<div class='search'>
+  <%= search_form_for @q, url: edits_list_url do |f| %>
     <%= f.label :title_cont,"Title" %>
     <%= f.search_field :title_cont %>
-
-
     <%= f.submit %>
-<% end %>
+  <% end %>
+</div>
 
-<table class='scaffold_table'>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Title</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <% @edits.each do |edit| %>
-      <tr>
-        <td><%= edit.User.name %></td>
-        <td><%= link_to edit.title, edit %></td>
-        <td><%= edit.date %></td>
-        <% if @user.authority %>
-          <td><%= link_to 'Destroy', edit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="list">
+  <table>
+    <tbody>
+      <% @edits.each do |edit| %>
+        <tr>
+          <td><%= edit.User.name %></td>
+          <td><%= link_to edit.title, edit %></td>
+          <td><%= edit.date %></td>
+          <% if @user.authority %>
+            <td><%= link_to 'Destroy', edit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

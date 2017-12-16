@@ -8,18 +8,23 @@ display: flex;
 
 ul{
  list-style: none;
- 
  line-heigh: 1.5;
-
 }
 
+.search {
+  margin-left: 40px;
+}
+
+.list {
+  margin-right: 100px;
+}
 
 .wrapper li{
  font-size: 14px;
  background-color: red;
 }
 
-table,th,td{
+table, th, td{
  border: none;
  margin-left: 40px;
 }
