@@ -22,13 +22,13 @@
           </tbody>
         </table>
         <br>
-        <%= link_to '記事作成(過去のトレンドから)', trends_path %>
       </div>
     </div>
-<div class="article_bottom">
+    <div class="article_bottom">
       <div class='article_left'>
+        <%= link_to '記事作成(過去のトレンドから)', trends_path %>
         <h1>
-          本日のトレンド一覧
+          本日のトレンド
         </h1>
         <table class='scaffold_table'>
           <tbody>
@@ -42,7 +42,8 @@
         <br>
       </div>
       <div class='article_right'>
-        <a href="/categories"><h1>カテゴリー一覧へ</h1></a>
+        <%= link_to 'カテゴリー一覧', categories_path %>
+        <a href="/categories"><h1>カテゴリー</h1></a>
         <table class='scaffold_table'>
           <tbody>
             <% @categories.each do |category| %>
