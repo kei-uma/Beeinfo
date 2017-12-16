@@ -6,6 +6,7 @@ namespace :rank do
   desc "rank"
   task :rank => :environment do
 
+  puts 'データベースの中身を消去' if Ranking.delete_all()
   ## アプリの証明書をファイルから読み込む
   options = YAML.load_file("./config/ga_config.yml")
   email      = options['service_account_email']
@@ -50,11 +51,30 @@ namespace :rank do
     filters: filters
   )
 
-  ## 取得結果を表示
+  # 取得結果を表示
   puts gadata.column_headers.collect{|c| c.name}.join("\t")
+  count = 0
   gadata.rows.each do |r|
+    count += 1
+    print count
     puts r.join("\t")
   end
+
+  puts gadata.column_headers.collect{|c| c.name}.join("\t")
+  gadata.rows.each do |r|
+    tmp = r[0].gsub("edits/","")
+    tt = Edit.find_by(id: tmp)
+
+    ranking = {
+      'edit_id' => tt.id,
+      'category_id' => tt.category_id
+    }
+
+    if Ranking.create(ranking)
+    end
+
+    end
+
   end
-  
+
 end
