@@ -70,7 +70,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right" style="font-size: 20px;">
             <li style="color: white">
-              <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
             </li>
             <li>
               <% if user_signed_in? %>
@@ -79,12 +79,15 @@
                 <% end %>
               <% end %>
             </li>
+            <li>
+              <%= link_to '検索', edits_list_path %>
+            </li>
           </ul>
           <div class="navbar-text navbar-right" style="font-size: 22px;">
             <% if user_signed_in? %>
               <%= current_user.name %>さん
             <% else %>
-              <%= link_to 'Login', new_user_session_path %>
+              <%= link_to 'ログイン', new_user_session_path %>
             <% end %>
           </div>
         </div><!--/.nav-collapse -->
