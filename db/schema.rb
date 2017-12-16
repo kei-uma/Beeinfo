@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201143848) do
+ActiveRecord::Schema.define(version: 20171216014447) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20171201143848) do
     t.datetime "updated_at",       null: false
     t.index ["edit_id"], name: "index_edits_twitters_on_edit_id", using: :btree
     t.index ["twitter_datum_id"], name: "index_edits_twitters_on_twitter_datum_id", using: :btree
+  end
+
+  create_table "rankings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.integer  "edit_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "trend_twitters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
