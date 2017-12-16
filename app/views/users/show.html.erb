@@ -54,7 +54,7 @@
           <% else %>
             <% image_url = '/assets/noimage.jpg' %>
           <% end %>
-          
+
           <a href=<%= edit_path(edit) %>>
             <div style="text-align:center;"><img src="<%= image_url %>" alt="" width="70%" style="border: solid 1px #000000;"/></div>
           </a>
@@ -160,7 +160,8 @@
     <% if check == 0 then %>
       <div class="col-md-4" style="background-color: #FFEFD5; margin-bottom: 50px;">
       <h1>ランキング</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+      <% @rankings.each do |rank| %>
+      <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
         <div class="row">
           <div class="col-md-6">
             <% if edit.url != '' %>
@@ -178,10 +179,12 @@
           </div>
         </div>
         <% end %>
+    <% end %>
     <% elsif check == 1 then %>
       <div class="col-md-6" style="background-color: #FFEFD5; margin-bottom: 50px;">
       <h1>ランキング</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+      <% @rankings.each do |rank| %>
+        <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
         <div class="row">
           <div class="col-md-5">
             <% if edit.url != '' %>
@@ -199,10 +202,12 @@
           </div>
         </div>
         <% end %>
+      <% end %>
     <% elsif check == 2 %>
       <div class="col-md-12" style="background-color: #FFEFD5; margin-bottom: 50px;">
       <h1>ランキング</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+      <% @rankings.each do |rank| %>
+      <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
         <div class="row">
           <div class="col-md-3">
             <% if edit.url != '' %>
@@ -221,7 +226,9 @@
         </div>
         <% end %>
     <% end %>
+  <% end %>
     </div>
   </div>
   <div class="text-center" style="font-size: 24px;　padding: 30px 0;"><%= link_to 'カスタマイズ', edit_user_path(@user) %></div>
 </div>
+

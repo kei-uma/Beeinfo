@@ -1,5 +1,6 @@
 class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
+  before_action :isauth, only: [:index]
 helper_method :twitter_datum_ids
 @@twiGetId = Array.new
 @@t = 0
@@ -8,12 +9,12 @@ helper_method :twitter_datum_ids
   # GET /edits.json
 
   def index
+    @user = current_user
     @@twiGetId = Array.new
     @edits = Edit.includes(:User).includes(:category)
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
     @categories = Category.all
-    @user = current_user
     #今日の日付が取れないので昨日+1で対応
     @trends = Trend.where('updated_at > ?', DateTime.yesterday+1)
   end
@@ -113,6 +114,11 @@ helper_method :twitter_datum_ids
       @edit = Edit.find_by_id(params[:id])
     end
 
+    def isauth
+      unless current_user.authority
+        redirect_to current_user
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
       logger.debug("Log3 : " + @@twiGetId.to_s)
