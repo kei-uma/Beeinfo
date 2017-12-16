@@ -1,82 +1,105 @@
-<% #ページを再読み込みしないと表示されない %>
-共有:<div class="line-it-button" data-lang="ja" data-type="share-b" data-url=<%= url_for(only_path: false) %> style="display: none;"></div>
- <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-<a class="twitter-share-button"
-  href="https://twitter.com/intent/tweet?original_referer=<%= url_for(only_path: false) %>&tw_p=<%= @edit.title %>&url=<%= url_for(only_path: false) %>">Twitter</a>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.11';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-share-button" data-href="<%= url_for(only_path: false) %>" data-layout="box_count" data-size="small" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= url_for(only_path: false) %>&amp;src=sdkpreparse">シェア</a></div>
-<p>
-  <strong>User:</strong>
-  <%= @edit.User.name %>
-</p>
+<div class="container container-large">
+  <div class="col-md-2 sidebar">
+    <div class="row" style="padding-top: 100px;">
+    <% @categories.each do |category| %>
+      <p style="font-size: 20px; padding-bottom: 10px;"><%= link_to category.name, category %></p>
+    <% end %>
+    </div>
+  </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @edit.title %>
-</p>
+  <div class="col-md-10">
+    <div class="row">
+      <div class="text-center" style="padding-left: 113px; padding-top: 50px;">
+        <% if @edit.url != '' %>
+          <% image_url = @edit.url %>
+        <% else %>
+          <% image_url = '/assets/default.jpg' %>
+        <% end %>
+        <span class="text-align:center;"><img src="<%= image_url %>" alt="" width="100%" height="562.5" style="border: solid 1px #000000;"/></span>
+      </div>
+    </div>
 
-<p>
-  <strong>Date:</strong>
-  <%= @edit.date %>
-</p>
+    <div class="row" style="padding-left: 113px;">
+      <div>
+        <h2 style="font-weight: bolder">
+          <%= @edit.title %>
+        </h2>
+      </div>
 
-<p>
-  <strong>Trend:</strong>
-  <%= @edit.trend.name %>
-</p>
+      <div>
+        <h3>
+          <%= @edit.category.name %> > #<%= @edit.trend.name %>
+        </h3>
+      </div>
+      
+      <div style="padding-top: 2px;">
+        <h4><%= @edit.date %></h4>
+      </div>
 
-<p>
-  <strong>Tweet:</strong>
-  <% @twes.each do |twe| %>
-   <table border="1">
-      <tr><td>tweet</td><td><%= twe.twitter_datum.tweet %></td></tr>
-      <tr><td>tweet_id</td><td><%= twe.twitter_datum.tweet_id %></td></tr>
-      <tr><td>user_name</td><td><%= twe.twitter_datum.user %></td></tr>
-      <tr><td>user_id</td><td><%= twe.twitter_datum.user_id %></td></tr>
-      <tr><td>user_icon_url</td><td><%= twe.twitter_datum.user_icon_url %></td></tr>
-      <tr><td>tweet_time</td><td><%= twe.twitter_datum.tweet_time %></td></tr>
-      <tr><td>image_url</td><td><%= twe.twitter_datum.image_url %></td></tr>
-    <table>
-      <!-- DBの中に画像があれば画像を表示させる -->
-      <!-- 現在はサイズなどは適当に表示している -->
-      <% if twe.twitter_datum.image_url != nil  %>
-        <p style="text-align:center;"><img src="<%= twe.twitter_datum.image_url %>" alt="" width="327" height="328" style="border: solid 1px #000000;" /></p>
+      <h4 class="comment" style="background-color: #cccccc; padding: 5px;">
+        <%= @edit.text %>
+      </h4>
+
+      <div>
+      <% @twes.each do |twe| %>
+        <div class="balloon5">
+          <div class="faceicon text-center">
+            <a href="https://twitter.com/<%= twe.twitter_datum.user_id %>" target="_blank">
+              <img src=<%= twe.twitter_datum.user_icon_url %> class="img-circle">
+              <%= twe.twitter_datum.user %>
+            </a>
+          </div>
+            
+          <a href="https://twitter.com/okkake_reach/status/<%= twe.twitter_datum.tweet_id %>" target="_blank">
+            <div class="chatting">
+              <div class="says">
+                <p><%= twe.twitter_datum.tweet %></p>
+                <% if twe.twitter_datum.image_url != nil  %>
+                  <p style="text-align:center; padding-top: 10px;"><img src="<%= twe.twitter_datum.image_url %>" alt="" width="400" height="225" style="border: solid 1px #000000;" /></p>
+                <% end %>
+                <br>
+                <p class="text-right"><%= twe.twitter_datum.tweet_time %></p>
+              </div>
+            </div>
+          </a>
+        </div>
       <% end %>
-  <% end %>
-</p>
+      </div>
+    </div>
 
-<p>
-  <strong>Category:</strong>
-  <%= @edit.category.name %>
-</p>
+    <div class="row" style="padding-top: 30px;">
+      <div class="col-md-4 text-center">
+        <div class="line-it-button" data-lang="ja" data-type="share-d" data-url="https://media.line.me/ja/how_to_install" style="display: none;"></div>
+      </div>
+      
+      <div class="col-md-4 text-center">
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?original_referer=<%= url_for(only_path: false) %>&tw_p=<%= @edit.title %>&url=<%= url_for(only_path: false) %>"><i class="fa fa-twitter-square" style="font-size:40px"></i></a>
+      </div>
 
-<p>
-  <strong>Text:</strong>
-  <%= @edit.text %>
-</p>
+      <div class="col-md-4 text-center">
+        <div id="fb-root"></div>
+        <div class="fb-share-button" data-href="<%= url_for(only_path: false) %>" data-layout="box_count" data-size="small" data-mobile-iframe="false">
+          <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<%= url_for(only_path: false) %>&amp;src=sdkpreparse">シェア</a>
+        </div>
+      </div>
+    </div>
 
-<p>
-  <strong>Url:</strong>
-  <%= @edit.url %>
-</p>
-
-<p>
-  <strong>Thumbnail:</strong>
-  <% if @edit.url != '' %>
-    <% image_url = @edit.url %>
-  <% else %>
-    <% image_url = '/assets/default.jpg' %>
-  <% end %>
-  <td style="text-align:center;"><img src="<%= image_url %>" alt="" width="100" height="100" style="border: solid 1px #000000;"/>
-</p>
-
-<% if current_user.authority %>
-  <%= link_to 'Edit', edit_edit_path(@edit) %>
-<% end %>
+    <p class="text-center" style="font-size: 40px; padding: 30px;">
+      <% if current_user.authority %>
+        <%= link_to 'Edit', edit_edit_path(@edit) %>
+      <% end %>
+    </p>
+    
+    
+    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.11';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </div>
+</div>
