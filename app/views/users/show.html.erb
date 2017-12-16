@@ -22,7 +22,7 @@
       <div class="row">
         <div class = "col-md-12" style="background-color: #FFFFE0;">
         <h1>注目記事</h1>
-        <% @edits.where(category_id: @user.user_categories.find_by(priority: 1).category_id).each do |edit| %>
+        <% @edits.where(category_id: @user.user_categories.find_by(priority: 1).category_id).limit(1).each do |edit| %>
         <div class="row">
           <div class="col-md-12">
             <% if edit.url != '' %>
@@ -46,7 +46,7 @@
     <% else %>
       <div class="col-md-12" style="background-color: #FFFFE0;">
       <h1>注目記事</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 1).category_id).each do |edit| %>
+      <% @edits.where(category_id: @user.user_categories.find_by(priority: 1).category_id).limit(1).each do |edit| %>
       <div class="row">
         <div class="col-md-12">
           <% if edit.url != '' %>
@@ -75,7 +75,7 @@
       </div>
       <div class="col-md-12" style="background-color: #F0F8FF;">
       <h1>新着記事</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
+      <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).limit(5).each do |edit| %>
       <div class="row">
         <div class="col-md-3">
           <% if edit.url != '' %>
@@ -100,7 +100,7 @@
       </div>
       <div class="col-md-6" style="background-color: #F0F8FF;">
       <h1>新着記事</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
+      <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).limit(5).each do |edit| %>
       <div class="row">
         <div class="col-md-5">
           <% if edit.url != '' %>
@@ -123,7 +123,7 @@
       </div>
       <div class="col-md-12" style="background-color: #F0F8FF;">
       <h1>新着記事</h1>
-      <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).each do |edit| %>
+      <% @edits.where(category_id: @user.user_categories.find_by(priority: 2).category_id).limit(5).each do |edit| %>
       <div class="row">
         <div class="col-md-3">
           <% if edit.url != '' %>
@@ -161,7 +161,7 @@
       <div class="col-md-4" style="background-color: #FFEFD5; margin-bottom: 50px;">
       <h1>ランキング</h1>
       <% @rankings.each do |rank| %>
-      <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+      <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).limit(10).each do |edit| %>
         <div class="row">
           <div class="col-md-6">
             <% if edit.url != '' %>
@@ -184,7 +184,7 @@
       <div class="col-md-6" style="background-color: #FFEFD5; margin-bottom: 50px;">
       <h1>ランキング</h1>
       <% @rankings.each do |rank| %>
-        <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+        <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).limit(5).category_id).each do |edit| %>
         <div class="row">
           <div class="col-md-5">
             <% if edit.url != '' %>
@@ -207,7 +207,7 @@
       <div class="col-md-12" style="background-color: #FFEFD5; margin-bottom: 50px;">
       <h1>ランキング</h1>
       <% @rankings.each do |rank| %>
-      <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).each do |edit| %>
+      <% @edits.where(id: rank.edit_id).where(category_id: @user.user_categories.find_by(priority: 3).category_id).limit(5).each do |edit| %>
         <div class="row">
           <div class="col-md-3">
             <% if edit.url != '' %>
@@ -229,6 +229,5 @@
   <% end %>
     </div>
   </div>
-  <div class="text-center" style="font-size: 24px;　padding: 30px 0;"><%= link_to 'カスタマイズ', edit_user_path(@user) %></div>
 </div>
 

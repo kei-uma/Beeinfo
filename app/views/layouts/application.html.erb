@@ -91,6 +91,10 @@
         margin: 0;
         padding: 0;
     }
+    a:hover {
+      color: #4274b3 !important;
+      background: #ffffff !important;
+    } /*カーソルが乗っているリンクの色*/
     </style>
   </head>
 
@@ -117,6 +121,12 @@
             <li>
               <%= link_to '検索', edits_list_path %>
             </li>
+
+            <li>
+              <%= link_to 'カスタマイズ', edit_user_path(current_user) %>
+            </li>
+
+
             <li style="color: white">
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
             </li>
