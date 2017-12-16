@@ -21,6 +21,7 @@ helper_method :twitter_datum_ids
   # GET /edits/1
   # GET /edits/1.json
   def show
+    @categories = Category.all
     @@twiGetId = Array.new
     @twes = @edit.edits_twitters.includes(:twitter_datum)
   end
