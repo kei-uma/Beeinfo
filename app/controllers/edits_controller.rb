@@ -10,7 +10,6 @@ helper_method :twitter_datum_ids
 
   def index
     @user = current_user
-    @@user_data = {}
     @edits = Edit.includes(:User).includes(:category)
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
@@ -23,13 +22,13 @@ helper_method :twitter_datum_ids
   # GET /edits/1.json
   def show
     @categories = Category.all
-    @@user_data = {}
+
     @twes = @edit.edits_twitters.includes(:twitter_datum)
   end
 
   # GET /edits/new
   def new
-    @@user_data = {}
+
     logger.debug("Log0 : " + @@user_data[params[:user_id]].to_s)
     #ページが再読み込みされるのでパラメータを保持
     if params[:select_trend] == nil
