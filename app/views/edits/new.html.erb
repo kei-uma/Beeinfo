@@ -87,8 +87,7 @@ else {
   $('#dropArea').append('<ul><li style="display:none" >'+ id +'</li><li>'+ tweet +'</li><li style="display:none">'+ tweet_id +'</li><li>'+ name +'</li><li>'+ user_id +'</li><li><img src='+ user_icon +'></li><li>'+ date +'</li></ul>');
 }
 }
-
-
+      user_id =  <%= current_user.id%>
       if (id != null) {
       getTwiId.push(id)
     }
@@ -99,12 +98,11 @@ else {
         url: "<%=  edits_add_path  %>",
         type: "POST",
         data: {
-          id: getTwiId
+          id: getTwiId,
+          user_id: user_id
         },
         dataType: "html",
         success: function (data) {
-          var iframe = document.getElementById('dropArea');
-        console.log(iframe)
 
           // $('#test').load(location.href);
           // $('#test').load('<%= new_edit_path %> #test');
@@ -226,7 +224,7 @@ else {
       // endDropzone(name);
       console.log("icon : " + icon)
       doAction(id,name,tweet_id,tweet,user_id,icon,date,img_url,date);
-      doAction(null,name,tweet_id,tweet,user_id,icon,date,img_url,date);
+      // doAction(null,name,tweet_id,tweet,user_id,icon,date,img_url,date);
       onHidden(tweet_id);
     }
 

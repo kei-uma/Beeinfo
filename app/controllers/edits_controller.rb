@@ -2,7 +2,7 @@ class EditsController < ApplicationController
   before_action :set_edit, only: [:show, :edit, :update, :destroy]
   before_action :isauth, only: [:index]
 helper_method :twitter_datum_ids
-@@twiGetId = Array.new
+@@user_data = {}
 @@t = 0
   require 'date'
   # GET /edits
@@ -10,7 +10,7 @@ helper_method :twitter_datum_ids
 
   def index
     @user = current_user
-    @@twiGetId = Array.new
+    @@user_data = {}
     @edits = Edit.includes(:User).includes(:category)
     @articles = TwitterDatum.all
     @ed = EditsTwitter.all
@@ -23,14 +23,14 @@ helper_method :twitter_datum_ids
   # GET /edits/1.json
   def show
     @categories = Category.all
-    @@twiGetId = Array.new
+    @@user_data = {}
     @twes = @edit.edits_twitters.includes(:twitter_datum)
   end
 
   # GET /edits/new
   def new
-    @@twiGetId = Array.new
-    logger.debug("Log0 : " + @@twiGetId.to_s)
+    @@user_data = {}
+    logger.debug("Log0 : " + @@user_data[params[:user_id]].to_s)
     #ページが再読み込みされるのでパラメータを保持
     if params[:select_trend] == nil
       params[:select_trend] = @@t
@@ -51,13 +51,14 @@ helper_method :twitter_datum_ids
 
   # ドラッグアンドドロップされた時に呼ばれる
   def add
-    @@twiGetId = Array.new
+    @@user_data[params[:user_id]] = params[:id]
+    logger.debug("Log5 : " + @@user_data[params[:user_id]].to_s)
     logger.debug("Log1 : " + params[:id].to_s)
-    params[:id].each do |twi_id|
-      @@twiGetId.push(twi_id)
-    end
-    @@twiGetId.uniq!
-    logger.debug("Log1 : " + @@twiGetId.to_s)
+    @@user_data[params[:user_id]].uniq!
+    logger.debug("Log1 : " + @@user_data[params[:user_id]].to_s)
+hash = {id: @@user_data[params[:user_id]]}
+require 'json'
+render :json => hash.to_json
   end
 
   #GET /edits/list
@@ -71,7 +72,11 @@ helper_method :twitter_datum_ids
   # POST /edits.json
   def create
     @edit = Edit.new(edit_params)
-    @edit.twitter_datum_ids = @@twiGetId
+    # current_user.idを取得
+    cui = current_user.id.to_s
+    @edit.twitter_datum_ids =  @@user_data[cui]
+    logger.debug("Log6 : " + current_user.id.to_s)
+    logger.debug(@edit.twitter_datum_ids)
     @articles = TwitterDatum.all.order(created_at: 'desc')
     respond_to do |format|
       if @edit.save!
@@ -121,7 +126,7 @@ helper_method :twitter_datum_ids
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def edit_params
-      logger.debug("Log3 : " + @@twiGetId.to_s)
+      logger.debug("Log3 : " + @@user_data[params[:user_id]].to_s)
       params.require(:edit).permit(:title, :date, :category_id, :text, :url, :trend_id, :User_id)
     end
 end
