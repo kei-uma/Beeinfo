@@ -11,8 +11,8 @@ helper_method :twitter_datum_ids
   def index
     @user = current_user
     @edits = Edit.includes(:User).includes(:category)
-    @articles = TwitterDatum.all
-    @ed = EditsTwitter.all
+    @articles = TwitterDatum.all.order(created_at: 'desc')
+    @ed = EditsTwitter.all.order(created_at: 'desc')
     @categories = Category.all
     #今日の日付が取れないので昨日+1で対応
     @trends = Trend.where('updated_at > ?', DateTime.yesterday+1)
@@ -63,7 +63,7 @@ render :json => hash.to_json
   #GET /edits/list
   def list
     @q = Edit.includes(:User).ransack(params[:q])
-    @edits = @q.result(distinct: true)
+    @edits = @q.result(distinct: true).order(created_at: 'desc')
     @user = current_user
   end
 

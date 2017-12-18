@@ -10,13 +10,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @rankings = Ranking.all 
+    @rankings = Ranking.all
     @categories = Category.all
     unless @user.user_categories.exists?
       redirect_to edit_user_path(@user)
     end
-    @edits = Edit.all
-    @category = Category.all
+    @edits = Edit.all.order(created_at: 'desc')
+    @category = Category.all.order(created_at: 'desc')
   end
 
   # GET /users/new
