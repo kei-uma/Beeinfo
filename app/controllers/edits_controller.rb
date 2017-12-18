@@ -10,12 +10,12 @@ helper_method :twitter_datum_ids
 
   def index
     @user = current_user
-    @edits = Edit.includes(:User).includes(:category)
+    @edits = Edit.includes(:User).includes(:category).order(created_at: 'desc')
     @articles = TwitterDatum.all.order(created_at: 'desc')
     @ed = EditsTwitter.all.order(created_at: 'desc')
     @categories = Category.all
     #今日の日付が取れないので昨日+1で対応
-    @trends = Trend.where('updated_at > ?', DateTime.yesterday+1)
+    @trends = Trend.where('updated_at > ?', DateTime.yesterday+1).order(created_at: 'desc')
   end
 
   # GET /edits/1
