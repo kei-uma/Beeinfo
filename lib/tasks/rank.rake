@@ -30,7 +30,7 @@ namespace :rank do
   service.authorization.fetch_access_token!
 
   ## 取得するデータの期間を指定する
-  start_date = (DateTime.now - 2).strftime("%Y-%m-%d")
+  start_date = (DateTime.now - 1).strftime("%Y-%m-%d")
   end_date   = DateTime.now.strftime("%Y-%m-%d")
 
   ## URL(pagepath)ごとのページビュー、ユニークページビューを
@@ -61,13 +61,14 @@ namespace :rank do
   gadata.rows.each do |r|
     tmp = r[0].gsub("/edits/","")
     tt = Edit.find_by(id: tmp.to_i)
-
+    if tt != nil then
     ranking = {
       'edit_id' => tt.id,
       'category_id' => tt.category_id
     }
-
     puts "データベース登録" if Ranking.create(ranking)
+  end
+  
     end
   end
 
